@@ -573,7 +573,7 @@ public final class BoxDrawingCharacters {
         private void checkLength() {
             if (boxDrawing.length() != EXPECTED_LENGTH) {
                 throw new IllegalArgumentException(
-                        "boxDrawing is expected to be " + EXPECTED_LENGTH + " long"
+                        "boxDrawing is expected to be " + EXPECTED_LENGTH + " characters long"
                 );
             }
         }
