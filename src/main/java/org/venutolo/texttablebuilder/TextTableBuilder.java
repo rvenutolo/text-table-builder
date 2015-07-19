@@ -15,6 +15,7 @@ public class TextTableBuilder {
     private Alignment[] rowAlignments;
 
     private static <T> T[] copyArray(final T... array) {
+        // TODO replace with own implementation if want to be 1.5 compatible
         return Arrays.copyOf(array, array.length);
     }
 

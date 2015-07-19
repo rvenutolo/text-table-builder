@@ -133,9 +133,8 @@
                 <version>1.14</version>
                 <configuration>
                     <signature>
-                        <groupId>org.codehaus.mojo.signature
-                        </groupId>
-                        <artifactId>java15</artifactId>
+                        <groupId>org.codehaus.mojo.signature</groupId>
+                        <artifactId>java16</artifactId>
                         <version>1.0</version>
                     </signature>
                 </configuration>
