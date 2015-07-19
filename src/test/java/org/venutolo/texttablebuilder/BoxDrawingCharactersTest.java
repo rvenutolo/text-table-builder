@@ -15,6 +15,54 @@ import static org.junit.Assert.assertTrue;
  */
 public class BoxDrawingCharactersTest {
 
+    private static final String NOT_EQUAL_TO_NULL =
+            "must not be equal to null";
+
+    private static final String NOT_EQUAL_RANDOM_OBJECT =
+            "must not be equal to some random object";
+
+    private static final String EQUAL_ITSELF =
+            "must be equal to itself";
+
+    private static final String NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES =
+            "must not be equal to instance with different values";
+
+    private static final String EQUAL_TO_INSTANCE_WITH_SAME_VALUES =
+            "must be equal to instance with same values";
+
+    private static final String HASH_CODE_MUST_BE_CONSISTENT =
+            "hash code must be consistent";
+
+    private static final String HASH_CODE_MUST_BE_DISTINCT =
+            "hash code must be distinct for non-equal instances";
+
+    private static final String HASH_CODE_MUST_BE_SAME =
+            "hash code must be the same for equal instances";
+
+    private static final String TO_STRING_SHOULD_BE_CONSISTENT =
+            "toString should be consistent";
+
+    private static final String TO_STRING_SHOULD_BE_DISTINCT =
+            "toString should be distinct for non-equal instances";
+
+    private static final String EXPECTED_IAE_FOR_INCORRECT_LENGTH =
+            "Expected IAE for incorrect length";
+
+    private static final String EXPECTED_IAE_LENGTH_SUBSTRING =
+            "characters long";
+
+    private static final String EXPECTED_IAE_HORIZ_SUBSTRING =
+            "Inconsistent horizontal line character";
+
+    private static final String EXPECTED_IAE_FOR_INCONSISTENT_HORIZ =
+            "Expected IAE for inconsistent horizontal usage";
+
+    private static final String EXPECTED_IAE_VERT_SUBSTRING =
+            "Inconsistent vertical line character";
+
+    private static final String EXPECTED_IAE_FOR_INCONSISTENT_VERT =
+            "Expected IAE for inconsistent vertical usage";
+
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
@@ -48,55 +96,64 @@ public class BoxDrawingCharactersTest {
 
     @Test
     public void testEquals() {
-        assertTrue("must not be equal to null", !testCharacters.equals(null));
-        assertTrue("must not be equal to some random object", !testCharacters.equals(new Object()));
-        assertTrue("must be equal to itself", testCharacters.equals(testCharacters));
         assertTrue(
-                "must not be equal to instance with different values",
+                NOT_EQUAL_TO_NULL,
+                !testCharacters.equals(null)
+        );
+        assertTrue(
+                NOT_EQUAL_RANDOM_OBJECT,
+                !testCharacters.equals(new Object())
+        );
+        assertTrue(
+                EQUAL_ITSELF,
+                testCharacters.equals(testCharacters)
+        );
+        assertTrue(
+                NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
                 !testCharacters.equals(builder.build())
         );
         assertTrue(
-                "must not be equal to instance with different values",
+                NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
                 !testCharacters.equals(builder.setHorizontal('h').build())
         );
         assertTrue(
-                "must not be equal to instance with different values",
+                NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
                 !testCharacters.equals(builder.setVertical('v').build())
         );
         assertTrue(
-                "must not be equal to instance with different values",
+                NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
                 !testCharacters.equals(builder.setTopLeftCorner('1').build())
         );
         assertTrue(
-                "must not be equal to instance with different values",
+                NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
                 !testCharacters.equals(builder.setTopIntersect('2').build())
         );
         assertTrue(
-                "must not be equal to instance with different values",
+                NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
                 !testCharacters.equals(builder.setTopRightCorner('3').build())
         );
         assertTrue(
-                "must not be equal to instance with different values",
+                NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
                 !testCharacters.equals(builder.setLeftIntersect('4').build())
         );
         assertTrue(
-                "must not be equal to instance with different values",
+                NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
                 !testCharacters.equals(builder.setMiddleIntersect('5').build())
         );
         assertTrue(
-                "must not be equal to instance with different values",
+                NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
                 !testCharacters.equals(builder.setRightIntersect('6').build())
         );
         assertTrue(
-                "must not be equal to instance with different values",
+                NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
                 !testCharacters.equals(builder.setBottomLeftCorner('7').build())
         );
         assertTrue(
-                "must not be equal to instance with different values",
+                NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
                 !testCharacters.equals(builder.setBottomIntersect('8').build())
         );
         assertTrue(
-                "must be equal to instance with same values",
+                EQUAL_TO_INSTANCE_WITH_SAME_VALUES,
                 testCharacters.equals(builder.setBottomRightCorner('9').build())
         );
     }
@@ -104,78 +161,78 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testHashCode() {
         assertEquals(
-                "hash code must be consistent",
+                HASH_CODE_MUST_BE_CONSISTENT,
                 testCharacters.hashCode(),
                 testCharacters.hashCode()
         );
         assertNotEquals(
-                "hash code must be distinct for non-equal instances",
+                HASH_CODE_MUST_BE_DISTINCT,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
         builder.setHorizontal('h');
         assertNotEquals(
-                "hash code must be distinct for non-equal instances",
+                HASH_CODE_MUST_BE_DISTINCT,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
         builder.setVertical('v');
         assertNotEquals(
-                "hash code must be distinct for non-equal instances",
+                HASH_CODE_MUST_BE_DISTINCT,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
         builder.setTopLeftCorner('1');
         assertNotEquals(
-                "hash code must be distinct for non-equal instances",
+                HASH_CODE_MUST_BE_DISTINCT,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
         builder.setTopIntersect('2');
         assertNotEquals(
-                "hash code must be distinct for non-equal instances",
+                HASH_CODE_MUST_BE_DISTINCT,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
         builder.setTopRightCorner('3');
         assertNotEquals(
-                "hash code must be distinct for non-equal instances",
+                HASH_CODE_MUST_BE_DISTINCT,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
         builder.setLeftIntersect('4');
         assertNotEquals(
-                "hash code must be distinct for non-equal instances",
+                HASH_CODE_MUST_BE_DISTINCT,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
         builder.setMiddleIntersect('5');
         assertNotEquals(
-                "hash code must be distinct for non-equal instances",
+                HASH_CODE_MUST_BE_DISTINCT,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
         builder.setRightIntersect('6');
         assertNotEquals(
-                "hash code must be distinct for non-equal instances",
+                HASH_CODE_MUST_BE_DISTINCT,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
         builder.setBottomLeftCorner('7');
         assertNotEquals(
-                "hash code must be distinct for non-equal instances",
+                HASH_CODE_MUST_BE_DISTINCT,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
         builder.setBottomIntersect('8');
         assertNotEquals(
-                "hash code must be distinct for non-equal instances",
+                HASH_CODE_MUST_BE_DISTINCT,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
         builder.setBottomRightCorner('9');
         assertEquals(
-                "hash code must be the same for equal instances",
+                HASH_CODE_MUST_BE_SAME,
                 testCharacters.hashCode(),
                 builder.build().hashCode()
         );
@@ -186,12 +243,12 @@ public class BoxDrawingCharactersTest {
         // this may be pointless, but is the only thing preventing me from 100% code coverage
         // and I just want to see that green
         assertEquals(
-                "toString should be consistent",
+                TO_STRING_SHOULD_BE_CONSISTENT,
                 testCharacters.toString(),
                 testCharacters.toString()
         );
         assertNotEquals(
-                "toString should be distinct for non-equal instances",
+                TO_STRING_SHOULD_BE_DISTINCT,
                 testCharacters.toString(),
                 builder.build().toString()
         );
@@ -212,17 +269,61 @@ public class BoxDrawingCharactersTest {
                 .setBottomIntersect('8')
                 .setBottomRightCorner('9')
                 .build();
-        assertEquals("horizontal should be \'h\'", 'h', built.getHorizontal());
-        assertEquals("vertical should be \'v\'", 'v', built.getVertical());
-        assertEquals("topLeftCorner should be \'1\'", '1', built.getTopLeftCorner());
-        assertEquals("topIntersect should be \'2\'", '2', built.getTopIntersect());
-        assertEquals("topRightCorner should be \'3\'", '3', built.getTopRightCorner());
-        assertEquals("leftIntersect should be \'4\'", '4', built.getLeftIntersect());
-        assertEquals("middleIntersect should be \'5\'", '5', built.getMiddleIntersect());
-        assertEquals("rightIntersect should be \'6\'", '6', built.getRightIntersect());
-        assertEquals("bottomLeftCorner should be \'7\'", '7', built.getBottomLeftCorner());
-        assertEquals("bottomIntersect should be \'8\'", '8', built.getBottomIntersect());
-        assertEquals("bottomRightCorner should be \'9\'", '9', built.getBottomRightCorner());
+        assertEquals(
+                "horizontal should be \'h\'",
+                'h',
+                built.getHorizontal()
+        );
+        assertEquals(
+                "vertical should be \'v\'",
+                'v',
+                built.getVertical()
+        );
+        assertEquals(
+                "topLeftCorner should be \'1\'",
+                '1',
+                built.getTopLeftCorner()
+        );
+        assertEquals(
+                "topIntersect should be \'2\'",
+                '2',
+                built.getTopIntersect()
+        );
+        assertEquals(
+                "topRightCorner should be \'3\'",
+                '3',
+                built.getTopRightCorner()
+        );
+        assertEquals(
+                "leftIntersect should be \'4\'",
+                '4',
+                built.getLeftIntersect()
+        );
+        assertEquals(
+                "middleIntersect should be \'5\'",
+                '5',
+                built.getMiddleIntersect()
+        );
+        assertEquals(
+                "rightIntersect should be \'6\'",
+                '6',
+                built.getRightIntersect()
+        );
+        assertEquals(
+                "bottomLeftCorner should be \'7\'",
+                '7',
+                built.getBottomLeftCorner()
+        );
+        assertEquals(
+                "bottomIntersect should be \'8\'",
+                '8',
+                built.getBottomIntersect()
+        );
+        assertEquals(
+                "bottomRightCorner should be \'9\'",
+                '9',
+                built.getBottomRightCorner()
+        );
     }
 
     @Test
@@ -246,8 +347,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionWrongLengthTooLong() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("long");
-        expectedException.reportMissingExceptionWithMessage("Expected IAE for incorrect length");
+        expectedException.expectMessage(EXPECTED_IAE_LENGTH_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCORRECT_LENGTH);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2h3"
@@ -262,8 +363,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionWrongLengthTooShort() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("long");
-        expectedException.reportMissingExceptionWithMessage("Expected IAE for incorrect length");
+        expectedException.expectMessage(EXPECTED_IAE_LENGTH_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCORRECT_LENGTH);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2h3"
@@ -278,10 +379,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionInconsistentHorizontals1() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("horizontal");
-        expectedException.reportMissingExceptionWithMessage(
-                "Expected IAE for inconsistent horizontal usage"
-        );
+        expectedException.expectMessage(EXPECTED_IAE_HORIZ_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCONSISTENT_HORIZ);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2H3"
@@ -296,10 +395,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionInconsistentHorizontals2() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("horizontal");
-        expectedException.reportMissingExceptionWithMessage(
-                "Expected IAE for inconsistent horizontal usage"
-        );
+        expectedException.expectMessage(EXPECTED_IAE_HORIZ_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCONSISTENT_HORIZ);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2h3"
@@ -314,10 +411,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionInconsistentHorizontals3() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("horizontal");
-        expectedException.reportMissingExceptionWithMessage(
-                "Expected IAE for inconsistent horizontal usage"
-        );
+        expectedException.expectMessage(EXPECTED_IAE_HORIZ_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCONSISTENT_HORIZ);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2h3"
@@ -332,10 +427,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionInconsistentHorizontals4() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("horizontal");
-        expectedException.reportMissingExceptionWithMessage(
-                "Expected IAE for inconsistent horizontal usage"
-        );
+        expectedException.expectMessage(EXPECTED_IAE_HORIZ_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCONSISTENT_HORIZ);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2h3"
@@ -350,10 +443,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionInconsistentHorizontals5() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("horizontal");
-        expectedException.reportMissingExceptionWithMessage(
-                "Expected IAE for inconsistent horizontal usage"
-        );
+        expectedException.expectMessage(EXPECTED_IAE_HORIZ_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCONSISTENT_HORIZ);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2h3"
@@ -368,10 +459,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionInconsistentVerticals1() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("vertical");
-        expectedException.reportMissingExceptionWithMessage(
-                "Expected IAE for inconsistent vertical usage"
-        );
+        expectedException.expectMessage(EXPECTED_IAE_VERT_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCONSISTENT_VERT);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2h3"
@@ -386,10 +475,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionInconsistentVerticals2() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("vertical");
-        expectedException.reportMissingExceptionWithMessage(
-                "Expected IAE for inconsistent vertical usage"
-        );
+        expectedException.expectMessage(EXPECTED_IAE_VERT_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCONSISTENT_VERT);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2h3"
@@ -404,10 +491,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionInconsistentVerticals3() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("vertical");
-        expectedException.reportMissingExceptionWithMessage(
-                "Expected IAE for inconsistent vertical usage"
-        );
+        expectedException.expectMessage(EXPECTED_IAE_VERT_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCONSISTENT_VERT);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2h3"
@@ -422,10 +507,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionInconsistentVerticals4() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("vertical");
-        expectedException.reportMissingExceptionWithMessage(
-                "Expected IAE for inconsistent vertical usage"
-        );
+        expectedException.expectMessage(EXPECTED_IAE_VERT_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCONSISTENT_VERT);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2h3"
@@ -440,10 +523,8 @@ public class BoxDrawingCharactersTest {
     @Test
     public void testFromBoxDrawingExceptionInconsistentVerticals5() {
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("vertical");
-        expectedException.reportMissingExceptionWithMessage(
-                "Expected IAE for inconsistent vertical usage"
-        );
+        expectedException.expectMessage(EXPECTED_IAE_VERT_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_INCONSISTENT_VERT);
         BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
                   "1h2h3"
