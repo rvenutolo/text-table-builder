@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -37,14 +36,22 @@ public class TextTableBuilderTest {
 
     private TextTableBuilder textTableBuilder;
 
+    private List<Alignment> alignments;
+
+    private Alignment[] alignmentsArray;
+
     @Before
     public void setUp() {
         textTableBuilder = new TextTableBuilder();
+        alignments = Arrays.asList(Alignment.LEFT, Alignment.RIGHT);
+        alignmentsArray = alignments.toArray(new Alignment[alignments.size()]);
     }
 
     @After
     public void tearDown() {
         textTableBuilder = null;
+        alignments = null;
+        alignmentsArray = null;
     }
 
     @Test
@@ -61,9 +68,8 @@ public class TextTableBuilderTest {
 
     @Test
     public void testSetAndGetHeaderAlignments() {
-        final Alignment[] alignments = {Alignment.LEFT, Alignment.RIGHT};
         textTableBuilder.setHeaderAlignments(alignments);
-        assertArrayEquals(
+        assertEquals(
                 "value returned from getter is not equal to that given to setter",
                 alignments,
                 textTableBuilder.getHeaderAlignments()
@@ -71,40 +77,41 @@ public class TextTableBuilderTest {
     }
 
     @Test
-    public void testSetAndGetHeaderAlignmentsForDefensiveCopying() {
-        final Alignment[] setAlignments = {Alignment.LEFT, Alignment.RIGHT};
-        textTableBuilder.setHeaderAlignments(setAlignments);
-        setAlignments[0] = Alignment.RIGHT;
+    public void testSetArrayAndGetHeaderAlignmentsArray() {
+        textTableBuilder.setHeaderAlignments(alignmentsArray);
         assertEquals(
-                "setter did not create a defensive copy",
-                Alignment.LEFT,
-                textTableBuilder.getHeaderAlignments()[0]
-        );
-        final Alignment[] getAlignments = textTableBuilder.getHeaderAlignments();
-        getAlignments[0] = Alignment.RIGHT;
-        assertEquals(
-                "getter did not return a defensive copy",
-                Alignment.LEFT,
-                textTableBuilder.getHeaderAlignments()[0]
+                "value returned from getter is not equal to that given to setter",
+                alignments,
+                textTableBuilder.getHeaderAlignments()
         );
     }
 
     @Test
-    public void testSetAndGetHeaderAlignmentsList() {
-        final List<Alignment> alignments = Arrays.asList(Alignment.LEFT, Alignment.RIGHT);
+    public void testSetHeaderAlignmentsForDefensiveCopying() {
         textTableBuilder.setHeaderAlignments(alignments);
+        alignments.set(0, Alignment.RIGHT);
         assertEquals(
-                "value returned from getter is not equal to that given to setter",
-                alignments,
-                Arrays.asList(textTableBuilder.getHeaderAlignments())
+                "setter did not create a defensive copy",
+                Alignment.LEFT,
+                textTableBuilder.getHeaderAlignments().get(0)
+        );
+    }
+
+    @Test
+    public void testGetHeaderAlignmentsForDefensiveCopying() {
+        textTableBuilder.setHeaderAlignments(alignments);
+        textTableBuilder.getHeaderAlignments().set(0, Alignment.RIGHT);
+        assertEquals(
+                "getter did not create a defensive copy",
+                Alignment.LEFT,
+                textTableBuilder.getHeaderAlignments().get(0)
         );
     }
 
     @Test
     public void testSetAndGetRowAlignments() {
-        final Alignment[] alignments = {Alignment.LEFT, Alignment.RIGHT};
         textTableBuilder.setRowAlignments(alignments);
-        assertArrayEquals(
+        assertEquals(
                 "value returned from getter is not equal to that given to setter",
                 alignments,
                 textTableBuilder.getRowAlignments()
@@ -112,32 +119,34 @@ public class TextTableBuilderTest {
     }
 
     @Test
-    public void testSetAndGetRowAlignmentsForDefensiveCopying() {
-        final Alignment[] setAlignments = {Alignment.LEFT, Alignment.RIGHT};
-        textTableBuilder.setRowAlignments(setAlignments);
-        setAlignments[0] = Alignment.RIGHT;
+    public void testSetArrayAndGetRowAlignmentsArray() {
+        textTableBuilder.setRowAlignments(alignmentsArray);
         assertEquals(
-                "setter did not create a defensive copy",
-                Alignment.LEFT,
-                textTableBuilder.getRowAlignments()[0]
-        );
-        final Alignment[] getAlignments = textTableBuilder.getRowAlignments();
-        getAlignments[0] = Alignment.RIGHT;
-        assertEquals(
-                "getter did not return a defensive copy",
-                Alignment.LEFT,
-                textTableBuilder.getRowAlignments()[0]
+                "value returned from getter is not equal to that given to setter",
+                alignments,
+                textTableBuilder.getRowAlignments()
         );
     }
 
     @Test
-    public void testSetAndGetRowAlignmentsList() {
-        final List<Alignment> alignments = Arrays.asList(Alignment.LEFT, Alignment.RIGHT);
+    public void testSetRowAlignmentsForDefensiveCopying() {
         textTableBuilder.setRowAlignments(alignments);
+        alignments.set(0, Alignment.RIGHT);
         assertEquals(
-                "value returned from getter is not equal to that given to setter",
-                alignments,
-                Arrays.asList(textTableBuilder.getRowAlignments())
+                "setter did not create a defensive copy",
+                Alignment.LEFT,
+                textTableBuilder.getRowAlignments().get(0)
+        );
+    }
+
+    @Test
+    public void testGetRowAlignmentsForDefensiveCopying() {
+        textTableBuilder.setRowAlignments(alignments);
+        textTableBuilder.getRowAlignments().set(0, Alignment.RIGHT);
+        assertEquals(
+                "getter did not create a defensive copy",
+                Alignment.LEFT,
+                textTableBuilder.getRowAlignments().get(0)
         );
     }
 
