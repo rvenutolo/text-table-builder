@@ -2,6 +2,7 @@ package org.venutolo.texttablebuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -11,12 +12,16 @@ public class TextTableBuilder {
 
     private BoxDrawingCharacters boxDrawingCharacters = BoxDrawingCharacters.LIGHT;
 
+    private List<String> headers;
+
     private List<Alignment> headerAlignments;
+
+    private List<List<String>> rows = new ArrayList<List<String>>();
 
     private List<Alignment> rowAlignments;
 
-    private static <T> List<T> defensiveCopy(final List<T> list) {
-        return new ArrayList<T>(list);
+    private static <T> List<T> defensiveCopy(final Collection<T> collection) {
+        return new ArrayList<T>(collection);
     }
 
     public TextTableBuilder setBoxDrawingCharacters(final BoxDrawingCharacters boxDrawingCharacters) {
@@ -28,7 +33,20 @@ public class TextTableBuilder {
         return boxDrawingCharacters;
     }
 
-    public TextTableBuilder setHeaderAlignments(final List<Alignment> headerAlignments) {
+    public TextTableBuilder setHeaders(final Collection<String> headers) {
+        this.headers = defensiveCopy(headers);
+        return this;
+    }
+
+    public TextTableBuilder setHeaders(final String... headers) {
+        return setHeaders(Arrays.asList(headers));
+    }
+
+    public List<String> getHeaders() {
+        return defensiveCopy(headers);
+    }
+
+    public TextTableBuilder setHeaderAlignments(final Collection<Alignment> headerAlignments) {
         this.headerAlignments = defensiveCopy(headerAlignments);
         return this;
     }
@@ -41,7 +59,23 @@ public class TextTableBuilder {
         return defensiveCopy(headerAlignments);
     }
 
-    public TextTableBuilder setRowAlignments(final List<Alignment> rowAlignments) {
+    public TextTableBuilder setRows(final Collection<Collection<String>> rows) {
+        this.rows = new ArrayList<List<String>>(rows.size());
+        for (final Collection<String> row : rows) {
+            this.rows.add(defensiveCopy(row));
+        }
+        return this;
+    }
+
+    public List<List<String>> getRows() {
+        final List<List<String>> rows = new ArrayList<List<String>>(this.rows.size());
+        for (final Collection<String> row : this.rows) {
+            rows.add(defensiveCopy(row));
+        }
+        return rows;
+    }
+
+    public TextTableBuilder setRowAlignments(final Collection<Alignment> rowAlignments) {
         this.rowAlignments = defensiveCopy(rowAlignments);
         return this;
     }
@@ -52,6 +86,16 @@ public class TextTableBuilder {
 
     public List<Alignment> getRowAlignments() {
         return defensiveCopy(rowAlignments);
+    }
+
+    public TextTableBuilder addRow(final Collection<String> row) {
+        rows.add(defensiveCopy(row));
+        return this;
+    }
+
+    public TextTableBuilder addRow(final String... row) {
+        addRow(Arrays.asList(row));
+        return this;
     }
 
 }
