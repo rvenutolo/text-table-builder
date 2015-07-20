@@ -87,12 +87,16 @@ public class TextTableBuilder {
         return this;
     }
 
-    public TextTableBuilder setRows(final Collection<Collection<String>> rows) {
-        this.rows = new ArrayList<List<String>>(rows.size());
+    public TextTableBuilder addRows(final Collection<Collection<String>> rows) {
         for (final Collection<String> row : rows) {
             addRow(row);
         }
         return this;
+    }
+
+    public TextTableBuilder setRows(final Collection<Collection<String>> rows) {
+        this.rows = new ArrayList<List<String>>(rows.size());
+        return addRows(rows);
     }
 
     public List<List<String>> getRows() {

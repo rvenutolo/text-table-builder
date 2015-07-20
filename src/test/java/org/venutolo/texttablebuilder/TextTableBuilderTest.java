@@ -28,6 +28,9 @@ public class TextTableBuilderTest {
     private static final String GETTER_NO_DEFENSIVE_COPY =
             "getter did not create a defensive copy";
 
+    private static final String APPENDER_NO_DEFENSIVE_COPY =
+            "appender did not create a defensive copy";
+
     private static final String GETTER_APPENDER_VALUE_NOT_EQUAL =
             "value returned from getter is not equal to that given to appender";
 
@@ -177,7 +180,7 @@ public class TextTableBuilderTest {
     public void testSetHeaderAlignmentsForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
-        expectedException.reportMissingExceptionWithMessage("Expected IAE for wrong column length");
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.setHeaderAlignments(Collections.<Alignment>emptyList());
     }
 
@@ -185,7 +188,7 @@ public class TextTableBuilderTest {
     public void testSetHeaderAlignmentsArrayForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
-        expectedException.reportMissingExceptionWithMessage("Expected IAE for wrong column length");
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.setHeaderAlignments();
     }
 
@@ -249,7 +252,7 @@ public class TextTableBuilderTest {
     public void testSetRowAlignmentsForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
-        expectedException.reportMissingExceptionWithMessage("Expected IAE for wrong column length");
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.setRowAlignments(Collections.<Alignment>emptyList());
     }
 
@@ -257,7 +260,7 @@ public class TextTableBuilderTest {
     public void testSetRowAlignmentsArrayForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
-        expectedException.reportMissingExceptionWithMessage("Expected IAE for wrong column length");
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.setRowAlignments();
     }
 
@@ -321,7 +324,7 @@ public class TextTableBuilderTest {
     public void testSetHeadersForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
-        expectedException.reportMissingExceptionWithMessage("Expected IAE for wrong column length");
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.setHeaders(Collections.<String>emptyList());
     }
 
@@ -329,7 +332,7 @@ public class TextTableBuilderTest {
     public void testSetHeadersArrayForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
-        expectedException.reportMissingExceptionWithMessage("Expected IAE for wrong column length");
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.setHeaders();
     }
 
@@ -381,7 +384,7 @@ public class TextTableBuilderTest {
         textTableBuilder.addRow(row0);
         row0.set(0, null);
         assertEquals(
-                "APPENDER NO DEFENSIVE COPY",
+                APPENDER_NO_DEFENSIVE_COPY,
                 expected,
                 textTableBuilder.getRows().get(0).get(0)
         );
@@ -393,7 +396,7 @@ public class TextTableBuilderTest {
         textTableBuilder.addRow(row0Array);
         row0Array[0] = null;
         assertEquals(
-                "APPENDER NO DEFENSIVE COPY",
+                APPENDER_NO_DEFENSIVE_COPY,
                 expected,
                 textTableBuilder.getRows().get(0).get(0)
         );
@@ -403,7 +406,7 @@ public class TextTableBuilderTest {
     public void testAddRowForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
-        expectedException.reportMissingExceptionWithMessage("Expected IAE for wrong column length");
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.addRow(Collections.<String>emptyList());
     }
 
@@ -411,8 +414,56 @@ public class TextTableBuilderTest {
     public void testAddRowArrayForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
-        expectedException.reportMissingExceptionWithMessage("Expected IAE for wrong column length");
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.addRow();
+    }
+
+    @Test
+    public void testAddRows() {
+        textTableBuilder.addRows(allRows);
+        assertEquals(
+                GETTER_APPENDER_VALUE_NOT_EQUAL,
+                allRows,
+                textTableBuilder.getRows()
+        );
+    }
+
+    @Test
+    public void testAddRowsMultiple() {
+        final Collection<Collection<String>> expected = new ArrayList<Collection<String>>();
+        expected.addAll(allRows);
+        expected.addAll(allRows);
+        textTableBuilder.addRows(allRows);
+        textTableBuilder.addRows(allRows);
+        assertEquals(
+                GETTER_APPENDER_VALUE_NOT_EQUAL,
+                expected,
+                textTableBuilder.getRows()
+        );
+    }
+
+    @Test
+    public void testAddRowsForDefensiveCopy() {
+        final Collection<String> expected = allRows.get(0);
+        textTableBuilder.addRows(allRows);
+        allRows.set(0, Arrays.<String>asList(null, null));
+        assertEquals(
+                APPENDER_NO_DEFENSIVE_COPY,
+                expected,
+                textTableBuilder.getRows().get(0)
+        );
+    }
+
+    @Test
+    public void testAddRowsForBadLength() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
+        populatedTextTableBuilder.addRows(
+                Collections.<Collection<String>>singletonList(
+                        Collections.<String>emptyList()
+                )
+        );
     }
 
     @Test
