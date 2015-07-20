@@ -39,13 +39,13 @@ public class TextTableBuilder {
         }
     }
 
+    public BoxDrawingCharacters getBoxDrawingCharacters() {
+        return boxDrawingCharacters;
+    }
+
     public TextTableBuilder setBoxDrawingCharacters(final BoxDrawingCharacters boxDrawingCharacters) {
         this.boxDrawingCharacters = boxDrawingCharacters;
         return this;
-    }
-
-    public BoxDrawingCharacters getBoxDrawingCharacters() {
-        return boxDrawingCharacters;
     }
 
     public TextTableBuilder setHeaders(final Collection<String> headers) {
@@ -54,12 +54,12 @@ public class TextTableBuilder {
         return this;
     }
 
-    public TextTableBuilder setHeaders(final String... headers) {
-        return setHeaders(Arrays.asList(headers));
-    }
-
     public List<String> getHeaders() {
         return defensiveCopy(headers);
+    }
+
+    public TextTableBuilder setHeaders(final String... headers) {
+        return setHeaders(Arrays.asList(headers));
     }
 
     public TextTableBuilder setHeaderAlignments(final Collection<Alignment> headerAlignments) {
@@ -68,12 +68,12 @@ public class TextTableBuilder {
         return this;
     }
 
-    public TextTableBuilder setHeaderAlignments(final Alignment... headerAlignments) {
-        return setHeaderAlignments(Arrays.asList(headerAlignments));
-    }
-
     public List<Alignment> getHeaderAlignments() {
         return defensiveCopy(headerAlignments);
+    }
+
+    public TextTableBuilder setHeaderAlignments(final Alignment... headerAlignments) {
+        return setHeaderAlignments(Arrays.asList(headerAlignments));
     }
 
     public TextTableBuilder addRow(final Collection<String> row) {
@@ -94,11 +94,6 @@ public class TextTableBuilder {
         return this;
     }
 
-    public TextTableBuilder setRows(final Collection<Collection<String>> rows) {
-        this.rows = new ArrayList<List<String>>(rows.size());
-        return addRows(rows);
-    }
-
     public List<List<String>> getRows() {
         final List<List<String>> rows = new ArrayList<List<String>>(this.rows.size());
         for (final Collection<String> row : this.rows) {
@@ -107,18 +102,23 @@ public class TextTableBuilder {
         return rows;
     }
 
+    public TextTableBuilder setRows(final Collection<Collection<String>> rows) {
+        this.rows = new ArrayList<List<String>>(rows.size());
+        return addRows(rows);
+    }
+
     public TextTableBuilder setRowAlignments(final Collection<Alignment> rowAlignments) {
         checkNumColumns(rowAlignments);
         this.rowAlignments = defensiveCopy(rowAlignments);
         return this;
     }
 
-    public TextTableBuilder setRowAlignments(final Alignment... rowAlignments) {
-        return setRowAlignments(Arrays.asList(rowAlignments));
-    }
-
     public List<Alignment> getRowAlignments() {
         return defensiveCopy(rowAlignments);
+    }
+
+    public TextTableBuilder setRowAlignments(final Alignment... rowAlignments) {
+        return setRowAlignments(Arrays.asList(rowAlignments));
     }
 
 }
