@@ -14,11 +14,11 @@ public class TextTableBuilder {
 
     private BoxDrawingCharacters boxDrawingCharacters = BoxDrawingCharacters.LIGHT;
 
-    private List<String> headers;
+    private List<Object> headers;
 
     private List<Alignment> headerAlignments;
 
-    private List<List<String>> rows;
+    private List<List<Object>> rows;
 
     private List<Alignment> rowAlignments;
 
@@ -38,17 +38,21 @@ public class TextTableBuilder {
         return (collection == null) ? new ArrayList<T>() : new ArrayList<T>(collection);
     }
 
+    private static List<Object> defensiveObjectListCopy(final Collection<?> collection) {
+        return (collection == null) ? new ArrayList<Object>() : new ArrayList<Object>(collection);
+    }
+
     public TextTableBuilder() {
         initRows(null);
     }
 
     private void initRows(final Integer size) {
         this.rows = (size != null)
-                    ? new ArrayList<List<String>>(size)
-                    : new ArrayList<List<String>>();
+                    ? new ArrayList<List<Object>>(size)
+                    : new ArrayList<List<Object>>();
     }
 
-    private <T> void checkNumColumns(final Collection<T> collection) {
+    private void checkNumColumns(final Collection<?> collection) {
         if (numColumns == null) {
             // if numColumns is null, this is the first check for number of columns
             // set some variables now that number of columns is known
@@ -78,17 +82,17 @@ public class TextTableBuilder {
         return this;
     }
 
-    public TextTableBuilder setHeaders(final Collection<String> headers) {
+    public TextTableBuilder setHeaders(final Collection<?> headers) {
         checkNumColumns(headers);
-        this.headers = defensiveListCopy(headers);
+        this.headers = defensiveObjectListCopy(headers);
         return this;
     }
 
-    public List<String> getHeaders() {
+    public List<Object> getHeaders() {
         return defensiveListCopy(headers);
     }
 
-    public TextTableBuilder setHeaders(final String... headers) {
+    public TextTableBuilder setHeadersFromArray(final Object... headers) {
         return setHeaders(Arrays.asList(headers));
     }
 
@@ -107,39 +111,46 @@ public class TextTableBuilder {
         return defensiveListCopy(headerAlignments);
     }
 
-    public TextTableBuilder setHeaderAlignments(final Alignment... headerAlignments) {
+    public TextTableBuilder setHeaderAlignmentsFromArray(final Alignment... headerAlignments) {
         return setHeaderAlignments(Arrays.asList(headerAlignments));
     }
 
-    public TextTableBuilder addRow(final Collection<String> row) {
+    public TextTableBuilder addRow(final Collection<?> row) {
         checkNumColumns(row);
-        rows.add(defensiveListCopy(row));
+        rows.add(defensiveObjectListCopy(row));
         return this;
     }
 
-    public TextTableBuilder addRow(final String... row) {
-        addRow(Arrays.asList(row));
-        return this;
+    public TextTableBuilder addRowFromArray(final Object... row) {
+        return addRow(Arrays.asList(row));
     }
 
-    public TextTableBuilder addRows(final Collection<Collection<String>> rows) {
-        for (final Collection<String> row : rows) {
+    public TextTableBuilder addRows(final Collection<? extends Collection<?>> rows) {
+        for (final Collection<?> row : rows) {
             addRow(row);
         }
         return this;
     }
 
-    public List<List<String>> getRows() {
-        final List<List<String>> rows = new ArrayList<List<String>>(this.rows.size());
-        for (final Collection<String> row : this.rows) {
+    public TextTableBuilder addRowsFromArray(final Collection<?>... rows) {
+        return addRows(Arrays.asList(rows));
+    }
+
+    public List<List<Object>> getRows() {
+        final List<List<Object>> rows = new ArrayList<List<Object>>(this.rows.size());
+        for (final Collection<Object> row : this.rows) {
             rows.add(defensiveListCopy(row));
         }
         return rows;
     }
 
-    public TextTableBuilder setRows(final Collection<Collection<String>> rows) {
+    public TextTableBuilder setRows(final Collection<? extends Collection<?>> rows) {
         initRows(rows.size());
         return addRows(rows);
+    }
+
+    public TextTableBuilder setRowsFromArray(final Collection<?>... rows) {
+        return setRows(Arrays.asList(rows));
     }
 
     public TextTableBuilder removeRow(final int rowNum) {
@@ -162,7 +173,7 @@ public class TextTableBuilder {
         return defensiveListCopy(rowAlignments);
     }
 
-    public TextTableBuilder setRowAlignments(final Alignment... rowAlignments) {
+    public TextTableBuilder setRowAlignmentsFromArray(final Alignment... rowAlignments) {
         return setRowAlignments(Arrays.asList(rowAlignments));
     }
 
@@ -221,8 +232,10 @@ public class TextTableBuilder {
             throw new IllegalArgumentException("Width is less than 0");
         }
         if (minColumnWidths == null) {
-            throw new IllegalStateException("Cannot set column width before number of columns has "
-                                            + "been defined by another method");
+            throw new IllegalStateException(
+                    "Cannot set column width before number of columns has "
+                    + "been defined by another method"
+            );
         }
         minColumnWidths.set(columnNum, width);
         return this;
@@ -239,8 +252,10 @@ public class TextTableBuilder {
             throw new IllegalArgumentException("Width is less than 0");
         }
         if (maxColumnWidths == null) {
-            throw new IllegalStateException("Cannot set column width before number of columns has "
-                                            + "been defined by another method");
+            throw new IllegalStateException(
+                    "Cannot set column width before number of columns has "
+                    + "been defined by another method"
+            );
         }
         maxColumnWidths.set(columnNum, width);
         return this;
