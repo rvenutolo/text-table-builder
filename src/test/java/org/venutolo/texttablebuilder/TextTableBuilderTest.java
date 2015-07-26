@@ -606,7 +606,7 @@ public class TextTableBuilderTest {
 
     @Test
     public void testSetAndGetShowRowNums() {
-        for (final boolean showRowNums : new Boolean[]{true, false}) {
+        for (final boolean showRowNums : new boolean[]{true, false}) {
             emptyTextTableBuilder.setShowRowNums(showRowNums);
             assertEquals(
                     GETTER_SETTER_VALUE_NOT_EQUAL,
@@ -808,6 +808,18 @@ public class TextTableBuilderTest {
                 row1,
                 populatedTextTableBuilder.getRows().get(0)
         );
+    }
+
+    @Test
+    public void testSetAndGetReplaceNullWithEmptyString() {
+        for (final boolean replaceNullWithEmptyString : new boolean[] {true, false}) {
+            emptyTextTableBuilder.setReplaceNullWithEmptyString(replaceNullWithEmptyString);
+            assertEquals(
+                    GETTER_SETTER_VALUE_NOT_EQUAL,
+                    replaceNullWithEmptyString,
+                    emptyTextTableBuilder.getReplaceNullWithEmptyString()
+            );
+        }
     }
 
 }

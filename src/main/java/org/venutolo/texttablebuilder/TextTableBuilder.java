@@ -34,6 +34,8 @@ public class TextTableBuilder {
 
     private List<Integer> maxColumnWidths;
 
+    private boolean replaceNullWithEmptyString;
+
     private static <T> List<T> defensiveListCopy(final Collection<T> collection) {
         return (collection == null) ? new ArrayList<T>() : new ArrayList<T>(collection);
     }
@@ -265,6 +267,15 @@ public class TextTableBuilder {
         setColumnMinWidth(columnNum, width);
         setColumnMaxWidth(columnNum, width);
         return this;
+    }
+
+    public TextTableBuilder setReplaceNullWithEmptyString(final boolean replaceNullWithEmptyString) {
+        this.replaceNullWithEmptyString = replaceNullWithEmptyString;
+        return this;
+    }
+
+    public boolean getReplaceNullWithEmptyString() {
+        return replaceNullWithEmptyString;
     }
 
 }
