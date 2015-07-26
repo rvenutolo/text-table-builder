@@ -13,6 +13,8 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Rick Venutolo
@@ -40,6 +42,18 @@ public class TextTableBuilderTest {
     private static final String EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH =
             "Expected IAE for wrong column length";
 
+    private static final String WIDTH_LESS_THAN_0 =
+            "Width is less than 0";
+
+    private static final String EXPECTED_IAE_FOR_BAD_WIDTH =
+            "Expected IAE for bad width";
+
+    private static final String CANNOT_SET_COLUMN_WIDTH =
+            "Cannot set column width";
+
+    private static final String EXPECTED_ISE_FOR_SET_BEFORE_DEFINED =
+            "Expected ISE for attempting to set column width before column has been defined";
+
     private final Collection<BoxDrawingCharacters> boxDrawingCharactersCollection =
             Collections.unmodifiableCollection(
                     Arrays.asList(
@@ -56,7 +70,7 @@ public class TextTableBuilderTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    private TextTableBuilder textTableBuilder;
+    private TextTableBuilder emptyTextTableBuilder;
 
     private TextTableBuilder populatedTextTableBuilder;
 
@@ -80,7 +94,7 @@ public class TextTableBuilderTest {
 
     @Before
     public void setUp() {
-        textTableBuilder = new TextTableBuilder();
+        emptyTextTableBuilder = new TextTableBuilder();
         alignmentsArray = new Alignment[]{Alignment.LEFT, Alignment.RIGHT};
         alignments = Arrays.asList(alignmentsArray);
         headersArray = new String[]{"0", "1"};
@@ -101,7 +115,7 @@ public class TextTableBuilderTest {
 
     @After
     public void tearDown() {
-        textTableBuilder = null;
+        emptyTextTableBuilder = null;
         alignmentsArray = null;
         alignments = null;
         headersArray = null;
@@ -111,68 +125,68 @@ public class TextTableBuilderTest {
     @Test
     public void testSetAndGetBoxDrawingCharacters() {
         for (final BoxDrawingCharacters boxDrawingCharacters : boxDrawingCharactersCollection) {
-            textTableBuilder.setBoxDrawingCharacters(boxDrawingCharacters);
+            emptyTextTableBuilder.setBoxDrawingCharacters(boxDrawingCharacters);
             assertEquals(
                     GETTER_SETTER_VALUE_NOT_EQUAL,
                     boxDrawingCharacters,
-                    textTableBuilder.getBoxDrawingCharacters()
+                    emptyTextTableBuilder.getBoxDrawingCharacters()
             );
         }
     }
 
     @Test
     public void testSetAndGetHeaderAlignments() {
-        textTableBuilder.setHeaderAlignments(alignments);
+        emptyTextTableBuilder.setHeaderAlignments(alignments);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 alignments,
-                textTableBuilder.getHeaderAlignments()
+                emptyTextTableBuilder.getHeaderAlignments()
         );
     }
 
     @Test
     public void testSetArrayAndGetHeaderAlignmentsArray() {
-        textTableBuilder.setHeaderAlignments(alignmentsArray);
+        emptyTextTableBuilder.setHeaderAlignments(alignmentsArray);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 alignments,
-                textTableBuilder.getHeaderAlignments()
+                emptyTextTableBuilder.getHeaderAlignments()
         );
     }
 
     @Test
     public void testSetHeaderAlignmentsForDefensiveCopying() {
         final Alignment expected = alignments.get(0);
-        textTableBuilder.setHeaderAlignments(alignments);
+        emptyTextTableBuilder.setHeaderAlignments(alignments);
         alignments.set(0, null);
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getHeaderAlignments().get(0)
+                emptyTextTableBuilder.getHeaderAlignments().get(0)
         );
     }
 
     @Test
     public void testSetHeaderAlignmentsArrayForDefensiveCopying() {
         final Alignment expected = alignmentsArray[0];
-        textTableBuilder.setHeaderAlignments(alignmentsArray);
+        emptyTextTableBuilder.setHeaderAlignments(alignmentsArray);
         alignmentsArray[0] = null;
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getHeaderAlignments().get(0)
+                emptyTextTableBuilder.getHeaderAlignments().get(0)
         );
     }
 
     @Test
     public void testGetHeaderAlignmentsForDefensiveCopying() {
         final Alignment expected = alignments.get(0);
-        textTableBuilder.setHeaderAlignments(alignments);
-        textTableBuilder.getHeaderAlignments().set(0, null);
+        emptyTextTableBuilder.setHeaderAlignments(alignments);
+        emptyTextTableBuilder.getHeaderAlignments().set(0, null);
         assertEquals(
                 GETTER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getHeaderAlignments().get(0)
+                emptyTextTableBuilder.getHeaderAlignments().get(0)
         );
     }
 
@@ -194,57 +208,57 @@ public class TextTableBuilderTest {
 
     @Test
     public void testSetAndGetRowAlignments() {
-        textTableBuilder.setRowAlignments(alignments);
+        emptyTextTableBuilder.setRowAlignments(alignments);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 alignments,
-                textTableBuilder.getRowAlignments()
+                emptyTextTableBuilder.getRowAlignments()
         );
     }
 
     @Test
     public void testSetArrayAndGetRowAlignmentsArray() {
-        textTableBuilder.setRowAlignments(alignmentsArray);
+        emptyTextTableBuilder.setRowAlignments(alignmentsArray);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 alignments,
-                textTableBuilder.getRowAlignments()
+                emptyTextTableBuilder.getRowAlignments()
         );
     }
 
     @Test
     public void testSetRowAlignmentsForDefensiveCopying() {
         final Alignment expected = alignments.get(0);
-        textTableBuilder.setRowAlignments(alignments);
+        emptyTextTableBuilder.setRowAlignments(alignments);
         alignments.set(0, null);
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getRowAlignments().get(0)
+                emptyTextTableBuilder.getRowAlignments().get(0)
         );
     }
 
     @Test
     public void testSetRowAlignmentsArrayForDefensiveCopying() {
         final Alignment expected = alignmentsArray[0];
-        textTableBuilder.setRowAlignments(alignmentsArray);
+        emptyTextTableBuilder.setRowAlignments(alignmentsArray);
         alignmentsArray[0] = null;
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getRowAlignments().get(0)
+                emptyTextTableBuilder.getRowAlignments().get(0)
         );
     }
 
     @Test
     public void testGetRowAlignmentsForDefensiveCopying() {
         final Alignment expected = alignments.get(0);
-        textTableBuilder.setRowAlignments(alignments);
-        textTableBuilder.getRowAlignments().set(0, null);
+        emptyTextTableBuilder.setRowAlignments(alignments);
+        emptyTextTableBuilder.getRowAlignments().set(0, null);
         assertEquals(
                 GETTER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getRowAlignments().get(0)
+                emptyTextTableBuilder.getRowAlignments().get(0)
         );
     }
 
@@ -266,57 +280,57 @@ public class TextTableBuilderTest {
 
     @Test
     public void testSetAndGetHeaders() {
-        textTableBuilder.setHeaders(headers);
+        emptyTextTableBuilder.setHeaders(headers);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 headers,
-                textTableBuilder.getHeaders()
+                emptyTextTableBuilder.getHeaders()
         );
     }
 
     @Test
     public void testSetAndGetHeadersArray() {
-        textTableBuilder.setHeaders(headersArray);
+        emptyTextTableBuilder.setHeaders(headersArray);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 headers,
-                textTableBuilder.getHeaders()
+                emptyTextTableBuilder.getHeaders()
         );
     }
 
     @Test
     public void testSetHeadersForDefensiveCopying() {
         final String expected = headers.get(0);
-        textTableBuilder.setHeaders(headers);
+        emptyTextTableBuilder.setHeaders(headers);
         headers.set(0, null);
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getHeaders().get(0)
+                emptyTextTableBuilder.getHeaders().get(0)
         );
     }
 
     @Test
     public void testSetHeadersArrayForDefensiveCopying() {
         final String expected = headersArray[0];
-        textTableBuilder.setHeaders(headersArray);
+        emptyTextTableBuilder.setHeaders(headersArray);
         headersArray[0] = null;
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getHeaders().get(0)
+                emptyTextTableBuilder.getHeaders().get(0)
         );
     }
 
     @Test
     public void testGetHeadersForDefensiveCopying() {
         final String expected = headers.get(0);
-        textTableBuilder.setHeaders(headers);
-        textTableBuilder.getHeaders().set(0, null);
+        emptyTextTableBuilder.setHeaders(headers);
+        emptyTextTableBuilder.getHeaders().set(0, null);
         assertEquals(
                 GETTER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getHeaders().get(0)
+                emptyTextTableBuilder.getHeaders().get(0)
         );
     }
 
@@ -338,67 +352,67 @@ public class TextTableBuilderTest {
 
     @Test
     public void testAddRow() {
-        textTableBuilder.addRow(row0);
+        emptyTextTableBuilder.addRow(row0);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 row0,
-                textTableBuilder.getRows().get(0)
+                emptyTextTableBuilder.getRows().get(0)
         );
     }
 
     @Test
     public void testAddRowMultiple() {
-        textTableBuilder.addRow(row0);
-        textTableBuilder.addRow(row1);
+        emptyTextTableBuilder.addRow(row0);
+        emptyTextTableBuilder.addRow(row1);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 allRows,
-                textTableBuilder.getRows()
+                emptyTextTableBuilder.getRows()
         );
     }
 
     @Test
     public void testAddRowArray() {
-        textTableBuilder.addRow(row0Array);
+        emptyTextTableBuilder.addRow(row0Array);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 row0,
-                textTableBuilder.getRows().get(0)
+                emptyTextTableBuilder.getRows().get(0)
         );
     }
 
     @Test
     public void testAddRowArrayMultiple() {
-        textTableBuilder.addRow(row0Array);
-        textTableBuilder.addRow(row1Array);
+        emptyTextTableBuilder.addRow(row0Array);
+        emptyTextTableBuilder.addRow(row1Array);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 allRows,
-                textTableBuilder.getRows()
+                emptyTextTableBuilder.getRows()
         );
     }
 
     @Test
     public void testAddRowForDefensiveCopy() {
         final String expected = row0.get(0);
-        textTableBuilder.addRow(row0);
+        emptyTextTableBuilder.addRow(row0);
         row0.set(0, null);
         assertEquals(
                 APPENDER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getRows().get(0).get(0)
+                emptyTextTableBuilder.getRows().get(0).get(0)
         );
     }
 
     @Test
     public void testAddRowArrayForDefensiveCopy() {
         final String expected = row0Array[0];
-        textTableBuilder.addRow(row0Array);
+        emptyTextTableBuilder.addRow(row0Array);
         row0Array[0] = null;
         assertEquals(
                 APPENDER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getRows().get(0).get(0)
+                emptyTextTableBuilder.getRows().get(0).get(0)
         );
     }
 
@@ -420,11 +434,11 @@ public class TextTableBuilderTest {
 
     @Test
     public void testAddRows() {
-        textTableBuilder.addRows(allRows);
+        emptyTextTableBuilder.addRows(allRows);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 allRows,
-                textTableBuilder.getRows()
+                emptyTextTableBuilder.getRows()
         );
     }
 
@@ -433,24 +447,24 @@ public class TextTableBuilderTest {
         final Collection<Collection<String>> expected = new ArrayList<Collection<String>>();
         expected.addAll(allRows);
         expected.addAll(allRows);
-        textTableBuilder.addRows(allRows);
-        textTableBuilder.addRows(allRows);
+        emptyTextTableBuilder.addRows(allRows);
+        emptyTextTableBuilder.addRows(allRows);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 expected,
-                textTableBuilder.getRows()
+                emptyTextTableBuilder.getRows()
         );
     }
 
     @Test
     public void testAddRowsForDefensiveCopy() {
         final Collection<String> expected = allRows.get(0);
-        textTableBuilder.addRows(allRows);
+        emptyTextTableBuilder.addRows(allRows);
         allRows.set(0, Arrays.<String>asList(null, null));
         assertEquals(
                 APPENDER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getRows().get(0)
+                emptyTextTableBuilder.getRows().get(0)
         );
     }
 
@@ -468,35 +482,35 @@ public class TextTableBuilderTest {
 
     @Test
     public void testSetAndGetRows() {
-        textTableBuilder.setRows(allRows);
+        emptyTextTableBuilder.setRows(allRows);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 allRows,
-                textTableBuilder.getRows()
+                emptyTextTableBuilder.getRows()
         );
     }
 
     @Test
     public void testSetRowsForDefensiveCopying() {
         final Collection<String> expected = allRows.get(0);
-        textTableBuilder.setRows(allRows);
+        emptyTextTableBuilder.setRows(allRows);
         allRows.set(0, Arrays.<String>asList(null, null));
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getRows().get(0)
+                emptyTextTableBuilder.getRows().get(0)
         );
     }
 
     @Test
     public void testGetRowsForDefensiveCopying() {
         final Collection<String> expected = allRows.get(0);
-        textTableBuilder.setRows(allRows);
-        textTableBuilder.getRows().set(0, Arrays.<String>asList(null, null));
+        emptyTextTableBuilder.setRows(allRows);
+        emptyTextTableBuilder.getRows().set(0, Arrays.<String>asList(null, null));
         assertEquals(
                 GETTER_NO_DEFENSIVE_COPY,
                 expected,
-                textTableBuilder.getRows().get(0)
+                emptyTextTableBuilder.getRows().get(0)
         );
     }
 
@@ -507,6 +521,212 @@ public class TextTableBuilderTest {
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         allRows.add(Collections.<String>emptyList());
         populatedTextTableBuilder.setRows(allRows);
+    }
+
+    @Test
+    public void testSetAndGetShowRowNums() {
+        for (final boolean showRowNums : new Boolean[] {true, false}) {
+            emptyTextTableBuilder.setShowRowNums(showRowNums);
+            assertEquals(
+                    GETTER_SETTER_VALUE_NOT_EQUAL,
+                    showRowNums,
+                    emptyTextTableBuilder.getShowRowNums()
+            );
+        }
+    }
+
+    @Test
+    public void testClearRows() {
+        populatedTextTableBuilder.clearRows();
+        assertTrue(
+                "Rows not empty after clearRows()",
+                populatedTextTableBuilder.getRows().isEmpty()
+        );
+    }
+
+    @Test
+    public void testClearHeaders() {
+        populatedTextTableBuilder.clearHeaders();
+        assertTrue(
+                "Headers not empty after clearHeaders()",
+                populatedTextTableBuilder.getHeaders().isEmpty()
+        );
+    }
+
+    @Test
+    public void testGetNumRows() {
+        assertEquals(
+                "Incorrect number of rows",
+                emptyTextTableBuilder.getRows().size(),
+                emptyTextTableBuilder.getNumRows()
+        );
+        assertEquals(
+                "Incorrect number of rows",
+                populatedTextTableBuilder.getRows().size(),
+                populatedTextTableBuilder.getNumRows()
+        );
+    }
+
+    @Test
+    public void testSetAndGetRepeatHeaders() {
+        final int numRows = 10;
+        emptyTextTableBuilder.repeatHeaders(numRows);
+        assertEquals(
+                GETTER_SETTER_VALUE_NOT_EQUAL,
+                numRows,
+                emptyTextTableBuilder.getRepeatHeaders()
+        );
+    }
+
+    @Test
+    public void testSetAndGetPrependerString(){
+        final String prependerString = "prepender";
+        emptyTextTableBuilder.setPrependerString(prependerString);
+        assertEquals(
+                GETTER_SETTER_VALUE_NOT_EQUAL,
+                prependerString,
+                emptyTextTableBuilder.getPrependerString()
+        );
+    }
+
+    @Test
+    public void testSetAndGetAppenderString() {
+        final String appenderString = "appender";
+        emptyTextTableBuilder.setAppenderString(appenderString);
+        assertEquals(
+                GETTER_SETTER_VALUE_NOT_EQUAL,
+                appenderString,
+                emptyTextTableBuilder.getAppenderString()
+        );
+    }
+
+    @Test
+    public void testGetNumColumns() {
+        assertEquals(
+                "Incorrect number of columns",
+                emptyTextTableBuilder.getRows().size(),
+                emptyTextTableBuilder.getNumColumns()
+        );
+        assertEquals(
+                "Incorrect number of columns",
+                populatedTextTableBuilder.getRows().size(),
+                populatedTextTableBuilder.getNumColumns()
+        );
+    }
+
+    @Test
+    public void testSetAndGetMinColumnWidth() {
+        for (int i = 0; i < populatedTextTableBuilder.getNumColumns(); i++) {
+            populatedTextTableBuilder.setColumnMinWidth(i, i);
+            assertEquals(
+                    GETTER_SETTER_VALUE_NOT_EQUAL,
+                    (Integer) i,
+                    populatedTextTableBuilder.getColumnMinWidth(i)
+            );
+        }
+    }
+
+    @Test
+    public void testSetAndGetMaxColumnWidth() {
+        for (int i = 0; i < populatedTextTableBuilder.getNumColumns(); i++) {
+            populatedTextTableBuilder.setColumnMaxWidth(i, i);
+            assertEquals(
+                    GETTER_SETTER_VALUE_NOT_EQUAL,
+                    (Integer) i,
+                    populatedTextTableBuilder.getColumnMaxWidth(i)
+            );
+        }
+    }
+
+    @Test
+    public void testSetColumnWidth() {
+        for (int i = 0; i < populatedTextTableBuilder.getNumColumns(); i++) {
+            populatedTextTableBuilder.setColumnWidth(i, i);
+            assertEquals(
+                    GETTER_SETTER_VALUE_NOT_EQUAL,
+                    (Integer) i,
+                    populatedTextTableBuilder.getColumnMinWidth(i)
+            );
+            assertEquals(
+                    GETTER_SETTER_VALUE_NOT_EQUAL,
+                    (Integer) i,
+                    populatedTextTableBuilder.getColumnMaxWidth(i)
+            );
+        }
+    }
+
+    @Test
+    public void testGetColumnMinWidthNotSet() {
+        assertNull(
+                "Min width should be null when it has not been set",
+                populatedTextTableBuilder.getColumnMinWidth(0)
+        );
+    }
+
+    @Test
+    public void testGetColumnMaxWidthNotSet() {
+        assertNull(
+                "Max width should be null when it has not been set",
+                populatedTextTableBuilder.getColumnMaxWidth(0)
+        );
+    }
+
+    @Test
+    public void testSetColumnMinWidthBadValue() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(WIDTH_LESS_THAN_0);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_WIDTH);
+        populatedTextTableBuilder.setColumnMinWidth(0, -1);
+    }
+
+    @Test
+    public void testSetColumnMaxWidthBadValue() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(WIDTH_LESS_THAN_0);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_WIDTH);
+        populatedTextTableBuilder.setColumnMaxWidth(0, -1);
+    }
+
+    @Test
+    public void testSetColumnWidthBadValue() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(WIDTH_LESS_THAN_0);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_WIDTH);
+        populatedTextTableBuilder.setColumnWidth(0, -1);
+    }
+
+    @Test
+    public void testSetColumnMinWidthBeforeNumColumnsDefined() {
+        expectedException.expect(IllegalStateException.class);
+        expectedException.expectMessage(CANNOT_SET_COLUMN_WIDTH);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_ISE_FOR_SET_BEFORE_DEFINED);
+        emptyTextTableBuilder.setColumnMinWidth(0, 0);
+    }
+
+    @Test
+    public void testSetColumnMaxWidthBeforeNumColumnsDefined() {
+        expectedException.expect(IllegalStateException.class);
+        expectedException.expectMessage(CANNOT_SET_COLUMN_WIDTH);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_ISE_FOR_SET_BEFORE_DEFINED);
+        emptyTextTableBuilder.setColumnMaxWidth(0, 0);
+    }
+
+    @Test
+    public void testSetColumnWidthBeforeNumColumnsDefined() {
+        expectedException.expect(IllegalStateException.class);
+        expectedException.expectMessage(CANNOT_SET_COLUMN_WIDTH);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_ISE_FOR_SET_BEFORE_DEFINED);
+        emptyTextTableBuilder.setColumnWidth(0, 0);
+    }
+
+    @Test
+    public void testRemoveRow() {
+        populatedTextTableBuilder.removeRow(0);
+        assertEquals(
+                "After removing first row, previous second row should now be first now",
+                row1,
+                populatedTextTableBuilder.getRows().get(0)
+        );
     }
 
 }
