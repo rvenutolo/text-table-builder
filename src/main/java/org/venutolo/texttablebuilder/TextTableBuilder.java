@@ -30,9 +30,13 @@ public class TextTableBuilder {
 
     private boolean replaceNullWithEmptyString;
 
-    private String prependerString = "";
+    private String prepender = "";
 
-    private String appenderString = "";
+    private String appender = "";
+
+    /**************************************************************************
+     * STATIC UTILITY METHODS
+     **************************************************************************/
 
     private static <T> List<T> defensiveListCopy(final Collection<T> collection) {
         return (collection == null) ? new ArrayList<T>() : new ArrayList<T>(collection);
@@ -42,9 +46,17 @@ public class TextTableBuilder {
         return (collection == null) ? new ArrayList<Object>() : new ArrayList<Object>(collection);
     }
 
+    /**************************************************************************
+     * CONSTRUCTOR(S)
+     **************************************************************************/
+
     public TextTableBuilder() {
         initRows(null);
     }
+
+    /**************************************************************************
+     * INSTANCE UTILITY METHODS
+     **************************************************************************/
 
     private void initRows(final Integer size) {
         this.rows = (size != null)
@@ -67,6 +79,10 @@ public class TextTableBuilder {
         }
     }
 
+    /**************************************************************************
+     * BOX DRAWING CHARACTERS METHODS
+     **************************************************************************/
+
     public BoxDrawingCharacters getBoxDrawingCharacters() {
         return boxDrawingCharacters;
     }
@@ -76,14 +92,18 @@ public class TextTableBuilder {
         return this;
     }
 
+    /**************************************************************************
+     * HEADER METHODS
+     **************************************************************************/
+
+    public List<Object> getHeaders() {
+        return defensiveListCopy(headers);
+    }
+
     public TextTableBuilder setHeaders(final Collection<?> headers) {
         checkNumColumns(headers);
         this.headers = defensiveObjectListCopy(headers);
         return this;
-    }
-
-    public List<Object> getHeaders() {
-        return defensiveListCopy(headers);
     }
 
     public TextTableBuilder setHeadersFromArray(final Object... headers) {
@@ -95,14 +115,18 @@ public class TextTableBuilder {
         return this;
     }
 
+    /**************************************************************************
+     * HEADER ALIGNMENT METHODS
+     **************************************************************************/
+
+    public List<Alignment> getHeaderAlignments() {
+        return defensiveListCopy(headerAlignments);
+    }
+
     public TextTableBuilder setHeaderAlignments(final Collection<Alignment> headerAlignments) {
         checkNumColumns(headerAlignments);
         this.headerAlignments = defensiveListCopy(headerAlignments);
         return this;
-    }
-
-    public List<Alignment> getHeaderAlignments() {
-        return defensiveListCopy(headerAlignments);
     }
 
     public TextTableBuilder setHeaderAlignmentsFromArray(final Alignment... headerAlignments) {
@@ -112,6 +136,18 @@ public class TextTableBuilder {
     public TextTableBuilder clearHeaderAlignments() {
         this.headerAlignments = null;
         return this;
+    }
+
+    /**************************************************************************
+     * ROW METHODS
+     **************************************************************************/
+
+    public List<List<Object>> getRows() {
+        final List<List<Object>> rows = new ArrayList<List<Object>>(this.rows.size());
+        for (final Collection<Object> row : this.rows) {
+            rows.add(defensiveListCopy(row));
+        }
+        return rows;
     }
 
     public TextTableBuilder addRow(final Collection<?> row) {
@@ -135,14 +171,6 @@ public class TextTableBuilder {
         return addRows(Arrays.asList(rows));
     }
 
-    public List<List<Object>> getRows() {
-        final List<List<Object>> rows = new ArrayList<List<Object>>(this.rows.size());
-        for (final Collection<Object> row : this.rows) {
-            rows.add(defensiveListCopy(row));
-        }
-        return rows;
-    }
-
     public TextTableBuilder setRows(final Collection<? extends Collection<?>> rows) {
         initRows(rows.size());
         return addRows(rows);
@@ -162,14 +190,18 @@ public class TextTableBuilder {
         return this;
     }
 
+    /**************************************************************************
+     * ROW ALIGNMENT METHODS
+     **************************************************************************/
+
+    public List<Alignment> getRowAlignments() {
+        return defensiveListCopy(rowAlignments);
+    }
+
     public TextTableBuilder setRowAlignments(final Collection<Alignment> rowAlignments) {
         checkNumColumns(rowAlignments);
         this.rowAlignments = defensiveListCopy(rowAlignments);
         return this;
-    }
-
-    public List<Alignment> getRowAlignments() {
-        return defensiveListCopy(rowAlignments);
     }
 
     public TextTableBuilder setRowAlignmentsFromArray(final Alignment... rowAlignments) {
@@ -181,6 +213,22 @@ public class TextTableBuilder {
         return this;
     }
 
+    /**************************************************************************
+     * NUMBER OF ROW AND COLUMN GETTERS
+     **************************************************************************/
+
+    public int getNumRows() {
+        return rows.size();
+    }
+
+    public int getNumColumns() {
+        return (numColumns == null) ? 0 : numColumns;
+    }
+
+    /**************************************************************************
+     * MISC OPTION METHODS
+     **************************************************************************/
+
     public boolean getShowRowNums() {
         return showRowNums;
     }
@@ -190,8 +238,12 @@ public class TextTableBuilder {
         return this;
     }
 
-    public int getNumRows() {
-        return rows.size();
+    public TextTableBuilder showRowNums() {
+        return setShowRowNums(true);
+    }
+
+    public int getRepeatHeaders() {
+        return repeatHeaders;
     }
 
     public TextTableBuilder repeatHeaders(final int numRows) {
@@ -199,38 +251,34 @@ public class TextTableBuilder {
         return this;
     }
 
-    public int getRepeatHeaders() {
-        return repeatHeaders;
+    public String getPrepender() {
+        return prepender;
     }
 
-    public String getPrependerString() {
-        return prependerString;
-    }
-
-    public TextTableBuilder setPrependerString(final String prependerString) {
-        this.prependerString = (prependerString == null) ? "" : prependerString;
+    public TextTableBuilder setPrepender(final String prepender) {
+        this.prepender = (prepender == null) ? "" : prepender;
         return this;
     }
 
-    public TextTableBuilder clearPrependerString() {
-        return setPrependerString(null);
+    public TextTableBuilder clearPrepender() {
+        return setPrepender(null);
     }
 
-    public String getAppenderString() {
-        return appenderString;
+    public String getAppender() {
+        return appender;
     }
 
-    public TextTableBuilder setAppenderString(final String appenderString) {
-        this.appenderString = (appenderString == null) ? "" : appenderString;
+    public TextTableBuilder setAppender(final String appender) {
+        this.appender = (appender == null) ? "" : appender;
         return this;
     }
 
-    public TextTableBuilder clearAppenderString() {
-        return setAppenderString(null);
+    public TextTableBuilder clearAppender() {
+        return setAppender(null);
     }
 
-    public int getNumColumns() {
-        return (numColumns == null) ? 0 : numColumns;
+    public boolean getReplaceNullWithEmptyString() {
+        return replaceNullWithEmptyString;
     }
 
     public TextTableBuilder setReplaceNullWithEmptyString(final boolean replaceNullWithEmptyString) {
@@ -238,8 +286,12 @@ public class TextTableBuilder {
         return this;
     }
 
-    public boolean getReplaceNullWithEmptyString() {
-        return replaceNullWithEmptyString;
+    public TextTableBuilder replaceNullWithEmptyString() {
+        return setReplaceNullWithEmptyString(true);
+    }
+
+    public boolean getRepeatHeadersAtBottom() {
+        return repeatHeadersAtBottom;
     }
 
     public TextTableBuilder setRepeatHeadersAtBottom(final boolean repeatHeadersAtBottom) {
@@ -247,8 +299,8 @@ public class TextTableBuilder {
         return this;
     }
 
-    public boolean getRepeatHeadersAtBottom() {
-        return repeatHeadersAtBottom;
+    public TextTableBuilder repeatHeadersAtBottom() {
+        return setRepeatHeadersAtBottom(true);
     }
 
 }
