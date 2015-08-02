@@ -103,8 +103,8 @@ public class TextTableBuilderTest {
                 .setHeaders(headers)
                 .setRowAlignments(alignments)
                 .setRows(allRows)
-                .setPrependerString("")
-                .setAppenderString("");
+                .setPrepender("")
+                .setAppender("");
     }
 
     @Test
@@ -661,40 +661,40 @@ public class TextTableBuilderTest {
     @Test
     public void testSetAndGetPrependerString() {
         final String prependerString = "prepender";
-        emptyTextTableBuilder.setPrependerString(prependerString);
+        emptyTextTableBuilder.setPrepender(prependerString);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 prependerString,
-                emptyTextTableBuilder.getPrependerString()
+                emptyTextTableBuilder.getPrepender()
         );
     }
 
     @Test
     public void testClearPrependerString() {
-        populatedTextTableBuilder.clearPrependerString();
+        populatedTextTableBuilder.clearPrepender();
         assertTrue(
                 "Prepender string is not empty after clearing",
-                populatedTextTableBuilder.getPrependerString().isEmpty()
+                populatedTextTableBuilder.getPrepender().isEmpty()
         );
     }
 
     @Test
     public void testSetAndGetAppenderString() {
         final String appenderString = "appender";
-        emptyTextTableBuilder.setAppenderString(appenderString);
+        emptyTextTableBuilder.setAppender(appenderString);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 appenderString,
-                emptyTextTableBuilder.getAppenderString()
+                emptyTextTableBuilder.getAppender()
         );
     }
 
     @Test
     public void testClearAppenderString() {
-        populatedTextTableBuilder.clearAppenderString();
+        populatedTextTableBuilder.clearAppender();
         assertTrue(
                 "Appender string is not empty after clearing",
-                populatedTextTableBuilder.getAppenderString().isEmpty()
+                populatedTextTableBuilder.getAppender().isEmpty()
         );
     }
 
