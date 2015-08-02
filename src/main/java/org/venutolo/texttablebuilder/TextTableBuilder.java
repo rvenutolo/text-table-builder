@@ -36,6 +36,8 @@ public class TextTableBuilder {
 
     private boolean replaceNullWithEmptyString;
 
+    private boolean repeatHeaderAtBottom;
+
     private static <T> List<T> defensiveListCopy(final Collection<T> collection) {
         return (collection == null) ? new ArrayList<T>() : new ArrayList<T>(collection);
     }
@@ -276,6 +278,15 @@ public class TextTableBuilder {
 
     public boolean getReplaceNullWithEmptyString() {
         return replaceNullWithEmptyString;
+    }
+
+    public TextTableBuilder setRepeatHeadersAtBottom(final boolean repeatHeadersAtBottom) {
+        this.repeatHeaderAtBottom = repeatHeadersAtBottom;
+        return this;
+    }
+
+    public boolean getRepeatHeadersAtBottom() {
+        return repeatHeaderAtBottom;
     }
 
 }

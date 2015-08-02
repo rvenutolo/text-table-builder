@@ -54,6 +54,8 @@ public class TextTableBuilderTest {
     private static final String EXPECTED_ISE_FOR_SET_BEFORE_DEFINED =
             "Expected ISE for attempting to set column width before column has been defined";
 
+    private static final boolean[] trueFalseArray = {true, false};
+
     private final Collection<BoxDrawingCharacters> boxDrawingCharactersCollection =
             Collections.unmodifiableCollection(
                     Arrays.asList(
@@ -812,12 +814,24 @@ public class TextTableBuilderTest {
 
     @Test
     public void testSetAndGetReplaceNullWithEmptyString() {
-        for (final boolean replaceNullWithEmptyString : new boolean[] {true, false}) {
+        for (final boolean replaceNullWithEmptyString : new boolean[]{true, false}) {
             emptyTextTableBuilder.setReplaceNullWithEmptyString(replaceNullWithEmptyString);
             assertEquals(
                     GETTER_SETTER_VALUE_NOT_EQUAL,
                     replaceNullWithEmptyString,
                     emptyTextTableBuilder.getReplaceNullWithEmptyString()
+            );
+        }
+    }
+
+    @Test
+    public void testSetAndGetRepeatHeadersAtBottom() {
+        for (final boolean repeatHeadersAtBottom : trueFalseArray) {
+            emptyTextTableBuilder.setRepeatHeadersAtBottom(repeatHeadersAtBottom);
+            assertEquals(
+                    GETTER_SETTER_VALUE_NOT_EQUAL,
+                    repeatHeadersAtBottom,
+                    emptyTextTableBuilder.getRepeatHeadersAtBottom()
             );
         }
     }
