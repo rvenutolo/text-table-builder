@@ -35,6 +35,14 @@ public class TextTableBuilder {
     private String appender = "";
 
     /**************************************************************************
+     * CONSTRUCTOR(S)
+     **************************************************************************/
+
+    public TextTableBuilder() {
+        initRows(null);
+    }
+
+    /**************************************************************************
      * STATIC UTILITY METHODS
      **************************************************************************/
 
@@ -44,14 +52,6 @@ public class TextTableBuilder {
 
     private static List<Object> defensiveObjectListCopy(final Collection<?> collection) {
         return (collection == null) ? new ArrayList<Object>() : new ArrayList<Object>(collection);
-    }
-
-    /**************************************************************************
-     * CONSTRUCTOR(S)
-     **************************************************************************/
-
-    public TextTableBuilder() {
-        initRows(null);
     }
 
     /**************************************************************************
