@@ -1,6 +1,5 @@
 package org.venutolo.texttablebuilder;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -41,18 +39,6 @@ public class TextTableBuilderTest {
 
     private static final String EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH =
             "Expected IAE for wrong column length";
-
-    private static final String WIDTH_LESS_THAN_0 =
-            "Width is less than 0";
-
-    private static final String EXPECTED_IAE_FOR_BAD_WIDTH =
-            "Expected IAE for bad width";
-
-    private static final String CANNOT_SET_COLUMN_WIDTH =
-            "Cannot set column width";
-
-    private static final String EXPECTED_ISE_FOR_SET_BEFORE_DEFINED =
-            "Expected ISE for attempting to set column width before column has been defined";
 
     private static final boolean[] trueFalseArray = {true, false};
 
@@ -98,7 +84,6 @@ public class TextTableBuilderTest {
 
     @Before
     public void setUp() {
-        emptyTextTableBuilder = new TextTableBuilder();
         alignmentsArray = new Alignment[]{Alignment.LEFT, Alignment.RIGHT};
         alignments = Arrays.asList(alignmentsArray);
         headersArray = new String[]{"0", "1"};
@@ -112,20 +97,14 @@ public class TextTableBuilderTest {
         allRows.add(row0);
         allRows.add(row1);
         allRowsArray = allRows.toArray(new List<?>[allRows.size()]);
+        emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()
                 .setHeaderAlignments(alignments)
                 .setHeaders(headers)
                 .setRowAlignments(alignments)
-                .setRows(allRows);
-    }
-
-    @After
-    public void tearDown() {
-        emptyTextTableBuilder = null;
-        alignmentsArray = null;
-        alignments = null;
-        headersArray = null;
-        headers = null;
+                .setRows(allRows)
+                .setPrependerString("")
+                .setAppenderString("");
     }
 
     @Test
@@ -213,6 +192,15 @@ public class TextTableBuilderTest {
     }
 
     @Test
+    public void testClearHeaderAlignments() {
+        populatedTextTableBuilder.clearHeaderAlignments();
+        assertTrue(
+                "Header alignments not empty after clearing",
+                populatedTextTableBuilder.getHeaderAlignments().isEmpty()
+        );
+    }
+
+    @Test
     public void testSetAndGetRowAlignments() {
         emptyTextTableBuilder.setRowAlignments(alignments);
         assertEquals(
@@ -282,6 +270,15 @@ public class TextTableBuilderTest {
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.setRowAlignmentsFromArray();
+    }
+
+    @Test
+    public void testClearRowAlignments() {
+        populatedTextTableBuilder.clearRowAlignments();
+        assertTrue(
+                "Row alignments not empty after clearing",
+                populatedTextTableBuilder.getRowAlignments().isEmpty()
+        );
     }
 
     @Test
@@ -622,7 +619,7 @@ public class TextTableBuilderTest {
     public void testClearRows() {
         populatedTextTableBuilder.clearRows();
         assertTrue(
-                "Rows not empty after clearRows()",
+                "Rows not empty after clearing",
                 populatedTextTableBuilder.getRows().isEmpty()
         );
     }
@@ -631,7 +628,7 @@ public class TextTableBuilderTest {
     public void testClearHeaders() {
         populatedTextTableBuilder.clearHeaders();
         assertTrue(
-                "Headers not empty after clearHeaders()",
+                "Headers not empty after clearing",
                 populatedTextTableBuilder.getHeaders().isEmpty()
         );
     }
@@ -673,6 +670,15 @@ public class TextTableBuilderTest {
     }
 
     @Test
+    public void testClearPrependerString() {
+        populatedTextTableBuilder.clearPrependerString();
+        assertTrue(
+                "Prepender string is not empty after clearing",
+                populatedTextTableBuilder.getPrependerString().isEmpty()
+        );
+    }
+
+    @Test
     public void testSetAndGetAppenderString() {
         final String appenderString = "appender";
         emptyTextTableBuilder.setAppenderString(appenderString);
@@ -680,6 +686,15 @@ public class TextTableBuilderTest {
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 appenderString,
                 emptyTextTableBuilder.getAppenderString()
+        );
+    }
+
+    @Test
+    public void testClearAppenderString() {
+        populatedTextTableBuilder.clearAppenderString();
+        assertTrue(
+                "Appender string is not empty after clearing",
+                populatedTextTableBuilder.getAppenderString().isEmpty()
         );
     }
 
@@ -695,111 +710,6 @@ public class TextTableBuilderTest {
                 populatedTextTableBuilder.getRows().size(),
                 populatedTextTableBuilder.getNumColumns()
         );
-    }
-
-    @Test
-    public void testSetAndGetMinColumnWidth() {
-        for (int i = 0; i < populatedTextTableBuilder.getNumColumns(); i++) {
-            populatedTextTableBuilder.setColumnMinWidth(i, i);
-            assertEquals(
-                    GETTER_SETTER_VALUE_NOT_EQUAL,
-                    (Integer) i,
-                    populatedTextTableBuilder.getColumnMinWidth(i)
-            );
-        }
-    }
-
-    @Test
-    public void testSetAndGetMaxColumnWidth() {
-        for (int i = 0; i < populatedTextTableBuilder.getNumColumns(); i++) {
-            populatedTextTableBuilder.setColumnMaxWidth(i, i);
-            assertEquals(
-                    GETTER_SETTER_VALUE_NOT_EQUAL,
-                    (Integer) i,
-                    populatedTextTableBuilder.getColumnMaxWidth(i)
-            );
-        }
-    }
-
-    @Test
-    public void testSetColumnWidth() {
-        for (int i = 0; i < populatedTextTableBuilder.getNumColumns(); i++) {
-            populatedTextTableBuilder.setColumnWidth(i, i);
-            assertEquals(
-                    GETTER_SETTER_VALUE_NOT_EQUAL,
-                    (Integer) i,
-                    populatedTextTableBuilder.getColumnMinWidth(i)
-            );
-            assertEquals(
-                    GETTER_SETTER_VALUE_NOT_EQUAL,
-                    (Integer) i,
-                    populatedTextTableBuilder.getColumnMaxWidth(i)
-            );
-        }
-    }
-
-    @Test
-    public void testGetColumnMinWidthNotSet() {
-        assertNull(
-                "Min width should be null when it has not been set",
-                populatedTextTableBuilder.getColumnMinWidth(0)
-        );
-    }
-
-    @Test
-    public void testGetColumnMaxWidthNotSet() {
-        assertNull(
-                "Max width should be null when it has not been set",
-                populatedTextTableBuilder.getColumnMaxWidth(0)
-        );
-    }
-
-    @Test
-    public void testSetColumnMinWidthBadValue() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(WIDTH_LESS_THAN_0);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_WIDTH);
-        populatedTextTableBuilder.setColumnMinWidth(0, -1);
-    }
-
-    @Test
-    public void testSetColumnMaxWidthBadValue() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(WIDTH_LESS_THAN_0);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_WIDTH);
-        populatedTextTableBuilder.setColumnMaxWidth(0, -1);
-    }
-
-    @Test
-    public void testSetColumnWidthBadValue() {
-        expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage(WIDTH_LESS_THAN_0);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_WIDTH);
-        populatedTextTableBuilder.setColumnWidth(0, -1);
-    }
-
-    @Test
-    public void testSetColumnMinWidthBeforeNumColumnsDefined() {
-        expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage(CANNOT_SET_COLUMN_WIDTH);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_ISE_FOR_SET_BEFORE_DEFINED);
-        emptyTextTableBuilder.setColumnMinWidth(0, 0);
-    }
-
-    @Test
-    public void testSetColumnMaxWidthBeforeNumColumnsDefined() {
-        expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage(CANNOT_SET_COLUMN_WIDTH);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_ISE_FOR_SET_BEFORE_DEFINED);
-        emptyTextTableBuilder.setColumnMaxWidth(0, 0);
-    }
-
-    @Test
-    public void testSetColumnWidthBeforeNumColumnsDefined() {
-        expectedException.expect(IllegalStateException.class);
-        expectedException.expectMessage(CANNOT_SET_COLUMN_WIDTH);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_ISE_FOR_SET_BEFORE_DEFINED);
-        emptyTextTableBuilder.setColumnWidth(0, 0);
     }
 
     @Test

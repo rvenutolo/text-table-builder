@@ -24,19 +24,15 @@ public class TextTableBuilder {
 
     private int repeatHeaders;
 
+    private boolean repeatHeadersAtBottom;
+
     private boolean showRowNums;
-
-    private String prependerString;
-
-    private String appenderString;
-
-    private List<Integer> minColumnWidths;
-
-    private List<Integer> maxColumnWidths;
 
     private boolean replaceNullWithEmptyString;
 
-    private boolean repeatHeadersAtBottom;
+    private String prependerString = "";
+
+    private String appenderString = "";
 
     private static <T> List<T> defensiveListCopy(final Collection<T> collection) {
         return (collection == null) ? new ArrayList<T>() : new ArrayList<T>(collection);
@@ -61,12 +57,6 @@ public class TextTableBuilder {
             // if numColumns is null, this is the first check for number of columns
             // set some variables now that number of columns is known
             numColumns = collection.size();
-            minColumnWidths = new ArrayList<Integer>(numColumns);
-            maxColumnWidths = new ArrayList<Integer>(numColumns);
-            for (int i = 0; i < numColumns; i++) {
-                minColumnWidths.add(null);
-                maxColumnWidths.add(null);
-            }
         } else {
             if (numColumns != collection.size()) {
                 throw new IllegalArgumentException(
@@ -117,6 +107,11 @@ public class TextTableBuilder {
 
     public TextTableBuilder setHeaderAlignmentsFromArray(final Alignment... headerAlignments) {
         return setHeaderAlignments(Arrays.asList(headerAlignments));
+    }
+
+    public TextTableBuilder clearHeaderAlignments() {
+        this.headerAlignments = null;
+        return this;
     }
 
     public TextTableBuilder addRow(final Collection<?> row) {
@@ -181,6 +176,11 @@ public class TextTableBuilder {
         return setRowAlignments(Arrays.asList(rowAlignments));
     }
 
+    public TextTableBuilder clearRowAlignments() {
+        this.rowAlignments = null;
+        return this;
+    }
+
     public boolean getShowRowNums() {
         return showRowNums;
     }
@@ -208,8 +208,12 @@ public class TextTableBuilder {
     }
 
     public TextTableBuilder setPrependerString(final String prependerString) {
-        this.prependerString = prependerString;
+        this.prependerString = (prependerString == null) ? "" : prependerString;
         return this;
+    }
+
+    public TextTableBuilder clearPrependerString() {
+        return setPrependerString(null);
     }
 
     public String getAppenderString() {
@@ -217,58 +221,16 @@ public class TextTableBuilder {
     }
 
     public TextTableBuilder setAppenderString(final String appenderString) {
-        this.appenderString = appenderString;
+        this.appenderString = (appenderString == null) ? "" : appenderString;
         return this;
+    }
+
+    public TextTableBuilder clearAppenderString() {
+        return setAppenderString(null);
     }
 
     public int getNumColumns() {
         return (numColumns == null) ? 0 : numColumns;
-    }
-
-    public Integer getColumnMinWidth(final int columnNum) {
-        return ((minColumnWidths == null) || (minColumnWidths.get(columnNum) == null))
-               ? null
-               : minColumnWidths.get(columnNum);
-    }
-
-    public TextTableBuilder setColumnMinWidth(final int columnNum, final int width) {
-        if (width < 0) {
-            throw new IllegalArgumentException("Width is less than 0");
-        }
-        if (minColumnWidths == null) {
-            throw new IllegalStateException(
-                    "Cannot set column width before number of columns has "
-                    + "been defined by another method"
-            );
-        }
-        minColumnWidths.set(columnNum, width);
-        return this;
-    }
-
-    public Integer getColumnMaxWidth(final int columnNum) {
-        return ((maxColumnWidths == null) || (maxColumnWidths.get(columnNum) == null))
-               ? null
-               : maxColumnWidths.get(columnNum);
-    }
-
-    public TextTableBuilder setColumnMaxWidth(final int columnNum, final int width) {
-        if (width < 0) {
-            throw new IllegalArgumentException("Width is less than 0");
-        }
-        if (maxColumnWidths == null) {
-            throw new IllegalStateException(
-                    "Cannot set column width before number of columns has "
-                    + "been defined by another method"
-            );
-        }
-        maxColumnWidths.set(columnNum, width);
-        return this;
-    }
-
-    public TextTableBuilder setColumnWidth(final int columnNum, final int width) {
-        setColumnMinWidth(columnNum, width);
-        setColumnMaxWidth(columnNum, width);
-        return this;
     }
 
     public TextTableBuilder setReplaceNullWithEmptyString(final boolean replaceNullWithEmptyString) {
