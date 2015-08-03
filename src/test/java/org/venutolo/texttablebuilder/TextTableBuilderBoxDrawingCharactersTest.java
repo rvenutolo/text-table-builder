@@ -15,14 +15,7 @@ import static org.venutolo.texttablebuilder.TestStrings.GETTER_SETTER_VALUE_NOT_
  */
 public class TextTableBuilderBoxDrawingCharactersTest {
 
-    private TextTableBuilder emptyTextTableBuilder;
-
-    @Before
-    public void setUp() {
-        emptyTextTableBuilder = new TextTableBuilder();
-    }
-
-    private final Collection<BoxDrawingCharacters> boxDrawingCharactersCollection =
+    private static final Collection<BoxDrawingCharacters> boxDrawingCharactersCollection =
             Collections.unmodifiableCollection(
                     Arrays.asList(
                             BoxDrawingCharacters.ASCII,
@@ -34,6 +27,13 @@ public class TextTableBuilderBoxDrawingCharactersTest {
                             BoxDrawingCharacters.SPACES
                     )
             );
+
+    private TextTableBuilder emptyTextTableBuilder;
+
+    @Before
+    public void setUp() {
+        emptyTextTableBuilder = new TextTableBuilder();
+    }
 
     @Test
     public void testSetAndGetBoxDrawingCharacters() {
