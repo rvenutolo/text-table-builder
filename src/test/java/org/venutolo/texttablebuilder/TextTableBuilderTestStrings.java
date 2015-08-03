@@ -3,7 +3,7 @@ package org.venutolo.texttablebuilder;
 /**
  * @author Rick Venutolo
  */
-final class TestStrings {
+final class TextTableBuilderTestStrings {
 
     static final String GETTER_SETTER_VALUE_NOT_EQUAL =
             "value returned from getter is not equal to that given to setter";
@@ -23,6 +23,6 @@ final class TestStrings {
     static final String NOT_EMPTY_AFTER_CLEAR =
             "not empty after clearing";
 
-    private TestStrings() {
+    private TextTableBuilderTestStrings() {
     }
 }
