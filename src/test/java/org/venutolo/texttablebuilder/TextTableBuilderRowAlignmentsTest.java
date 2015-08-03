@@ -36,7 +36,7 @@ public class TextTableBuilderRowAlignmentsTest {
 
     @Before
     public void setUp() {
-        rowAlignmentsArray = new Alignment[]{Alignment.LEFT, Alignment.LEFT};
+        rowAlignmentsArray = new Alignment[]{Alignment.LEFT, Alignment.RIGHT};
         rowAlignments = Arrays.asList(rowAlignmentsArray);
         emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()

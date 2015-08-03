@@ -36,7 +36,7 @@ public class TextTableBuilderHeaderAlignmentsTest {
 
     @Before
     public void setUp() {
-        headerAlignmentsArray = new Alignment[]{Alignment.LEFT, Alignment.LEFT};
+        headerAlignmentsArray = new Alignment[]{Alignment.LEFT, Alignment.RIGHT};
         headerAlignments = Arrays.asList(headerAlignmentsArray);
         emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()
