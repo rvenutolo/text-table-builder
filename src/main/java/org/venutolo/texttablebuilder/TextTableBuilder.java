@@ -251,6 +251,19 @@ public class TextTableBuilder {
         return this;
     }
 
+    public boolean getRepeatHeadersAtBottom() {
+        return repeatHeadersAtBottom;
+    }
+
+    public TextTableBuilder setRepeatHeadersAtBottom(final boolean repeatHeadersAtBottom) {
+        this.repeatHeadersAtBottom = repeatHeadersAtBottom;
+        return this;
+    }
+
+    public TextTableBuilder repeatHeadersAtBottom() {
+        return setRepeatHeadersAtBottom(true);
+    }
+
     public String getPrepender() {
         return prepender;
     }
@@ -288,19 +301,6 @@ public class TextTableBuilder {
 
     public TextTableBuilder replaceNullWithEmptyString() {
         return setReplaceNullWithEmptyString(true);
-    }
-
-    public boolean getRepeatHeadersAtBottom() {
-        return repeatHeadersAtBottom;
-    }
-
-    public TextTableBuilder setRepeatHeadersAtBottom(final boolean repeatHeadersAtBottom) {
-        this.repeatHeadersAtBottom = repeatHeadersAtBottom;
-        return this;
-    }
-
-    public TextTableBuilder repeatHeadersAtBottom() {
-        return setRepeatHeadersAtBottom(true);
     }
 
 }
