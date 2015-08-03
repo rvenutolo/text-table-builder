@@ -1,16 +1,47 @@
 package org.venutolo.texttablebuilder;
 
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.venutolo.texttablebuilder.TestStrings.BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING;
+import static org.venutolo.texttablebuilder.TestStrings.EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH;
+import static org.venutolo.texttablebuilder.TestStrings.GETTER_NO_DEFENSIVE_COPY;
+import static org.venutolo.texttablebuilder.TestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
+import static org.venutolo.texttablebuilder.TestStrings.NOT_EMPTY_AFTER_CLEAR;
+import static org.venutolo.texttablebuilder.TestStrings.SETTER_NO_DEFENSIVE_COPY;
 
 /**
  * @author Rick Venutolo
  */
-public class TextTableBuilderHeadersTest extends TextTableBuilderTest {
+public class TextTableBuilderHeadersTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
+    private String[] headersArray;
+
+    private List<String> headers;
+
+    private TextTableBuilder emptyTextTableBuilder;
+
+    private TextTableBuilder populatedTextTableBuilder;
+
+    @Before
+    public void setUp() {
+        headersArray = new String[]{"H0", "H1"};
+        headers = Arrays.asList(headersArray);
+        emptyTextTableBuilder = new TextTableBuilder();
+        populatedTextTableBuilder = new TextTableBuilder()
+                .setHeaders(headers);
+    }
 
     @Test
     public void testSetAndGetHeaders() {

@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * @author Rick Venutolo
  */
-public class TextTableBuilderConstructorTest extends TextTableBuilderTest {
+public class TextTableBuilderConstructorTest {
 
     @Test
     public void testConstructorDefaultState() {

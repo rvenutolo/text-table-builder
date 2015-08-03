@@ -1,6 +1,9 @@
 package org.venutolo.texttablebuilder;
 
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,17 +13,58 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.venutolo.texttablebuilder.TestStrings.BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING;
+import static org.venutolo.texttablebuilder.TestStrings.EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH;
+import static org.venutolo.texttablebuilder.TestStrings.GETTER_NO_DEFENSIVE_COPY;
+import static org.venutolo.texttablebuilder.TestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
+import static org.venutolo.texttablebuilder.TestStrings.NOT_EMPTY_AFTER_CLEAR;
+import static org.venutolo.texttablebuilder.TestStrings.SETTER_NO_DEFENSIVE_COPY;
 
 /**
  * @author Rick Venutolo
  */
-public class TextTableBuilderRowsTest extends TextTableBuilderTest {
+public class TextTableBuilderRowsTest {
 
     private static final String APPENDER_NO_DEFENSIVE_COPY =
             "appender did not create a defensive copy";
 
     private static final String GETTER_APPENDER_VALUE_NOT_EQUAL =
             "value returned from getter is not equal to that given to appender";
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
+    private TextTableBuilder emptyTextTableBuilder;
+
+    private TextTableBuilder populatedTextTableBuilder;
+
+    private String[] row0Array;
+
+    private List<String> row0;
+
+    private String[] row1Array;
+
+    private List<String> row1;
+
+    private List<?>[] allRowsArray;
+
+    private ArrayList<List<String>> allRows;
+
+    @Before
+    public void setUp() {
+        row0Array = new String[]{"r0c0", "r0c1"};
+        row0 = Arrays.asList(row0Array);
+        row1Array = new String[]{"r1c0", "r1c1"};
+        row1 = Arrays.asList(row1Array);
+        allRowsArray = new List<?>[2];
+        allRows = new ArrayList<List<String>>();
+        allRows.add(row0);
+        allRows.add(row1);
+        allRowsArray = allRows.toArray(new List<?>[allRows.size()]);
+        emptyTextTableBuilder = new TextTableBuilder();
+        populatedTextTableBuilder = new TextTableBuilder()
+                .setRows(allRows);
+    }
 
     @Test
     public void testAddRow() {

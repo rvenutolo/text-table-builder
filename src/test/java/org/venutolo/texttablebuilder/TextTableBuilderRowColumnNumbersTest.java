@@ -1,5 +1,6 @@
 package org.venutolo.texttablebuilder;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -7,7 +8,18 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Rick Venutolo
  */
-public class TextTableBuilderRowColumnNumbersTest extends TextTableBuilderTest {
+public class TextTableBuilderRowColumnNumbersTest {
+
+    private TextTableBuilder emptyTextTableBuilder;
+
+    private TextTableBuilder populatedTextTableBuilder;
+
+    @Before
+    public void setUp() {
+        emptyTextTableBuilder = new TextTableBuilder();
+        populatedTextTableBuilder = new TextTableBuilder()
+                .addRowFromArray("ROW");
+    }
 
     @Test
     public void testGetNumRows() {

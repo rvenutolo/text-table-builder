@@ -1,16 +1,31 @@
 package org.venutolo.texttablebuilder;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.venutolo.texttablebuilder.TestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
+import static org.venutolo.texttablebuilder.TestStrings.NOT_EMPTY_AFTER_CLEAR;
 
 /**
  * @author Rick Venutolo
  */
-public class TextTableBuilderOptionsTest extends TextTableBuilderTest {
+public class TextTableBuilderOptionsTest {
 
     private static final boolean[] trueFalseArray = {true, false};
+
+    private TextTableBuilder emptyTextTableBuilder;
+
+    private TextTableBuilder populatedTextTableBuilder;
+
+    @Before
+    public void setUp() {
+        emptyTextTableBuilder = new TextTableBuilder();
+        populatedTextTableBuilder = new TextTableBuilder()
+                .setPrepender("PREPENDER")
+                .setAppender("APPENDER");
+    }
 
     @Test
     public void testSetAndGetShowRowNums() {

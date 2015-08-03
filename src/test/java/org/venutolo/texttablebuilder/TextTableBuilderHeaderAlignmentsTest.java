@@ -1,16 +1,47 @@
 package org.venutolo.texttablebuilder;
 
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.venutolo.texttablebuilder.TestStrings.BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING;
+import static org.venutolo.texttablebuilder.TestStrings.EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH;
+import static org.venutolo.texttablebuilder.TestStrings.GETTER_NO_DEFENSIVE_COPY;
+import static org.venutolo.texttablebuilder.TestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
+import static org.venutolo.texttablebuilder.TestStrings.NOT_EMPTY_AFTER_CLEAR;
+import static org.venutolo.texttablebuilder.TestStrings.SETTER_NO_DEFENSIVE_COPY;
 
 /**
  * @author Rick Venutolo
  */
-public class TextTableBuilderHeaderAlignmentsTest extends TextTableBuilderTest {
+public class TextTableBuilderHeaderAlignmentsTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
+    private Alignment[] headerAlignmentsArray;
+
+    private List<Alignment> headerAlignments;
+
+    private TextTableBuilder emptyTextTableBuilder;
+
+    private TextTableBuilder populatedTextTableBuilder;
+
+    @Before
+    public void setUp() {
+        headerAlignmentsArray = new Alignment[]{Alignment.LEFT, Alignment.LEFT};
+        headerAlignments = Arrays.asList(headerAlignmentsArray);
+        emptyTextTableBuilder = new TextTableBuilder();
+        populatedTextTableBuilder = new TextTableBuilder()
+                .setHeaderAlignments(headerAlignments);
+    }
 
     @Test
     public void testSetAndGetHeaderAlignments() {

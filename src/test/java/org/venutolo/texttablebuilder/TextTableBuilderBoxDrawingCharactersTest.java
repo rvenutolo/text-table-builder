@@ -1,5 +1,6 @@
 package org.venutolo.texttablebuilder;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -7,11 +8,19 @@ import java.util.Collection;
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
+import static org.venutolo.texttablebuilder.TestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
 
 /**
  * @author Rick Venutolo
  */
-public class TextTableBuilderBoxDrawingCharactersTest extends TextTableBuilderTest {
+public class TextTableBuilderBoxDrawingCharactersTest {
+
+    private TextTableBuilder emptyTextTableBuilder;
+
+    @Before
+    public void setUp() {
+        emptyTextTableBuilder = new TextTableBuilder();
+    }
 
     private final Collection<BoxDrawingCharacters> boxDrawingCharactersCollection =
             Collections.unmodifiableCollection(
