@@ -63,12 +63,12 @@ public class TextTableBuilderRowsTest {
         allRowsArray = allRows.toArray(new List<?>[allRows.size()]);
         emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()
-                .setRows(allRows);
+                .setRowsList(allRows);
     }
 
     @Test
     public void testAddRow() {
-        emptyTextTableBuilder.addRow(row0);
+        emptyTextTableBuilder.addRowList(row0);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 row0,
@@ -78,8 +78,8 @@ public class TextTableBuilderRowsTest {
 
     @Test
     public void testAddRowMultiple() {
-        emptyTextTableBuilder.addRow(row0);
-        emptyTextTableBuilder.addRow(row1);
+        emptyTextTableBuilder.addRowList(row0);
+        emptyTextTableBuilder.addRowList(row1);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 allRows,
@@ -89,7 +89,7 @@ public class TextTableBuilderRowsTest {
 
     @Test
     public void testAddRowArray() {
-        emptyTextTableBuilder.addRowFromArray((Object[]) row0Array);
+        emptyTextTableBuilder.addRow((Object[]) row0Array);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 row0,
@@ -99,8 +99,8 @@ public class TextTableBuilderRowsTest {
 
     @Test
     public void testAddRowArrayMultiple() {
-        emptyTextTableBuilder.addRowFromArray((Object[]) row0Array);
-        emptyTextTableBuilder.addRowFromArray((Object[]) row1Array);
+        emptyTextTableBuilder.addRow((Object[]) row0Array);
+        emptyTextTableBuilder.addRow((Object[]) row1Array);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 allRows,
@@ -111,7 +111,7 @@ public class TextTableBuilderRowsTest {
     @Test
     public void testAddRowForDefensiveCopy() {
         final String expected = row0.get(0);
-        emptyTextTableBuilder.addRow(row0);
+        emptyTextTableBuilder.addRowList(row0);
         row0.set(0, null);
         assertEquals(
                 APPENDER_NO_DEFENSIVE_COPY,
@@ -123,7 +123,7 @@ public class TextTableBuilderRowsTest {
     @Test
     public void testAddRowArrayForDefensiveCopy() {
         final String expected = row0Array[0];
-        emptyTextTableBuilder.addRowFromArray((Object[]) row0Array);
+        emptyTextTableBuilder.addRow((Object[]) row0Array);
         row0Array[0] = null;
         assertEquals(
                 APPENDER_NO_DEFENSIVE_COPY,
@@ -137,7 +137,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.addRow(Collections.<String>emptyList());
+        populatedTextTableBuilder.addRowList(Collections.<String>emptyList());
     }
 
     @Test
@@ -145,12 +145,12 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.addRowFromArray();
+        populatedTextTableBuilder.addRow();
     }
 
     @Test
     public void testAddRows() {
-        emptyTextTableBuilder.addRows(allRows);
+        emptyTextTableBuilder.addRowsList(allRows);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 allRows,
@@ -160,7 +160,7 @@ public class TextTableBuilderRowsTest {
 
     @Test
     public void testAddRowsArray() {
-        emptyTextTableBuilder.addRowsFromArray(allRows.toArray(new List<?>[allRows.size()]));
+        emptyTextTableBuilder.addRows(allRows.toArray(new List<?>[allRows.size()]));
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 allRows,
@@ -173,8 +173,8 @@ public class TextTableBuilderRowsTest {
         final Collection<Collection<String>> expected = new ArrayList<Collection<String>>();
         expected.addAll(allRows);
         expected.addAll(allRows);
-        emptyTextTableBuilder.addRows(allRows);
-        emptyTextTableBuilder.addRows(allRows);
+        emptyTextTableBuilder.addRowsList(allRows);
+        emptyTextTableBuilder.addRowsList(allRows);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 expected,
@@ -187,8 +187,8 @@ public class TextTableBuilderRowsTest {
         final Collection<Collection<String>> expected = new ArrayList<Collection<String>>();
         expected.addAll(allRows);
         expected.addAll(allRows);
-        emptyTextTableBuilder.addRowsFromArray(allRowsArray);
-        emptyTextTableBuilder.addRowsFromArray(allRowsArray);
+        emptyTextTableBuilder.addRows(allRowsArray);
+        emptyTextTableBuilder.addRows(allRowsArray);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 expected,
@@ -199,7 +199,7 @@ public class TextTableBuilderRowsTest {
     @Test
     public void testAddRowsForDefensiveCopy() {
         final Collection<String> expected = allRows.get(0);
-        emptyTextTableBuilder.addRows(allRows);
+        emptyTextTableBuilder.addRowsList(allRows);
         allRows.set(0, Arrays.<String>asList(null, null));
         assertEquals(
                 APPENDER_NO_DEFENSIVE_COPY,
@@ -211,7 +211,7 @@ public class TextTableBuilderRowsTest {
     @Test
     public void testAddRowsArrayForDefensiveCopy() {
         final Collection<String> expected = allRows.get(0);
-        emptyTextTableBuilder.addRowsFromArray(allRowsArray);
+        emptyTextTableBuilder.addRows(allRowsArray);
         allRowsArray[0] = Arrays.<String>asList(null, null);
         assertEquals(
                 APPENDER_NO_DEFENSIVE_COPY,
@@ -225,7 +225,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.addRows(
+        populatedTextTableBuilder.addRowsList(
                 Collections.<Collection<String>>singletonList(
                         Collections.<String>emptyList()
                 )
@@ -237,14 +237,14 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.addRowsFromArray(
+        populatedTextTableBuilder.addRows(
                 Collections.<String>emptyList()
         );
     }
 
     @Test
     public void testSetAndGetRows() {
-        emptyTextTableBuilder.setRows(allRows);
+        emptyTextTableBuilder.setRowsList(allRows);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 allRows,
@@ -254,7 +254,7 @@ public class TextTableBuilderRowsTest {
 
     @Test
     public void testSetArrayAndGetRows() {
-        emptyTextTableBuilder.setRowsFromArray(allRowsArray);
+        emptyTextTableBuilder.setRows(allRowsArray);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 allRows,
@@ -265,7 +265,7 @@ public class TextTableBuilderRowsTest {
     @Test
     public void testSetRowsForDefensiveCopying() {
         final Collection<String> expected = allRows.get(0);
-        emptyTextTableBuilder.setRows(allRows);
+        emptyTextTableBuilder.setRowsList(allRows);
         allRows.set(0, Arrays.<String>asList(null, null));
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
@@ -277,7 +277,7 @@ public class TextTableBuilderRowsTest {
     @Test
     public void testSetRowsArrayForDefensiveCopying() {
         final Collection<String> expected = allRows.get(0);
-        emptyTextTableBuilder.setRowsFromArray(allRowsArray);
+        emptyTextTableBuilder.setRows(allRowsArray);
         allRowsArray[0] = Arrays.<String>asList(null, null);
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
@@ -289,7 +289,7 @@ public class TextTableBuilderRowsTest {
     @Test
     public void testGetRowsForDefensiveCopying() {
         final Collection<String> expected = allRows.get(0);
-        emptyTextTableBuilder.setRows(allRows);
+        emptyTextTableBuilder.setRowsList(allRows);
         emptyTextTableBuilder.getRows().set(0, Arrays.asList(null, null));
         assertEquals(
                 GETTER_NO_DEFENSIVE_COPY,
@@ -304,7 +304,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         allRows.add(Collections.<String>emptyList());
-        populatedTextTableBuilder.setRows(allRows);
+        populatedTextTableBuilder.setRowsList(allRows);
     }
 
     @Test
@@ -313,7 +313,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         allRowsArray[1] = Collections.<String>emptyList();
-        populatedTextTableBuilder.setRowsFromArray(allRowsArray);
+        populatedTextTableBuilder.setRows(allRowsArray);
     }
 
     @Test

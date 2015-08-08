@@ -100,14 +100,14 @@ public class TextTableBuilder {
         return defensiveListCopy(headers);
     }
 
-    public TextTableBuilder setHeaders(final Collection<?> headers) {
+    public TextTableBuilder setHeadersList(final Collection<?> headers) {
         checkNumColumns(headers);
         this.headers = defensiveObjectListCopy(headers);
         return this;
     }
 
-    public TextTableBuilder setHeadersFromArray(final Object... headers) {
-        return setHeaders(Arrays.asList(headers));
+    public TextTableBuilder setHeaders(final Object... headers) {
+        return setHeadersList(Arrays.asList(headers));
     }
 
     public TextTableBuilder clearHeaders() {
@@ -123,14 +123,14 @@ public class TextTableBuilder {
         return defensiveListCopy(headerAlignments);
     }
 
-    public TextTableBuilder setHeaderAlignments(final Collection<Alignment> headerAlignments) {
+    public TextTableBuilder setHeaderAlignmentsList(final Collection<Alignment> headerAlignments) {
         checkNumColumns(headerAlignments);
         this.headerAlignments = defensiveListCopy(headerAlignments);
         return this;
     }
 
-    public TextTableBuilder setHeaderAlignmentsFromArray(final Alignment... headerAlignments) {
-        return setHeaderAlignments(Arrays.asList(headerAlignments));
+    public TextTableBuilder setHeaderAlignments(final Alignment... headerAlignments) {
+        return setHeaderAlignmentsList(Arrays.asList(headerAlignments));
     }
 
     public TextTableBuilder clearHeaderAlignments() {
@@ -150,34 +150,34 @@ public class TextTableBuilder {
         return rows;
     }
 
-    public TextTableBuilder addRow(final Collection<?> row) {
+    public TextTableBuilder addRowList(final Collection<?> row) {
         checkNumColumns(row);
         rows.add(defensiveObjectListCopy(row));
         return this;
     }
 
-    public TextTableBuilder addRowFromArray(final Object... row) {
-        return addRow(Arrays.asList(row));
+    public TextTableBuilder addRow(final Object... row) {
+        return addRowList(Arrays.asList(row));
     }
 
-    public TextTableBuilder addRows(final Collection<? extends Collection<?>> rows) {
+    public TextTableBuilder addRowsList(final Collection<? extends Collection<?>> rows) {
         for (final Collection<?> row : rows) {
-            addRow(row);
+            addRowList(row);
         }
         return this;
     }
 
-    public TextTableBuilder addRowsFromArray(final Collection<?>... rows) {
-        return addRows(Arrays.asList(rows));
+    public TextTableBuilder addRows(final Collection<?>... rows) {
+        return addRowsList(Arrays.asList(rows));
     }
 
-    public TextTableBuilder setRows(final Collection<? extends Collection<?>> rows) {
+    public TextTableBuilder setRowsList(final Collection<? extends Collection<?>> rows) {
         initRows(rows.size());
-        return addRows(rows);
+        return addRowsList(rows);
     }
 
-    public TextTableBuilder setRowsFromArray(final Collection<?>... rows) {
-        return setRows(Arrays.asList(rows));
+    public TextTableBuilder setRows(final Collection<?>... rows) {
+        return setRowsList(Arrays.asList(rows));
     }
 
     public TextTableBuilder removeRow(final int rowNum) {
@@ -198,14 +198,14 @@ public class TextTableBuilder {
         return defensiveListCopy(rowAlignments);
     }
 
-    public TextTableBuilder setRowAlignments(final Collection<Alignment> rowAlignments) {
+    public TextTableBuilder setRowAlignmentsList(final Collection<Alignment> rowAlignments) {
         checkNumColumns(rowAlignments);
         this.rowAlignments = defensiveListCopy(rowAlignments);
         return this;
     }
 
-    public TextTableBuilder setRowAlignmentsFromArray(final Alignment... rowAlignments) {
-        return setRowAlignments(Arrays.asList(rowAlignments));
+    public TextTableBuilder setRowAlignments(final Alignment... rowAlignments) {
+        return setRowAlignmentsList(Arrays.asList(rowAlignments));
     }
 
     public TextTableBuilder clearRowAlignments() {

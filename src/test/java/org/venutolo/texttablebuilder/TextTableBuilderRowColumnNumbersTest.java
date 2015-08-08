@@ -18,7 +18,7 @@ public class TextTableBuilderRowColumnNumbersTest {
     public void setUp() {
         emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()
-                .addRowFromArray("ROW");
+                .addRow("ROW");
     }
 
     @Test
