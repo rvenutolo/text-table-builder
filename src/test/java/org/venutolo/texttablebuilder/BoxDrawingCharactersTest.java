@@ -97,13 +97,13 @@ public class BoxDrawingCharactersTest {
     public void testEquals() {
         assertNotEquals(
                 NOT_EQUAL_TO_NULL,
-                null,
-                testCharacters
+                testCharacters,
+                null
         );
         assertNotEquals(
                 NOT_EQUAL_RANDOM_OBJECT,
-                new Object(),
-                testCharacters
+                testCharacters,
+                new Object()
         );
         assertEquals(
                 EQUAL_ITSELF,
@@ -112,63 +112,63 @@ public class BoxDrawingCharactersTest {
         );
         assertNotEquals(
                 NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
-                builder.build(),
-                testCharacters
+                testCharacters,
+                builder.build()
         );
         assertNotEquals(
                 NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
-                builder.setHorizontal('h').build(),
-                testCharacters
+                testCharacters,
+                builder.setHorizontal('h').build()
         );
         assertNotEquals(
                 NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
-                builder.setVertical('v').build(),
-                testCharacters
+                testCharacters,
+                builder.setVertical('v').build()
         );
         assertNotEquals(
                 NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
-                builder.setTopLeftCorner('1').build(),
-                testCharacters
+                testCharacters,
+                builder.setTopLeftCorner('1').build()
         );
         assertNotEquals(
                 NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
-                builder.setTopIntersect('2').build(),
-                testCharacters
+                testCharacters,
+                builder.setTopIntersect('2').build()
         );
         assertNotEquals(
                 NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
-                builder.setTopRightCorner('3').build(),
-                testCharacters
+                testCharacters,
+                builder.setTopRightCorner('3').build()
         );
         assertNotEquals(
                 NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
-                builder.setLeftIntersect('4').build(),
-                testCharacters
+                testCharacters,
+                builder.setLeftIntersect('4').build()
         );
         assertNotEquals(
                 NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
-                builder.setMiddleIntersect('5').build(),
-                testCharacters
+                testCharacters,
+                builder.setMiddleIntersect('5').build()
         );
         assertNotEquals(
                 NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
-                builder.setRightIntersect('6').build(),
-                testCharacters
+                testCharacters,
+                builder.setRightIntersect('6').build()
         );
         assertNotEquals(
                 NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
-                builder.setBottomLeftCorner('7').build(),
-                testCharacters
+                testCharacters,
+                builder.setBottomLeftCorner('7').build()
         );
         assertNotEquals(
                 NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES,
-                builder.setBottomIntersect('8').build(),
-                testCharacters
+                testCharacters,
+                builder.setBottomIntersect('8').build()
         );
         assertEquals(
                 EQUAL_TO_INSTANCE_WITH_SAME_VALUES,
-                builder.setBottomRightCorner('9').build(),
-                testCharacters
+                testCharacters,
+                builder.setBottomRightCorner('9').build()
         );
     }
 
@@ -181,74 +181,74 @@ public class BoxDrawingCharactersTest {
         );
         assertNotEquals(
                 HASH_CODE_MUST_BE_DISTINCT,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
         builder.setHorizontal('h');
         assertNotEquals(
                 HASH_CODE_MUST_BE_DISTINCT,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
         builder.setVertical('v');
         assertNotEquals(
                 HASH_CODE_MUST_BE_DISTINCT,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
         builder.setTopLeftCorner('1');
         assertNotEquals(
                 HASH_CODE_MUST_BE_DISTINCT,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
         builder.setTopIntersect('2');
         assertNotEquals(
                 HASH_CODE_MUST_BE_DISTINCT,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
         builder.setTopRightCorner('3');
         assertNotEquals(
                 HASH_CODE_MUST_BE_DISTINCT,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
         builder.setLeftIntersect('4');
         assertNotEquals(
                 HASH_CODE_MUST_BE_DISTINCT,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
         builder.setMiddleIntersect('5');
         assertNotEquals(
                 HASH_CODE_MUST_BE_DISTINCT,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
         builder.setRightIntersect('6');
         assertNotEquals(
                 HASH_CODE_MUST_BE_DISTINCT,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
         builder.setBottomLeftCorner('7');
         assertNotEquals(
                 HASH_CODE_MUST_BE_DISTINCT,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
         builder.setBottomIntersect('8');
         assertNotEquals(
                 HASH_CODE_MUST_BE_DISTINCT,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
         builder.setBottomRightCorner('9');
         assertEquals(
                 HASH_CODE_MUST_BE_SAME,
-                builder.build().hashCode(),
-                testCharacters.hashCode()
+                testCharacters.hashCode(),
+                builder.build().hashCode()
         );
     }
 
@@ -263,8 +263,8 @@ public class BoxDrawingCharactersTest {
         );
         assertNotEquals(
                 TO_STRING_SHOULD_BE_DISTINCT,
-                builder.build().toString(),
-                testCharacters.toString()
+                testCharacters.toString(),
+                builder.build().toString()
         );
     }
 
