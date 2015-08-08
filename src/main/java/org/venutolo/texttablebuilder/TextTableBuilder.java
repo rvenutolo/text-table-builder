@@ -67,7 +67,6 @@ public class TextTableBuilder {
     private void checkNumColumns(final Collection<?> collection) {
         if (numColumns == null) {
             // if numColumns is null, this is the first check for number of columns
-            // set some variables now that number of columns is known
             numColumns = collection.size();
         } else {
             if (numColumns != collection.size()) {
