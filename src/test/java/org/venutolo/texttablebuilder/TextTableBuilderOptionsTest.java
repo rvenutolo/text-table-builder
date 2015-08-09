@@ -6,7 +6,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
-import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.NOT_EMPTY_AFTER_CLEAR;
 
 /**
  * @author Rick Venutolo
@@ -17,15 +16,9 @@ public class TextTableBuilderOptionsTest {
 
     private TextTableBuilder emptyTextTableBuilder;
 
-    private TextTableBuilder populatedTextTableBuilder;
-
     @Before
     public void setUp() {
         emptyTextTableBuilder = new TextTableBuilder();
-        populatedTextTableBuilder = new TextTableBuilder()
-                .setPrepender("PREPENDER")
-                .setAppender("APPENDER")
-                .setNullReplacement("NULL_REPLACEMENT");
     }
 
     @Test
@@ -93,15 +86,6 @@ public class TextTableBuilderOptionsTest {
     }
 
     @Test
-    public void testClearPrepender() {
-        populatedTextTableBuilder.clearPrepender();
-        assertTrue(
-                NOT_EMPTY_AFTER_CLEAR,
-                populatedTextTableBuilder.getPrepender().isEmpty()
-        );
-    }
-
-    @Test
     public void testSetAndGetAppender() {
         final String appenderString = "appender";
         emptyTextTableBuilder.setAppender(appenderString);
@@ -113,15 +97,6 @@ public class TextTableBuilderOptionsTest {
     }
 
     @Test
-    public void testClearAppender() {
-        populatedTextTableBuilder.clearAppender();
-        assertTrue(
-                NOT_EMPTY_AFTER_CLEAR,
-                populatedTextTableBuilder.getAppender().isEmpty()
-        );
-    }
-
-    @Test
     public void testSetAndGetNullReplacement() {
         final String nullReplacement = "nullReplacement";
         emptyTextTableBuilder.setNullReplacement(nullReplacement);
@@ -129,15 +104,6 @@ public class TextTableBuilderOptionsTest {
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 nullReplacement,
                 emptyTextTableBuilder.getNullReplacement()
-        );
-    }
-
-    @Test
-    public void testClearNullReplacement() {
-        populatedTextTableBuilder.clearNullReplacement();
-        assertTrue(
-                NOT_EMPTY_AFTER_CLEAR,
-                populatedTextTableBuilder.getNullReplacement().isEmpty()
         );
     }
 

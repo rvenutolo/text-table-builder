@@ -292,42 +292,27 @@ public class TextTableBuilder {
         return prepender;
     }
 
-    public TextTableBuilder setPrepender(@Nonnull final String prepender) {
-        checkNotNull(prepender, "prepender cannot be null");
-        this.prepender = prepender;
+    public TextTableBuilder setPrepender(final String prepender) {
+        this.prepender = (prepender == null) ? EMPTY_STRING : prepender;
         return this;
-    }
-
-    public TextTableBuilder clearPrepender() {
-        return setPrepender(EMPTY_STRING);
     }
 
     public String getAppender() {
         return appender;
     }
 
-    public TextTableBuilder setAppender(@Nonnull final String appender) {
-        checkNotNull(appender, "appender cannot be null");
-        this.appender = appender;
+    public TextTableBuilder setAppender(final String appender) {
+        this.appender = (appender == null) ? EMPTY_STRING : appender;
         return this;
-    }
-
-    public TextTableBuilder clearAppender() {
-        return setAppender(EMPTY_STRING);
     }
 
     public String getNullReplacement() {
         return nullReplacement;
     }
 
-    public TextTableBuilder setNullReplacement(@Nonnull final String nullReplacement) {
-        checkNotNull(nullReplacement, "null replacement cannot be null");
-        this.nullReplacement = nullReplacement;
+    public TextTableBuilder setNullReplacement(final String nullReplacement) {
+        this.nullReplacement = (nullReplacement == null) ? EMPTY_STRING : nullReplacement;
         return this;
-    }
-
-    public TextTableBuilder clearNullReplacement() {
-        return setNullReplacement(EMPTY_STRING);
     }
 
 }
