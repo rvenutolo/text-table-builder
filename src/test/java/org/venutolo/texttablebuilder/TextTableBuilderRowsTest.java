@@ -244,7 +244,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.addRowsList(
-                Collections.<Collection<String>>singletonList(
+                Collections.singletonList(
                         Collections.<String>emptyList()
                 )
         );
@@ -273,7 +273,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.addRows((Collection<?>) null);
+        populatedTextTableBuilder.addRows((List<?>) null);
     }
 
     @Test
@@ -281,7 +281,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.addRowsList(Collections.<Collection<?>>singletonList(null));
+        populatedTextTableBuilder.addRowsList(Collections.<List<?>>singletonList(null));
     }
 
     @Test
@@ -289,7 +289,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.addRows(new Collection<?>[]{null});
+        populatedTextTableBuilder.addRows(new List<?>[]{null});
     }
 
     @Test
@@ -379,7 +379,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.setRows((Collection<?>) null);
+        populatedTextTableBuilder.setRows((List<?>) null);
     }
 
     @Test
@@ -387,7 +387,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.setRowsList(Collections.<Collection<?>>singletonList(null));
+        populatedTextTableBuilder.setRowsList(Collections.<List<?>>singletonList(null));
     }
 
     @Test
@@ -395,7 +395,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.setRows(new Collection<?>[]{null});
+        populatedTextTableBuilder.setRows(new List<?>[]{null});
     }
 
     @Test
