@@ -50,12 +50,12 @@ public class TextTableBuilder {
      * STATIC UTILITY METHODS
      **************************************************************************/
 
-    private static <T> List<T> defensiveListCopy(final List<T> collection) {
-        return (collection == null) ? new ArrayList<T>() : new ArrayList<T>(collection);
+    private static <T> List<T> defensiveListCopy(final List<T> list) {
+        return (list == null) ? new ArrayList<T>() : new ArrayList<T>(list);
     }
 
-    private static List<Object> defensiveObjectListCopy(final List<?> collection) {
-        return (collection == null) ? new ArrayList<Object>() : new ArrayList<Object>(collection);
+    private static List<Object> defensiveObjectListCopy(final List<?> list) {
+        return (list == null) ? new ArrayList<Object>() : new ArrayList<Object>(list);
     }
 
     // if array is null, return null for later checking for null
@@ -64,10 +64,9 @@ public class TextTableBuilder {
     }
 
     private static void checkAlignmentsForNull(final List<Alignment> alignments) {
-        int index = 0;
-        for (final Alignment alignment : alignments) {
+        for (int index = 0; index < alignments.size(); index++) {
+            final Alignment alignment = alignments.get(index);
             checkNotNull(alignment, "alignment at index %s cannot be null", index);
-            index++;
         }
     }
 
@@ -81,14 +80,14 @@ public class TextTableBuilder {
                     : new ArrayList<List<Object>>();
     }
 
-    private void checkNumColumns(final List<?> collection) {
+    private void checkNumColumns(final List<?> list) {
         if (numColumns == null) {
             // if numColumns is null, this is the first check for number of columns, so set it
-            numColumns = collection.size();
+            numColumns = list.size();
         } else {
-            if (numColumns != collection.size()) {
+            if (numColumns != list.size()) {
                 throw new IllegalArgumentException(
-                        "Wrong number of columns: " + collection.size()
+                        "Wrong number of columns: " + list.size()
                         + "; expected " + numColumns + " columns"
                 );
             }
