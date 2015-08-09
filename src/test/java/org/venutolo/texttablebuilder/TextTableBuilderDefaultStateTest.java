@@ -79,16 +79,16 @@ public class TextTableBuilderDefaultStateTest {
     }
 
     @Test
-    public void testDefaultStateRepeatHeaders() {
+    public void testDefaultStateRepeatHeadersEveryXRows() {
         assertEquals(
-                "Default state repeat headers is incorrect",
+                "Default state repeat headers every x rows is incorrect",
                 0,
-                emptyTextTableBuilder.getRepeatHeaders()
+                emptyTextTableBuilder.getRepeatHeadersEveryXRows()
         );
     }
 
     @Test
-    public void testDefaultStateRepeateHeadersAtBottom() {
+    public void testDefaultStateRepeatHeadersAtBottom() {
         assertFalse(
                 "Default state repeat headers at bottom is incorrect",
                 emptyTextTableBuilder.getRepeatHeadersAtBottom()
@@ -104,26 +104,26 @@ public class TextTableBuilderDefaultStateTest {
     }
 
     @Test
-    public void testDefaultStateNullReplacement() {
+    public void testDefaultStateNullColumnReplacement() {
         assertTrue(
-                "Default state null replacements is not empty",
-                emptyTextTableBuilder.getNullReplacement().isEmpty()
+                "Default state null column replacements is not empty",
+                emptyTextTableBuilder.getNullColumnReplacement().isEmpty()
         );
     }
 
     @Test
-    public void testDefaultStatePrepender() {
+    public void testDefaultStateLinePrepender() {
         assertTrue(
-                "Default state prepender is not empty",
-                emptyTextTableBuilder.getPrepender().isEmpty()
+                "Default state line prepender is not empty",
+                emptyTextTableBuilder.getLinePrepender().isEmpty()
         );
     }
 
     @Test
-    public void testDefaultStateAppender() {
+    public void testDefaultStateLineAppender() {
         assertTrue(
-                "Default state appender is not empty",
-                emptyTextTableBuilder.getAppender().isEmpty()
+                "Default state line appender is not empty",
+                emptyTextTableBuilder.getLineAppender().isEmpty()
         );
     }
 

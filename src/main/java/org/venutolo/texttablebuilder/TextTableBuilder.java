@@ -26,17 +26,17 @@ public class TextTableBuilder {
 
     private List<Alignment> rowAlignments;
 
-    private int repeatHeaders;
+    private int repeatHeadersEveryXRows;
 
     private boolean repeatHeadersAtBottom;
 
     private boolean showRowNums;
 
-    private String nullReplacement = EMPTY_STRING;
+    private String linePrepender = EMPTY_STRING;
 
-    private String prepender = EMPTY_STRING;
+    private String lineAppender = EMPTY_STRING;
 
-    private String appender = EMPTY_STRING;
+    private String nullColumnReplacement = EMPTY_STRING;
 
     /**************************************************************************
      * CONSTRUCTOR(S)
@@ -253,25 +253,12 @@ public class TextTableBuilder {
      * MISC OPTION METHODS
      **************************************************************************/
 
-    public boolean getShowRowNums() {
-        return showRowNums;
+    public int getRepeatHeadersEveryXRows() {
+        return repeatHeadersEveryXRows;
     }
 
-    public TextTableBuilder setShowRowNums(final boolean showRowNums) {
-        this.showRowNums = showRowNums;
-        return this;
-    }
-
-    public TextTableBuilder showRowNums() {
-        return setShowRowNums(true);
-    }
-
-    public int getRepeatHeaders() {
-        return repeatHeaders;
-    }
-
-    public TextTableBuilder repeatHeaders(final int numRows) {
-        this.repeatHeaders = numRows;
+    public TextTableBuilder setRepeatHeadersEveryXRows(final int repeatHeadersEveryXRows) {
+        this.repeatHeadersEveryXRows = repeatHeadersEveryXRows;
         return this;
     }
 
@@ -288,30 +275,46 @@ public class TextTableBuilder {
         return setRepeatHeadersAtBottom(true);
     }
 
-    public String getPrepender() {
-        return prepender;
+    public boolean getShowRowNums() {
+        return showRowNums;
     }
 
-    public TextTableBuilder setPrepender(final String prepender) {
-        this.prepender = (prepender == null) ? EMPTY_STRING : prepender;
+    public TextTableBuilder setShowRowNums(final boolean showRowNums) {
+        this.showRowNums = showRowNums;
         return this;
     }
 
-    public String getAppender() {
-        return appender;
+    public TextTableBuilder showRowNums() {
+        return setShowRowNums(true);
     }
 
-    public TextTableBuilder setAppender(final String appender) {
-        this.appender = (appender == null) ? EMPTY_STRING : appender;
+    public String getLinePrepender() {
+        return linePrepender;
+    }
+
+    public TextTableBuilder setLinePrepender(final String linePrepender) {
+        this.linePrepender = (linePrepender == null) ? EMPTY_STRING : linePrepender;
         return this;
     }
 
-    public String getNullReplacement() {
-        return nullReplacement;
+    public String getLineAppender() {
+        return lineAppender;
     }
 
-    public TextTableBuilder setNullReplacement(final String nullReplacement) {
-        this.nullReplacement = (nullReplacement == null) ? EMPTY_STRING : nullReplacement;
+    public TextTableBuilder setLineAppender(final String lineAppender) {
+        this.lineAppender = (lineAppender == null) ? EMPTY_STRING : lineAppender;
+        return this;
+    }
+
+    public String getNullColumnReplacement() {
+        return nullColumnReplacement;
+    }
+
+    public TextTableBuilder setNullColumnReplacement(final String nullColumnReplacement) {
+        this.nullColumnReplacement =
+                (nullColumnReplacement == null)
+                ? EMPTY_STRING
+                : nullColumnReplacement;
         return this;
     }
 

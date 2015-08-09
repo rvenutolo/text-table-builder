@@ -43,13 +43,13 @@ public class TextTableBuilderOptionsTest {
     }
 
     @Test
-    public void testSetAndGetRepeatHeaders() {
+    public void testSetAndGetRepeatHeadersEveryXRows() {
         final int numRows = 10;
-        emptyTextTableBuilder.repeatHeaders(numRows);
+        emptyTextTableBuilder.setRepeatHeadersEveryXRows(numRows);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 numRows,
-                emptyTextTableBuilder.getRepeatHeaders()
+                emptyTextTableBuilder.getRepeatHeadersEveryXRows()
         );
     }
 
@@ -75,35 +75,35 @@ public class TextTableBuilderOptionsTest {
     }
 
     @Test
-    public void testSetAndGetPrepender() {
+    public void testSetAndGetLinePrepender() {
         final String prepender = "prepender";
-        emptyTextTableBuilder.setPrepender(prepender);
+        emptyTextTableBuilder.setLinePrepender(prepender);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 prepender,
-                emptyTextTableBuilder.getPrepender()
+                emptyTextTableBuilder.getLinePrepender()
         );
     }
 
     @Test
-    public void testSetAndGetAppender() {
-        final String appenderString = "appender";
-        emptyTextTableBuilder.setAppender(appenderString);
+    public void testSetAndGetLineAppender() {
+        final String appender = "appender";
+        emptyTextTableBuilder.setLineAppender(appender);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
-                appenderString,
-                emptyTextTableBuilder.getAppender()
+                appender,
+                emptyTextTableBuilder.getLineAppender()
         );
     }
 
     @Test
-    public void testSetAndGetNullReplacement() {
-        final String nullReplacement = "nullReplacement";
-        emptyTextTableBuilder.setNullReplacement(nullReplacement);
+    public void testSetAndGetNullColumnReplacement() {
+        final String replacement = "replacement";
+        emptyTextTableBuilder.setNullColumnReplacement(replacement);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
-                nullReplacement,
-                emptyTextTableBuilder.getNullReplacement()
+                replacement,
+                emptyTextTableBuilder.getNullColumnReplacement()
         );
     }
 
