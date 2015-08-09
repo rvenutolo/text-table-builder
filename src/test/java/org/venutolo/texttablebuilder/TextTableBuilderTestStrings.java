@@ -23,6 +23,16 @@ final class TextTableBuilderTestStrings {
     static final String NOT_EMPTY_AFTER_CLEAR =
             "not empty after clearing";
 
+    static final String CANNOT_BE_NULL =
+            "cannot be null";
+
+    static final String EXPECTED_NPE_FOR_NULL_LIST =
+            "expected NPE for null list";
+
+    static final String EXPECTED_NPE_FOR_NULL_ALIGNMENT =
+            "expected NPE for null alignment";
+
     private TextTableBuilderTestStrings() {
     }
+
 }
