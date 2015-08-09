@@ -63,7 +63,7 @@ public class TextTableBuilder {
         return (array == null) ? null : Arrays.asList(array);
     }
 
-    private static void checkAlignmentsForNull(final List<Alignment> alignments) {
+    protected static void checkAlignmentsForNull(final List<Alignment> alignments) {
         for (int index = 0; index < alignments.size(); index++) {
             final Alignment alignment = alignments.get(index);
             checkNotNull(alignment, "alignment at index %s cannot be null", index);
@@ -80,7 +80,7 @@ public class TextTableBuilder {
                     : new ArrayList<List<Object>>();
     }
 
-    private void checkNumColumns(final List<?> list) {
+    protected void checkNumColumns(final List<?> list) {
         if (numColumns == null) {
             // if numColumns is null, this is the first check for number of columns, so set it
             numColumns = list.size();
