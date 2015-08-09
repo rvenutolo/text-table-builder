@@ -243,11 +243,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.addRowsList(
-                Collections.singletonList(
-                        Collections.<String>emptyList()
-                )
-        );
+        populatedTextTableBuilder.addRowsList(Collections.singletonList(Collections.<String>emptyList()));
     }
 
     @Test
@@ -255,9 +251,7 @@ public class TextTableBuilderRowsTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.addRows(
-                Collections.<String>emptyList()
-        );
+        populatedTextTableBuilder.addRows(Collections.<String>emptyList());
     }
 
     @Test
