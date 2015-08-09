@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class TextTableBuilder {
 
+    private static final String EMPTY_STRING = "";
+
     private Integer numColumns;
 
     private BoxDrawingCharacters boxDrawingCharacters = BoxDrawingCharacters.LIGHT;
@@ -28,11 +30,11 @@ public class TextTableBuilder {
 
     private boolean showRowNums;
 
-    private boolean replaceNullWithEmptyString = true;
+    private String nullReplacement = EMPTY_STRING;
 
-    private String prepender = "";
+    private String prepender = EMPTY_STRING;
 
-    private String appender = "";
+    private String appender = EMPTY_STRING;
 
     /**************************************************************************
      * CONSTRUCTOR(S)
@@ -268,12 +270,12 @@ public class TextTableBuilder {
     }
 
     public TextTableBuilder setPrepender(final String prepender) {
-        this.prepender = (prepender == null) ? "" : prepender;
+        this.prepender = prepender;
         return this;
     }
 
     public TextTableBuilder clearPrepender() {
-        return setPrepender(null);
+        return setPrepender(EMPTY_STRING);
     }
 
     public String getAppender() {
@@ -281,25 +283,25 @@ public class TextTableBuilder {
     }
 
     public TextTableBuilder setAppender(final String appender) {
-        this.appender = (appender == null) ? "" : appender;
+        this.appender = appender;
         return this;
     }
 
     public TextTableBuilder clearAppender() {
-        return setAppender(null);
+        return setAppender(EMPTY_STRING);
     }
 
-    public boolean getReplaceNullWithEmptyString() {
-        return replaceNullWithEmptyString;
+    public String getNullReplacement() {
+        return nullReplacement;
     }
 
-    public TextTableBuilder setReplaceNullWithEmptyString(final boolean replaceNullWithEmptyString) {
-        this.replaceNullWithEmptyString = replaceNullWithEmptyString;
+    public TextTableBuilder setNullReplacement(final String nullReplacement) {
+        this.nullReplacement = nullReplacement;
         return this;
     }
 
-    public TextTableBuilder doNotReplaceNullWithEmptyString() {
-        return setReplaceNullWithEmptyString(false);
+    public TextTableBuilder clearNullReplacement() {
+        return setNullReplacement(EMPTY_STRING);
     }
 
 }
