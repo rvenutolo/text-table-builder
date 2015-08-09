@@ -11,7 +11,7 @@ import com.google.common.base.Objects;
  *
  * @author Rick Venutolo
  */
-public final class BoxDrawingCharacters {
+public class BoxDrawingCharacters {
 
     /**
      * Set of heavy solid line box drawing characters.
@@ -123,7 +123,12 @@ public final class BoxDrawingCharacters {
     private final char bottomIntersect;
     private final char bottomRightCorner;
 
-    private BoxDrawingCharacters(final Builder builder) {
+    /**
+     * Constructs a BoxDrawingCharacters from the given {@link Builder}.
+     *
+     * @param builder the {@link Builder} with the set of characters to use
+     */
+    protected BoxDrawingCharacters(final Builder builder) {
         this.horizontal = builder.horizontal;
         this.vertical = builder.vertical;
         this.topLeftCorner = builder.topLeftCorner;
