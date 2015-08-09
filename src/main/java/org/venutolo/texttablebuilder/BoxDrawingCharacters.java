@@ -3,6 +3,8 @@ package org.venutolo.texttablebuilder;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+import javax.annotation.Nonnull;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -130,7 +132,8 @@ public class BoxDrawingCharacters {
      *
      * @param builder the {@link Builder} with the set of characters to use
      */
-    protected BoxDrawingCharacters(final Builder builder) {
+    protected BoxDrawingCharacters(@Nonnull final Builder builder) {
+        checkNotNull(builder, "builder cannot be null");
         this.horizontal = builder.horizontal;
         this.vertical = builder.vertical;
         this.topLeftCorner = builder.topLeftCorner;
@@ -166,7 +169,7 @@ public class BoxDrawingCharacters {
      *                                  inconsistent with usage of horizontal and vertical bar
      *                                  characters
      */
-    public static BoxDrawingCharacters fromBoxDrawing(final String boxDrawing) {
+    public static BoxDrawingCharacters fromBoxDrawing(@Nonnull final String boxDrawing) {
         checkNotNull(boxDrawing, "box drawing cannot be null");
         return new BoxDrawingParser(boxDrawing).parse();
     }

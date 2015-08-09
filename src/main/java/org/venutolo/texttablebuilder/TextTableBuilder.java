@@ -1,5 +1,6 @@
 package org.venutolo.texttablebuilder;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -63,7 +64,7 @@ public class TextTableBuilder {
         return (array == null) ? null : Arrays.asList(array);
     }
 
-    private void checkAlignmentsForNull(final Collection<Alignment> alignments) {
+    private static void checkAlignmentsForNull(final Collection<Alignment> alignments) {
         int index = 0;
         for (final Alignment alignment : alignments) {
             checkNotNull(alignment, "alignment at index %s cannot be null", index);
@@ -117,14 +118,14 @@ public class TextTableBuilder {
         return defensiveListCopy(headers);
     }
 
-    public TextTableBuilder setHeadersList(final Collection<?> headers) {
+    public TextTableBuilder setHeadersList(@Nonnull final Collection<?> headers) {
         checkNotNull(headers, "headers cannot be null");
         checkNumColumns(headers);
         this.headers = defensiveObjectListCopy(headers);
         return this;
     }
 
-    public TextTableBuilder setHeaders(final Object... headers) {
+    public TextTableBuilder setHeaders(@Nonnull final Object... headers) {
         return setHeadersList(convertArrayToList(headers));
     }
 
@@ -141,7 +142,7 @@ public class TextTableBuilder {
         return defensiveListCopy(headerAlignments);
     }
 
-    public TextTableBuilder setHeaderAlignmentsList(final Collection<Alignment> headerAlignments) {
+    public TextTableBuilder setHeaderAlignmentsList(@Nonnull final Collection<Alignment> headerAlignments) {
         checkNotNull(headerAlignments, "header alignments cannot be null");
         checkAlignmentsForNull(headerAlignments);
         checkNumColumns(headerAlignments);
@@ -149,7 +150,7 @@ public class TextTableBuilder {
         return this;
     }
 
-    public TextTableBuilder setHeaderAlignments(final Alignment... headerAlignments) {
+    public TextTableBuilder setHeaderAlignments(@Nonnull final Alignment... headerAlignments) {
         return setHeaderAlignmentsList(convertArrayToList(headerAlignments));
     }
 
@@ -170,18 +171,18 @@ public class TextTableBuilder {
         return rows;
     }
 
-    public TextTableBuilder addRowList(final Collection<?> row) {
+    public TextTableBuilder addRowList(@Nonnull final Collection<?> row) {
         checkNotNull(row, "row cannot be null");
         checkNumColumns(row);
         rows.add(defensiveObjectListCopy(row));
         return this;
     }
 
-    public TextTableBuilder addRow(final Object... row) {
+    public TextTableBuilder addRow(@Nonnull final Object... row) {
         return addRowList(convertArrayToList(row));
     }
 
-    public TextTableBuilder addRowsList(final Collection<? extends Collection<?>> rows) {
+    public TextTableBuilder addRowsList(@Nonnull final Collection<? extends Collection<?>> rows) {
         checkNotNull(rows, "rows cannot be null");
         for (final Collection<?> row : rows) {
             addRowList(row);
@@ -189,17 +190,17 @@ public class TextTableBuilder {
         return this;
     }
 
-    public TextTableBuilder addRows(final Collection<?>... rows) {
+    public TextTableBuilder addRows(@Nonnull final Collection<?>... rows) {
         return addRowsList(convertArrayToList(rows));
     }
 
-    public TextTableBuilder setRowsList(final Collection<? extends Collection<?>> rows) {
+    public TextTableBuilder setRowsList(@Nonnull final Collection<? extends Collection<?>> rows) {
         checkNotNull(rows, "rows cannot be null");
         initRows(rows.size());
         return addRowsList(rows);
     }
 
-    public TextTableBuilder setRows(final Collection<?>... rows) {
+    public TextTableBuilder setRows(@Nonnull final Collection<?>... rows) {
         return setRowsList(convertArrayToList(rows));
     }
 
@@ -221,7 +222,7 @@ public class TextTableBuilder {
         return defensiveListCopy(rowAlignments);
     }
 
-    public TextTableBuilder setRowAlignmentsList(final Collection<Alignment> rowAlignments) {
+    public TextTableBuilder setRowAlignmentsList(@Nonnull final Collection<Alignment> rowAlignments) {
         checkNotNull(rowAlignments, "row alignments cannot be null");
         checkAlignmentsForNull(rowAlignments);
         checkNumColumns(rowAlignments);
@@ -229,7 +230,7 @@ public class TextTableBuilder {
         return this;
     }
 
-    public TextTableBuilder setRowAlignments(final Alignment... rowAlignments) {
+    public TextTableBuilder setRowAlignments(@Nonnull final Alignment... rowAlignments) {
         return setRowAlignmentsList(convertArrayToList(rowAlignments));
     }
 
@@ -293,7 +294,7 @@ public class TextTableBuilder {
         return prepender;
     }
 
-    public TextTableBuilder setPrepender(final String prepender) {
+    public TextTableBuilder setPrepender(@Nonnull final String prepender) {
         checkNotNull(prepender, "prepender cannot be null");
         this.prepender = prepender;
         return this;
@@ -307,7 +308,7 @@ public class TextTableBuilder {
         return appender;
     }
 
-    public TextTableBuilder setAppender(final String appender) {
+    public TextTableBuilder setAppender(@Nonnull final String appender) {
         checkNotNull(appender, "appender cannot be null");
         this.appender = appender;
         return this;
@@ -321,7 +322,7 @@ public class TextTableBuilder {
         return nullReplacement;
     }
 
-    public TextTableBuilder setNullReplacement(final String nullReplacement) {
+    public TextTableBuilder setNullReplacement(@Nonnull final String nullReplacement) {
         checkNotNull(nullReplacement, "null replacement cannot be null");
         this.nullReplacement = nullReplacement;
         return this;
