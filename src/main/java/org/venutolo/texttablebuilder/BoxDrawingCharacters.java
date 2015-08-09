@@ -3,6 +3,8 @@ package org.venutolo.texttablebuilder;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Set of characters used to create text tables.
  * <p>
@@ -165,6 +167,7 @@ public class BoxDrawingCharacters {
      *                                  characters
      */
     public static BoxDrawingCharacters fromBoxDrawing(final String boxDrawing) {
+        checkNotNull(boxDrawing, "box drawing cannot be null");
         return new BoxDrawingParser(boxDrawing).parse();
     }
 

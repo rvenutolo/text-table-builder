@@ -8,6 +8,8 @@ import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.CANNOT_BE_NULL;
+import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.EXPECTED_NPE_FOR_NULL_ALIGNMENT;
 
 /**
  * @author Rick Venutolo
@@ -548,6 +550,14 @@ public class BoxDrawingCharactersTest {
                 + "7h8h9"
                 //@formatter:on
         );
+    }
+
+    @Test
+    public void testFromBoxDrawingNull() {
+        expectedException.expect(NullPointerException.class);
+        expectedException.expectMessage(CANNOT_BE_NULL);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_ALIGNMENT);
+        BoxDrawingCharacters.fromBoxDrawing(null);
     }
 
 }
