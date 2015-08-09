@@ -28,7 +28,7 @@ public class TextTableBuilder {
 
     private boolean showRowNums;
 
-    private boolean replaceNullWithEmptyString;
+    private boolean replaceNullWithEmptyString = true;
 
     private String prepender = "";
 
@@ -66,7 +66,7 @@ public class TextTableBuilder {
 
     private void checkNumColumns(final Collection<?> collection) {
         if (numColumns == null) {
-            // if numColumns is null, this is the first check for number of columns
+            // if numColumns is null, this is the first check for number of columns, so set it
             numColumns = collection.size();
         } else {
             if (numColumns != collection.size()) {
@@ -298,8 +298,8 @@ public class TextTableBuilder {
         return this;
     }
 
-    public TextTableBuilder replaceNullWithEmptyString() {
-        return setReplaceNullWithEmptyString(true);
+    public TextTableBuilder doNotReplaceNullWithEmptyString() {
+        return setReplaceNullWithEmptyString(false);
     }
 
 }

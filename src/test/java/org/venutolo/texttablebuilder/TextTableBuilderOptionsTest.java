@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.NOT_EMPTY_AFTER_CLEAR;
@@ -14,6 +15,8 @@ import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.NOT_EMPT
 public class TextTableBuilderOptionsTest {
 
     private static final boolean[] trueFalseArray = {true, false};
+
+    private static final boolean[] falseTrueArray = {false, true};
 
     private TextTableBuilder emptyTextTableBuilder;
 
@@ -122,7 +125,7 @@ public class TextTableBuilderOptionsTest {
 
     @Test
     public void testSetAndGetReplaceNullWithEmptyString() {
-        for (final boolean replaceNullWithEmptyString : trueFalseArray) {
+        for (final boolean replaceNullWithEmptyString : falseTrueArray) {
             emptyTextTableBuilder.setReplaceNullWithEmptyString(replaceNullWithEmptyString);
             assertEquals(
                     GETTER_SETTER_VALUE_NOT_EQUAL,
@@ -133,9 +136,9 @@ public class TextTableBuilderOptionsTest {
     }
 
     @Test
-    public void testReplaceNullWithEmptyString() {
-        emptyTextTableBuilder.replaceNullWithEmptyString();
-        assertTrue(
+    public void testDoNotReplaceNullWithEmptyString() {
+        emptyTextTableBuilder.doNotReplaceNullWithEmptyString();
+        assertFalse(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 emptyTextTableBuilder.getReplaceNullWithEmptyString()
         );
