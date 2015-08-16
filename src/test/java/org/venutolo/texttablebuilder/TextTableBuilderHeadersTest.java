@@ -42,12 +42,12 @@ public class TextTableBuilderHeadersTest {
         headers = Arrays.asList(headersArray);
         emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()
-                .setHeadersList(headers);
+                .setHeadersCollection(headers);
     }
 
     @Test
     public void testSetAndGetHeadersList() {
-        emptyTextTableBuilder.setHeadersList(headers);
+        emptyTextTableBuilder.setHeadersCollection(headers);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 headers,
@@ -68,7 +68,7 @@ public class TextTableBuilderHeadersTest {
     @Test
     public void testSetHeadersListForDefensiveCopying() {
         final String expected = headers.get(0);
-        emptyTextTableBuilder.setHeadersList(headers);
+        emptyTextTableBuilder.setHeadersCollection(headers);
         headers.set(0, null);
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
@@ -92,7 +92,7 @@ public class TextTableBuilderHeadersTest {
     @Test
     public void testGetHeadersForDefensiveCopying() {
         final String expected = headers.get(0);
-        emptyTextTableBuilder.setHeadersList(headers);
+        emptyTextTableBuilder.setHeadersCollection(headers);
         emptyTextTableBuilder.getHeaders().set(0, null);
         assertEquals(
                 GETTER_NO_DEFENSIVE_COPY,
@@ -106,7 +106,7 @@ public class TextTableBuilderHeadersTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.setHeadersList(Collections.<String>emptyList());
+        populatedTextTableBuilder.setHeadersCollection(Collections.<String>emptyList());
     }
 
     @Test
@@ -122,7 +122,7 @@ public class TextTableBuilderHeadersTest {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.setHeadersList(null);
+        populatedTextTableBuilder.setHeadersCollection(null);
     }
 
     @Test
