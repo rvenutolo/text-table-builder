@@ -202,11 +202,6 @@ public class TextTableBuilder {
         return setRowsList(convertArrayToList(rows));
     }
 
-    public TextTableBuilder removeRow(final int rowNum) {
-        rows.remove(rowNum);
-        return this;
-    }
-
     public TextTableBuilder clearRows() {
         initRows(null);
         return this;

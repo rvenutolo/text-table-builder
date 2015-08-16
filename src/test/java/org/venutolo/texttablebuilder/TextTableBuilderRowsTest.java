@@ -401,14 +401,4 @@ public class TextTableBuilderRowsTest {
         );
     }
 
-    @Test
-    public void testRemoveRow() {
-        populatedTextTableBuilder.removeRow(0);
-        assertEquals(
-                "After removing first row, previous second row should now be first now",
-                row1,
-                populatedTextTableBuilder.getRows().get(0)
-        );
-    }
-
 }
