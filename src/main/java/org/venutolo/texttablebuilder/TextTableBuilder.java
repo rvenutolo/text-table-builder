@@ -51,20 +51,30 @@ public class TextTableBuilder {
      * STATIC UTILITY METHODS
      **************************************************************************/
 
-    private static <T> List<T> defensiveListCopy(final Collection<T> list) {
+    // these next four methods are used to make defensive copies (and convert arrays to collections)
+    // of input where null should be preserved for later checking
+    private static List<Object> objectListFromInputCollection(final Collection<?> collection) {
+        return (collection == null) ? null : new ArrayList<Object>(collection);
+    }
+
+    private static List<Alignment> alignmentListFromInputCollection(final Collection<Alignment> collection) {
+        return (collection == null) ? null : new ArrayList<Alignment>(collection);
+    }
+
+    private static List<Object> objectListFromInputArray(final Object... array) {
+        return (array == null) ? null : new ArrayList<Object>(Arrays.asList(array));
+    }
+
+    private static List<Alignment> alignmentListFromInputArray(final Alignment... array) {
+        return (array == null) ? null : new ArrayList<Alignment>(Arrays.asList(array));
+    }
+
+    // this method should return an empty list when the given list is null
+    private static <T> List<T> listForOutput(final List<T> list) {
         return (list == null) ? new ArrayList<T>() : new ArrayList<T>(list);
     }
 
-    private static List<Object> defensiveObjectListCopy(final Collection<?> list) {
-        return (list == null) ? new ArrayList<Object>() : new ArrayList<Object>(list);
-    }
-
-    // if array is null, return null for later checking for null
-    private static <T> Collection<T> convertArrayToCollection(final T... array) {
-        return (array == null) ? null : Arrays.asList(array);
-    }
-
-    protected static void checkAlignmentsForNull(final Iterable<Alignment> alignments) {
+    private static void checkAlignmentsForNull(final Iterable<Alignment> alignments) {
         int index = 0;
         for (final Alignment alignment : alignments) {
             checkNotNull(alignment, "alignment at index %s cannot be null", index);
@@ -82,14 +92,14 @@ public class TextTableBuilder {
                     : new ArrayList<List<Object>>();
     }
 
-    protected void checkNumColumns(final Collection<?> list) {
+    protected void checkNumColumns(final Collection<?> collection) {
         if (numColumns == null) {
             // if numColumns is null, this is the first check for number of columns, so set it
-            numColumns = list.size();
+            numColumns = collection.size();
         } else {
-            if (numColumns != list.size()) {
+            if (numColumns != collection.size()) {
                 throw new IllegalArgumentException(
-                        "Wrong number of columns: " + list.size()
+                        "Wrong number of columns: " + collection.size()
                         + "; expected " + numColumns + " columns"
                 );
             }
@@ -115,18 +125,23 @@ public class TextTableBuilder {
      **************************************************************************/
 
     public List<Object> getHeaders() {
-        return defensiveListCopy(headers);
+        return listForOutput(headers);
     }
 
-    public TextTableBuilder setHeadersCollection(@Nonnull final Collection<?> headers) {
+    private TextTableBuilder setHeadersInternal(@Nonnull final List<Object> headers) {
         checkNotNull(headers, "headers cannot be null");
         checkNumColumns(headers);
-        this.headers = defensiveObjectListCopy(headers);
+        // param should already be a defensive copy
+        this.headers = headers;
         return this;
     }
 
+    public TextTableBuilder setHeadersCollection(@Nonnull final Collection<?> headers) {
+        return setHeadersInternal(objectListFromInputCollection(headers));
+    }
+
     public TextTableBuilder setHeaders(@Nonnull final Object... headers) {
-        return setHeadersCollection(convertArrayToCollection(headers));
+        return setHeadersCollection(objectListFromInputArray(headers));
     }
 
     public TextTableBuilder clearHeaders() {
@@ -139,19 +154,24 @@ public class TextTableBuilder {
      **************************************************************************/
 
     public List<Alignment> getHeaderAlignments() {
-        return defensiveListCopy(headerAlignments);
+        return listForOutput(headerAlignments);
     }
 
-    public TextTableBuilder setHeaderAlignmentsCollection(@Nonnull final Collection<Alignment> headerAlignments) {
+    private TextTableBuilder setHeaderAlignmentsInternal(@Nonnull final List<Alignment> headerAlignments) {
         checkNotNull(headerAlignments, "header alignments cannot be null");
         checkAlignmentsForNull(headerAlignments);
         checkNumColumns(headerAlignments);
-        this.headerAlignments = defensiveListCopy(headerAlignments);
+        // param should already be a defensive copy
+        this.headerAlignments = headerAlignments;
         return this;
     }
 
+    public TextTableBuilder setHeaderAlignmentsCollection(@Nonnull final Collection<Alignment> headerAlignments) {
+        return setHeaderAlignmentsInternal(alignmentListFromInputCollection(headerAlignments));
+    }
+
     public TextTableBuilder setHeaderAlignments(@Nonnull final Alignment... headerAlignments) {
-        return setHeaderAlignmentsCollection(convertArrayToCollection(headerAlignments));
+        return setHeaderAlignmentsInternal(alignmentListFromInputArray(headerAlignments));
     }
 
     public TextTableBuilder clearHeaderAlignments() {
@@ -166,20 +186,25 @@ public class TextTableBuilder {
     public List<List<Object>> getRows() {
         final List<List<Object>> rows = new ArrayList<List<Object>>(this.rows.size());
         for (final List<Object> row : this.rows) {
-            rows.add(defensiveListCopy(row));
+            rows.add(listForOutput(row));
         }
         return rows;
     }
 
-    public TextTableBuilder addRowCollection(@Nonnull final Collection<?> row) {
+    private TextTableBuilder addRowInternal(@Nonnull final List<Object> row) {
         checkNotNull(row, "row cannot be null");
         checkNumColumns(row);
-        rows.add(defensiveObjectListCopy(row));
+        // param should already be a defensive copy
+        rows.add(row);
         return this;
     }
 
+    public TextTableBuilder addRowCollection(@Nonnull final Collection<?> row) {
+        return addRowInternal(objectListFromInputCollection(row));
+    }
+
     public TextTableBuilder addRow(@Nonnull final Object... row) {
-        return addRowCollection(convertArrayToCollection(row));
+        return addRowInternal(objectListFromInputArray(row));
     }
 
     public TextTableBuilder addRowsCollection(@Nonnull final Collection<? extends Collection<?>> rows) {
@@ -191,7 +216,11 @@ public class TextTableBuilder {
     }
 
     public TextTableBuilder addRows(@Nonnull final Collection<?>... rows) {
-        return addRowsCollection(convertArrayToCollection(rows));
+        checkNotNull(rows, "rows cannot be null");
+        for (final Collection<?> row : rows) {
+            addRowCollection(row);
+        }
+        return this;
     }
 
     public TextTableBuilder setRowsCollection(@Nonnull final Collection<? extends Collection<?>> rows) {
@@ -201,7 +230,9 @@ public class TextTableBuilder {
     }
 
     public TextTableBuilder setRows(@Nonnull final Collection<?>... rows) {
-        return setRowsCollection(convertArrayToCollection(rows));
+        checkNotNull(rows, "rows cannot be null");
+        initRows(rows.length);
+        return addRows(rows);
     }
 
     public TextTableBuilder clearRows() {
@@ -214,19 +245,24 @@ public class TextTableBuilder {
      **************************************************************************/
 
     public List<Alignment> getRowAlignments() {
-        return defensiveListCopy(rowAlignments);
+        return listForOutput(rowAlignments);
     }
 
-    public TextTableBuilder setRowAlignmentsCollection(@Nonnull final Collection<Alignment> rowAlignments) {
+    private TextTableBuilder setRowAlignmentsInternal(@Nonnull final List<Alignment> rowAlignments) {
         checkNotNull(rowAlignments, "row alignments cannot be null");
         checkAlignmentsForNull(rowAlignments);
         checkNumColumns(rowAlignments);
-        this.rowAlignments = defensiveListCopy(rowAlignments);
+        // param should already be a defensive copy
+        this.rowAlignments = rowAlignments;
         return this;
     }
 
+    public TextTableBuilder setRowAlignmentsCollection(@Nonnull final Collection<Alignment> rowAlignments) {
+        return setRowAlignmentsInternal(alignmentListFromInputCollection(rowAlignments));
+    }
+
     public TextTableBuilder setRowAlignments(@Nonnull final Alignment... rowAlignments) {
-        return setRowAlignmentsCollection(convertArrayToCollection(rowAlignments));
+        return setRowAlignmentsInternal(alignmentListFromInputArray(rowAlignments));
     }
 
     public TextTableBuilder clearRowAlignments() {
