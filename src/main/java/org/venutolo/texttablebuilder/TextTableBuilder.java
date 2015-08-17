@@ -40,7 +40,7 @@ public class TextTableBuilder {
     private String nullColumnReplacement = EMPTY_STRING;
 
     /**************************************************************************
-     * CONSTRUCTOR(S)
+     * CONSTRUCTOR
      **************************************************************************/
 
     public TextTableBuilder() {
@@ -107,16 +107,62 @@ public class TextTableBuilder {
     }
 
     /**************************************************************************
-     * BOX DRAWING CHARACTERS METHODS
+     * HEADER ALIGNMENT METHODS
      **************************************************************************/
 
-    public BoxDrawingCharacters getBoxDrawingCharacters() {
-        return boxDrawingCharacters;
+    public List<Alignment> getHeaderAlignments() {
+        return listForOutput(headerAlignments);
     }
 
-    public TextTableBuilder setBoxDrawingCharacters(final BoxDrawingCharacters boxDrawingCharacters) {
-        checkNotNull(boxDrawingCharacters, "box drawing characters cannot be null");
-        this.boxDrawingCharacters = boxDrawingCharacters;
+    private TextTableBuilder setHeaderAlignmentsInternal(@Nonnull final List<Alignment> headerAlignments) {
+        checkNotNull(headerAlignments, "header alignments cannot be null");
+        checkAlignmentsForNull(headerAlignments);
+        checkNumColumns(headerAlignments);
+        // param should already be a defensive copy
+        this.headerAlignments = headerAlignments;
+        return this;
+    }
+
+    public TextTableBuilder setHeaderAlignmentsCollection(@Nonnull final Collection<Alignment> headerAlignments) {
+        return setHeaderAlignmentsInternal(alignmentListFromInputCollection(headerAlignments));
+    }
+
+    public TextTableBuilder setHeaderAlignments(@Nonnull final Alignment... headerAlignments) {
+        return setHeaderAlignmentsInternal(alignmentListFromInputArray(headerAlignments));
+    }
+
+    public TextTableBuilder clearHeaderAlignments() {
+        this.headerAlignments = null;
+        return this;
+    }
+
+    /**************************************************************************
+     * ROW ALIGNMENT METHODS
+     **************************************************************************/
+
+    public List<Alignment> getRowAlignments() {
+        return listForOutput(rowAlignments);
+    }
+
+    private TextTableBuilder setRowAlignmentsInternal(@Nonnull final List<Alignment> rowAlignments) {
+        checkNotNull(rowAlignments, "row alignments cannot be null");
+        checkAlignmentsForNull(rowAlignments);
+        checkNumColumns(rowAlignments);
+        // param should already be a defensive copy
+        this.rowAlignments = rowAlignments;
+        return this;
+    }
+
+    public TextTableBuilder setRowAlignmentsCollection(@Nonnull final Collection<Alignment> rowAlignments) {
+        return setRowAlignmentsInternal(alignmentListFromInputCollection(rowAlignments));
+    }
+
+    public TextTableBuilder setRowAlignments(@Nonnull final Alignment... rowAlignments) {
+        return setRowAlignmentsInternal(alignmentListFromInputArray(rowAlignments));
+    }
+
+    public TextTableBuilder clearRowAlignments() {
+        this.rowAlignments = null;
         return this;
     }
 
@@ -146,36 +192,6 @@ public class TextTableBuilder {
 
     public TextTableBuilder clearHeaders() {
         this.headers = null;
-        return this;
-    }
-
-    /**************************************************************************
-     * HEADER ALIGNMENT METHODS
-     **************************************************************************/
-
-    public List<Alignment> getHeaderAlignments() {
-        return listForOutput(headerAlignments);
-    }
-
-    private TextTableBuilder setHeaderAlignmentsInternal(@Nonnull final List<Alignment> headerAlignments) {
-        checkNotNull(headerAlignments, "header alignments cannot be null");
-        checkAlignmentsForNull(headerAlignments);
-        checkNumColumns(headerAlignments);
-        // param should already be a defensive copy
-        this.headerAlignments = headerAlignments;
-        return this;
-    }
-
-    public TextTableBuilder setHeaderAlignmentsCollection(@Nonnull final Collection<Alignment> headerAlignments) {
-        return setHeaderAlignmentsInternal(alignmentListFromInputCollection(headerAlignments));
-    }
-
-    public TextTableBuilder setHeaderAlignments(@Nonnull final Alignment... headerAlignments) {
-        return setHeaderAlignmentsInternal(alignmentListFromInputArray(headerAlignments));
-    }
-
-    public TextTableBuilder clearHeaderAlignments() {
-        this.headerAlignments = null;
         return this;
     }
 
@@ -241,36 +257,6 @@ public class TextTableBuilder {
     }
 
     /**************************************************************************
-     * ROW ALIGNMENT METHODS
-     **************************************************************************/
-
-    public List<Alignment> getRowAlignments() {
-        return listForOutput(rowAlignments);
-    }
-
-    private TextTableBuilder setRowAlignmentsInternal(@Nonnull final List<Alignment> rowAlignments) {
-        checkNotNull(rowAlignments, "row alignments cannot be null");
-        checkAlignmentsForNull(rowAlignments);
-        checkNumColumns(rowAlignments);
-        // param should already be a defensive copy
-        this.rowAlignments = rowAlignments;
-        return this;
-    }
-
-    public TextTableBuilder setRowAlignmentsCollection(@Nonnull final Collection<Alignment> rowAlignments) {
-        return setRowAlignmentsInternal(alignmentListFromInputCollection(rowAlignments));
-    }
-
-    public TextTableBuilder setRowAlignments(@Nonnull final Alignment... rowAlignments) {
-        return setRowAlignmentsInternal(alignmentListFromInputArray(rowAlignments));
-    }
-
-    public TextTableBuilder clearRowAlignments() {
-        this.rowAlignments = null;
-        return this;
-    }
-
-    /**************************************************************************
      * NUMBER OF ROW AND COLUMN GETTERS
      **************************************************************************/
 
@@ -285,6 +271,16 @@ public class TextTableBuilder {
     /**************************************************************************
      * MISC OPTION METHODS
      **************************************************************************/
+
+    public BoxDrawingCharacters getBoxDrawingCharacters() {
+        return boxDrawingCharacters;
+    }
+
+    public TextTableBuilder setBoxDrawingCharacters(@Nonnull final BoxDrawingCharacters boxDrawingCharacters) {
+        checkNotNull(boxDrawingCharacters, "box drawing characters cannot be null");
+        this.boxDrawingCharacters = boxDrawingCharacters;
+        return this;
+    }
 
     public int getRepeatHeadersEveryXRows() {
         return repeatHeadersEveryXRows;
