@@ -43,12 +43,23 @@ public class TextTableBuilderHeaderAlignmentsTest {
         headerAlignments = Arrays.asList(headerAlignmentsArray);
         emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()
-                .setHeaderAlignmentsCollection(headerAlignments);
+                .setHeaderAlignmentsInternal(headerAlignments);
     }
 
     @Test
-    public void testSetAndGetHeaderAlignmentsList() {
-        emptyTextTableBuilder.setHeaderAlignmentsCollection(headerAlignments);
+    public void testGetHeaderAlignmentsForDefensiveCopying() {
+        final Alignment expected = headerAlignments.get(0);
+        populatedTextTableBuilder.getHeaderAlignments().set(0, null);
+        assertEquals(
+                GETTER_NO_DEFENSIVE_COPY,
+                expected,
+                populatedTextTableBuilder.getHeaderAlignments().get(0)
+        );
+    }
+
+    @Test
+    public void testSetAlignmentsCollection() {
+        emptyTextTableBuilder.setHeaderAlignmentsInternal(headerAlignments);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 headerAlignments,
@@ -57,7 +68,7 @@ public class TextTableBuilderHeaderAlignmentsTest {
     }
 
     @Test
-    public void testSetAndGetHeaderAlignmentsArray() {
+    public void testSetAlignmentsArray() {
         emptyTextTableBuilder.setHeaderAlignments(headerAlignmentsArray);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
@@ -67,9 +78,9 @@ public class TextTableBuilderHeaderAlignmentsTest {
     }
 
     @Test
-    public void testSetHeaderAlignmentsListForDefensiveCopying() {
+    public void testSetHeaderAlignmentsCollectionForDefensiveCopying() {
         final Alignment expected = headerAlignments.get(0);
-        emptyTextTableBuilder.setHeaderAlignmentsCollection(headerAlignments);
+        emptyTextTableBuilder.setHeaderAlignmentsInternal(headerAlignments);
         headerAlignments.set(0, null);
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
@@ -91,23 +102,11 @@ public class TextTableBuilderHeaderAlignmentsTest {
     }
 
     @Test
-    public void testGetHeaderAlignmentsForDefensiveCopying() {
-        final Alignment expected = headerAlignments.get(0);
-        emptyTextTableBuilder.setHeaderAlignmentsCollection(headerAlignments);
-        emptyTextTableBuilder.getHeaderAlignments().set(0, null);
-        assertEquals(
-                GETTER_NO_DEFENSIVE_COPY,
-                expected,
-                emptyTextTableBuilder.getHeaderAlignments().get(0)
-        );
-    }
-
-    @Test
-    public void testSetHeaderAlignmentsListForBadLength() {
+    public void testSetHeaderAlignmentsCollectionForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.setHeaderAlignmentsCollection(Collections.<Alignment>emptyList());
+        populatedTextTableBuilder.setHeaderAlignmentsInternal(Collections.<Alignment>emptyList());
     }
 
     @Test
@@ -119,11 +118,11 @@ public class TextTableBuilderHeaderAlignmentsTest {
     }
 
     @Test
-    public void testSetHeaderAlignmentsListForNull() {
+    public void testSetHeaderAlignmentsCollectionForNull() {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.setHeaderAlignmentsCollection(null);
+        populatedTextTableBuilder.setHeaderAlignmentsInternal(null);
     }
 
     @Test
@@ -135,11 +134,11 @@ public class TextTableBuilderHeaderAlignmentsTest {
     }
 
     @Test
-    public void testSetHeaderAlignmentsListForNullAlignment() {
+    public void testSetHeaderAlignmentsCollectionForNullAlignment() {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_ALIGNMENT);
-        populatedTextTableBuilder.setHeaderAlignmentsCollection(Arrays.asList(null, Alignment.LEFT));
+        populatedTextTableBuilder.setHeaderAlignmentsInternal(Arrays.asList(null, Alignment.LEFT));
     }
 
     @Test

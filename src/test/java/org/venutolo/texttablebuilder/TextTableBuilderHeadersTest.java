@@ -42,12 +42,23 @@ public class TextTableBuilderHeadersTest {
         headers = Arrays.asList(headersArray);
         emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()
-                .setHeadersCollection(headers);
+                .setHeadersInternal(headers);
     }
 
     @Test
-    public void testSetAndGetHeadersList() {
-        emptyTextTableBuilder.setHeadersCollection(headers);
+    public void testGetHeadersForDefensiveCopying() {
+        final String expected = headers.get(0);
+        populatedTextTableBuilder.getHeaders().set(0, null);
+        assertEquals(
+                GETTER_NO_DEFENSIVE_COPY,
+                expected,
+                populatedTextTableBuilder.getHeaders().get(0)
+        );
+    }
+
+    @Test
+    public void testSetHeadersCollection() {
+        emptyTextTableBuilder.setHeadersInternal(headers);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 headers,
@@ -56,7 +67,7 @@ public class TextTableBuilderHeadersTest {
     }
 
     @Test
-    public void testSetAndGetHeadersArray() {
+    public void testSetHeadersArray() {
         emptyTextTableBuilder.setHeaders((Object[]) headersArray);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
@@ -66,9 +77,9 @@ public class TextTableBuilderHeadersTest {
     }
 
     @Test
-    public void testSetHeadersListForDefensiveCopying() {
+    public void testSetHeadersCollectionForDefensiveCopying() {
         final String expected = headers.get(0);
-        emptyTextTableBuilder.setHeadersCollection(headers);
+        emptyTextTableBuilder.setHeadersInternal(headers);
         headers.set(0, null);
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,
@@ -90,23 +101,11 @@ public class TextTableBuilderHeadersTest {
     }
 
     @Test
-    public void testGetHeadersForDefensiveCopying() {
-        final String expected = headers.get(0);
-        emptyTextTableBuilder.setHeadersCollection(headers);
-        emptyTextTableBuilder.getHeaders().set(0, null);
-        assertEquals(
-                GETTER_NO_DEFENSIVE_COPY,
-                expected,
-                emptyTextTableBuilder.getHeaders().get(0)
-        );
-    }
-
-    @Test
-    public void testSetHeadersListForBadLength() {
+    public void testSetHeadersCollectionForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.setHeadersCollection(Collections.<String>emptyList());
+        populatedTextTableBuilder.setHeadersInternal(Collections.<String>emptyList());
     }
 
     @Test
@@ -118,11 +117,11 @@ public class TextTableBuilderHeadersTest {
     }
 
     @Test
-    public void testSetHeaderListForNull() {
+    public void testSetHeaderCollectionForNull() {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.setHeadersCollection(null);
+        populatedTextTableBuilder.setHeadersInternal(null);
     }
 
     @Test
