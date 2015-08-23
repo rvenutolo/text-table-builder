@@ -35,11 +35,11 @@ public class TextTableBuilderRowsTest {
 
     private String[] row0Array;
 
-    private List<String> row0;
+    private List<String> row0List;
 
     private String[] row1Array;
 
-    private List<String> row1;
+    private List<String> row1List;
 
     private List<List<String>> allRows;
 
@@ -50,13 +50,14 @@ public class TextTableBuilderRowsTest {
     @Before
     public void setUp() {
         row0Array = new String[]{"r0c0", "r0c1"};
-        row0 = Arrays.asList(row0Array);
+        row0List = Arrays.asList(row0Array);
         row1Array = new String[]{"r1c0", "r1c1"};
-        row1 = Arrays.asList(row1Array);
+        row1List = Arrays.asList(row1Array);
         allRows = new ArrayList<List<String>>();
-        allRows.add(row0);
-        allRows.add(row1);
+        allRows.add(row0List);
+        allRows.add(row1List);
         emptyTextTableBuilder = new TextTableBuilder();
+        // TODO check on warning
         populatedTextTableBuilder = new TextTableBuilder().addRow(row0Array).addRow(row1Array);
     }
 
@@ -80,10 +81,10 @@ public class TextTableBuilderRowsTest {
 
     @Test
     public void testAddRowCollection() {
-        emptyTextTableBuilder.addRowInternal(row0);
+        emptyTextTableBuilder.addRowInternal(row0List);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
-                row0,
+                row0List,
                 emptyTextTableBuilder.getTable().get(0)
         );
     }
@@ -93,15 +94,15 @@ public class TextTableBuilderRowsTest {
         emptyTextTableBuilder.addRow((Object[]) row0Array);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
-                row0,
+                row0List,
                 emptyTextTableBuilder.getTable().get(0)
         );
     }
 
     @Test
     public void testAddRowCollectionMultiple() {
-        emptyTextTableBuilder.addRowInternal(row0);
-        emptyTextTableBuilder.addRowInternal(row1);
+        emptyTextTableBuilder.addRowInternal(row0List);
+        emptyTextTableBuilder.addRowInternal(row1List);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 allRows,
@@ -122,9 +123,9 @@ public class TextTableBuilderRowsTest {
 
     @Test
     public void testAddRowCollectionForDefensiveCopy() {
-        final String expected = row0.get(0);
-        emptyTextTableBuilder.addRowInternal(row0);
-        row0.set(0, null);
+        final String expected = row0List.get(0);
+        emptyTextTableBuilder.addRowInternal(row0List);
+        row0List.set(0, null);
         assertEquals(
                 APPENDER_NO_DEFENSIVE_COPY,
                 expected,
