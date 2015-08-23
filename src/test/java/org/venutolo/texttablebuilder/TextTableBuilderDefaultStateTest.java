@@ -71,10 +71,10 @@ public class TextTableBuilderDefaultStateTest {
     }
 
     @Test
-    public void testDefaultStateRowAlignments() {
+    public void testDefaultStateColumnAlignments() {
         assertTrue(
-                "Default state row alignments are not empty",
-                emptyTextTableBuilder.getRowAlignments().isEmpty()
+                "Default state column alignments are not empty",
+                emptyTextTableBuilder.getColumnAlignments().isEmpty()
         );
     }
 

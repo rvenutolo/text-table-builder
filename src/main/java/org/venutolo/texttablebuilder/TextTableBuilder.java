@@ -25,7 +25,7 @@ public class TextTableBuilder {
 
     private List<List<Object>> table;
 
-    private List<Alignment> rowAlignments;
+    private List<Alignment> columnAlignments;
 
     private int repeatHeadersEveryXRows;
 
@@ -132,27 +132,27 @@ public class TextTableBuilder {
     }
 
     /**************************************************************************
-     * ROW ALIGNMENT METHODS
+     * COLUMN ALIGNMENT METHODS
      **************************************************************************/
 
-    public List<Alignment> getRowAlignments() {
-        return listForOutput(rowAlignments);
+    public List<Alignment> getColumnAlignments() {
+        return listForOutput(columnAlignments);
     }
 
-    protected TextTableBuilder setRowAlignmentsInternal(@Nonnull final Collection<Alignment> rowAlignments) {
-        checkNotNull(rowAlignments, "row alignments cannot be null");
-        checkAlignmentsForNull(rowAlignments);
-        checkNumColumns(rowAlignments);
-        this.rowAlignments = defensiveAlignmentListCopy(rowAlignments);
+    protected TextTableBuilder setColumnAlignmentsInternal(@Nonnull final Collection<Alignment> columnAlignments) {
+        checkNotNull(columnAlignments, "column alignments cannot be null");
+        checkAlignmentsForNull(columnAlignments);
+        checkNumColumns(columnAlignments);
+        this.columnAlignments = defensiveAlignmentListCopy(columnAlignments);
         return this;
     }
 
-    public TextTableBuilder setRowAlignments(@Nonnull final Alignment... rowAlignments) {
-        return setRowAlignmentsInternal(alignmentArrayToCollection(rowAlignments));
+    public TextTableBuilder setColumnAlignments(@Nonnull final Alignment... columnAlignments) {
+        return setColumnAlignmentsInternal(alignmentArrayToCollection(columnAlignments));
     }
 
-    public TextTableBuilder clearRowAlignments() {
-        this.rowAlignments = null;
+    public TextTableBuilder clearColumnAlignments() {
+        this.columnAlignments = null;
         return this;
     }
 
