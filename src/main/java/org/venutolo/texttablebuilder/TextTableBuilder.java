@@ -23,7 +23,7 @@ public class TextTableBuilder {
 
     private List<Alignment> headerAlignments;
 
-    private List<List<Object>> rows;
+    private List<List<Object>> table;
 
     private List<Alignment> rowAlignments;
 
@@ -89,7 +89,7 @@ public class TextTableBuilder {
      **************************************************************************/
 
     private void initRows() {
-        this.rows = new ArrayList<List<Object>>();
+        this.table = new ArrayList<List<Object>>();
     }
 
     protected void checkNumColumns(final Collection<?> collection) {
@@ -184,18 +184,18 @@ public class TextTableBuilder {
      * ROW METHODS
      **************************************************************************/
 
-    public List<List<Object>> getRows() {
-        final List<List<Object>> rows = new ArrayList<List<Object>>(this.rows.size());
-        for (final List<Object> row : this.rows) {
-            rows.add(listForOutput(row));
+    public List<List<Object>> getTable() {
+        final List<List<Object>> tableToReturn = new ArrayList<List<Object>>(table.size());
+        for (final List<Object> row : table) {
+            tableToReturn.add(listForOutput(row));
         }
-        return rows;
+        return tableToReturn;
     }
 
     protected TextTableBuilder addRowInternal(@Nonnull final Collection<?> row) {
         checkNotNull(row, "row cannot be null");
         checkNumColumns(row);
-        rows.add(defensiveObjectListCopy(row));
+        table.add(defensiveObjectListCopy(row));
         return this;
     }
 
@@ -213,7 +213,7 @@ public class TextTableBuilder {
      **************************************************************************/
 
     public int getNumRows() {
-        return rows.size();
+        return table.size();
     }
 
     public int getNumColumns() {

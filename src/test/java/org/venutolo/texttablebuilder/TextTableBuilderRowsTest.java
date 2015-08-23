@@ -61,20 +61,20 @@ public class TextTableBuilderRowsTest {
     }
 
     @Test
-    public void testGetRowsForDefensiveCopying() {
+    public void testGetTableForDefensiveCopying() {
         final List<String> rowExpected = allRows.get(0);
-        populatedTextTableBuilder.getRows().set(0, null);
+        populatedTextTableBuilder.getTable().set(0, null);
         assertEquals(
                 GETTER_NO_DEFENSIVE_COPY,
                 rowExpected,
-                populatedTextTableBuilder.getRows().get(0)
+                populatedTextTableBuilder.getTable().get(0)
         );
         final String columnExpected = rowExpected.get(0);
-        populatedTextTableBuilder.getRows().get(0).set(0, null);
+        populatedTextTableBuilder.getTable().get(0).set(0, null);
         assertEquals(
                 GETTER_NO_DEFENSIVE_COPY,
                 columnExpected,
-                populatedTextTableBuilder.getRows().get(0).get(0)
+                populatedTextTableBuilder.getTable().get(0).get(0)
         );
     }
 
@@ -84,7 +84,7 @@ public class TextTableBuilderRowsTest {
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 row0,
-                emptyTextTableBuilder.getRows().get(0)
+                emptyTextTableBuilder.getTable().get(0)
         );
     }
 
@@ -94,7 +94,7 @@ public class TextTableBuilderRowsTest {
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 row0,
-                emptyTextTableBuilder.getRows().get(0)
+                emptyTextTableBuilder.getTable().get(0)
         );
     }
 
@@ -105,7 +105,7 @@ public class TextTableBuilderRowsTest {
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 allRows,
-                emptyTextTableBuilder.getRows()
+                emptyTextTableBuilder.getTable()
         );
     }
 
@@ -116,7 +116,7 @@ public class TextTableBuilderRowsTest {
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 allRows,
-                emptyTextTableBuilder.getRows()
+                emptyTextTableBuilder.getTable()
         );
     }
 
@@ -128,7 +128,7 @@ public class TextTableBuilderRowsTest {
         assertEquals(
                 APPENDER_NO_DEFENSIVE_COPY,
                 expected,
-                emptyTextTableBuilder.getRows().get(0).get(0)
+                emptyTextTableBuilder.getTable().get(0).get(0)
         );
     }
 
@@ -140,7 +140,7 @@ public class TextTableBuilderRowsTest {
         assertEquals(
                 APPENDER_NO_DEFENSIVE_COPY,
                 expected,
-                emptyTextTableBuilder.getRows().get(0).get(0)
+                emptyTextTableBuilder.getTable().get(0).get(0)
         );
     }
 
@@ -181,7 +181,7 @@ public class TextTableBuilderRowsTest {
         populatedTextTableBuilder.clearRows();
         assertTrue(
                 NOT_EMPTY_AFTER_CLEAR,
-                populatedTextTableBuilder.getRows().isEmpty()
+                populatedTextTableBuilder.getTable().isEmpty()
         );
     }
 
