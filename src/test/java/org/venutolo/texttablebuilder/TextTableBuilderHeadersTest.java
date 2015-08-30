@@ -52,14 +52,14 @@ public class TextTableBuilderHeadersTest {
 
     @Test
     public void testGetHeadersWhenNotSet() {
-        final List<Alignment> emptyColumnAlignments = emptyTextTableBuilder.getColumnAlignments();
+        final List<Alignment> emptyHeaders = emptyTextTableBuilder.getColumnAlignments();
         assertNotNull(
                 "headers should not be null",
-                emptyColumnAlignments
+                emptyHeaders
         );
         assertTrue(
                 "headers should be empty",
-                emptyColumnAlignments.isEmpty()
+                emptyHeaders.isEmpty()
         );
     }
 
