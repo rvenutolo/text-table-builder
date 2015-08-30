@@ -29,6 +29,10 @@ public class TextTableBuilderCheckNumColumnsTest {
         emptyTextTableBuilder = new TextTableBuilder();
     }
 
+    /*========================================================================
+     * TESTS FOR checkNumColumns(Collection<?>)
+     *========================================================================*/
+
     @Test
     public void testCheckNumColumnSetsNumColumns() {
         emptyTextTableBuilder.checkNumColumns(Arrays.asList(null, null));
