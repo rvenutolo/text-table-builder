@@ -69,7 +69,7 @@ public class TextTableBuilderRowsTest {
      *========================================================================*/
 
     @Test
-    public void testGetHeadersWhenNotSet() {
+    public void testGetTableWhenNotSet() {
         final List<List<Object>> emptyTable = emptyTextTableBuilder.getTable();
         assertNotNull(
                 "table should not be null",
