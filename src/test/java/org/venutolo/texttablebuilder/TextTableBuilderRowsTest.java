@@ -58,7 +58,6 @@ public class TextTableBuilderRowsTest {
         allRows.add(row0List);
         allRows.add(row1List);
         emptyTextTableBuilder = new TextTableBuilder();
-        // TODO check on warning
         populatedTextTableBuilder = new TextTableBuilder()
                 .addRow((Object[]) row0Array)
                 .addRow((Object[]) row1Array);
