@@ -1,7 +1,5 @@
 package org.venutolo.texttablebuilder;
 
-import com.google.common.base.Preconditions;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -9,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -274,7 +273,7 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder setRepeatHeadersEveryXRows(final int repeatHeadersEveryXRows) {
-        Preconditions.checkArgument(repeatHeadersEveryXRows >= 0);
+        checkArgument(repeatHeadersEveryXRows >= 0, "num rows must be non-negative");
         this.repeatHeadersEveryXRows = repeatHeadersEveryXRows;
         return this;
     }
