@@ -33,11 +33,11 @@ public class TextTableBuilderCheckNumColumnsTest {
     public void testCheckNumColumnSetsNumColumns() {
         emptyTextTableBuilder.checkNumColumns(Arrays.asList(null, null));
         // first call sets the number of columns to expect
-        assertEquals("", 2, emptyTextTableBuilder.getNumColumns());
+        assertEquals("expected num columns to be set", 2, emptyTextTableBuilder.getNumColumns());
     }
 
     @Test
-    public void testCheckNumColumnsDifferentSizes() {
+    public void testCheckNumColumnsIaeForDifferentSizes() {
         emptyTextTableBuilder.checkNumColumns(Arrays.asList(null, null));
         // first call sets the number of columns to expect
         expectedException.expect(IllegalArgumentException.class);
@@ -47,7 +47,7 @@ public class TextTableBuilderCheckNumColumnsTest {
     }
 
     @Test
-    public void testCheckNumColumnsNull() {
+    public void testCheckNumColumnsNpeWhenNull() {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_COLLECTION);
