@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -20,6 +21,7 @@ public class BoxDrawingCharacters {
     /**
      * Set of heavy solid line box drawing characters.
      */
+    @Nonnull
     public static final BoxDrawingCharacters HEAVY = fromBoxDrawing(
             //@formatter:off
               "┏━┳━┓"
@@ -33,6 +35,7 @@ public class BoxDrawingCharacters {
     /**
      * Set of light solid line box drawing characters.
      */
+    @Nonnull
     public static final BoxDrawingCharacters LIGHT = fromBoxDrawing(
             //@formatter:off
               "┌─┬─┐"
@@ -46,6 +49,7 @@ public class BoxDrawingCharacters {
     /**
      * Set of light solid line box drawing characters with curved corners.
      */
+    @Nonnull
     public static final BoxDrawingCharacters CURVED = fromBoxDrawing(
             //@formatter:off
               "╭─┬─╮"
@@ -59,6 +63,7 @@ public class BoxDrawingCharacters {
     /**
      * Set of double line box drawing characters.
      */
+    @Nonnull
     public static final BoxDrawingCharacters DOUBLE = fromBoxDrawing(
             //@formatter:off
               "╔═╦═╗"
@@ -72,6 +77,7 @@ public class BoxDrawingCharacters {
     /**
      * Set of box drawing characters using only ASCII characters.
      */
+    @Nonnull
     public static final BoxDrawingCharacters ASCII = fromBoxDrawing(
             //@formatter:off
               "+-+-+"
@@ -85,6 +91,7 @@ public class BoxDrawingCharacters {
     /**
      * Set of box drawing characters using space for all characters.
      */
+    @Nonnull
     public static final BoxDrawingCharacters SPACES = new Builder().setHorizontal(' ')
                                                                    .setVertical(' ')
                                                                    .setTopLeftCorner(' ')
@@ -102,6 +109,7 @@ public class BoxDrawingCharacters {
     /**
      * Set of box drawing characters using null for all characters.
      */
+    @Nonnull
     public static final BoxDrawingCharacters NULLS = new Builder().setHorizontal('\u0000')
                                                                   .setVertical('\u0000')
                                                                   .setTopLeftCorner('\u0000')
@@ -132,6 +140,7 @@ public class BoxDrawingCharacters {
      *
      * @param builder the {@link Builder} with the set of characters to use
      */
+    @Nonnull
     protected BoxDrawingCharacters(@Nonnull final Builder builder) {
         checkNotNull(builder, "builder cannot be null");
         this.horizontal = builder.horizontal;
@@ -169,6 +178,7 @@ public class BoxDrawingCharacters {
      *                                  inconsistent with usage of horizontal and vertical bar
      *                                  characters
      */
+    @Nonnull
     public static BoxDrawingCharacters fromBoxDrawing(@Nonnull final String boxDrawing) {
         checkNotNull(boxDrawing, "box drawing cannot be null");
         return new BoxDrawingParser(boxDrawing).parse();
@@ -293,7 +303,7 @@ public class BoxDrawingCharacters {
      * to this {@code BoxDrawingCharacters}, {@code false} otherwise
      */
     @Override
-    public boolean equals(final Object object) {
+    public boolean equals(@Nullable final Object object) {
         if (this == object) {
             return true;
         }
@@ -382,6 +392,7 @@ public class BoxDrawingCharacters {
          *
          * @return this instance
          */
+        @Nonnull
         public Builder setHorizontal(final char horizontal) {
             this.horizontal = horizontal;
             return this;
@@ -394,6 +405,7 @@ public class BoxDrawingCharacters {
          *
          * @return this instance
          */
+        @Nonnull
         public Builder setVertical(final char vertical) {
             this.vertical = vertical;
             return this;
@@ -406,6 +418,7 @@ public class BoxDrawingCharacters {
          *
          * @return this instance
          */
+        @Nonnull
         public Builder setTopLeftCorner(final char topLeftCorner) {
             this.topLeftCorner = topLeftCorner;
             return this;
@@ -420,6 +433,7 @@ public class BoxDrawingCharacters {
          *
          * @return this instance
          */
+        @Nonnull
         public Builder setTopIntersect(final char topIntersect) {
             this.topIntersect = topIntersect;
             return this;
@@ -432,6 +446,7 @@ public class BoxDrawingCharacters {
          *
          * @return this instance
          */
+        @Nonnull
         public Builder setTopRightCorner(final char topRightCorner) {
             this.topRightCorner = topRightCorner;
             return this;
@@ -446,6 +461,7 @@ public class BoxDrawingCharacters {
          *
          * @return this instance
          */
+        @Nonnull
         public Builder setLeftIntersect(final char leftIntersect) {
             this.leftIntersect = leftIntersect;
             return this;
@@ -460,6 +476,7 @@ public class BoxDrawingCharacters {
          *
          * @return this instance
          */
+        @Nonnull
         public Builder setMiddleIntersect(final char middleIntersect) {
             this.middleIntersect = middleIntersect;
             return this;
@@ -474,6 +491,7 @@ public class BoxDrawingCharacters {
          *
          * @return this instance
          */
+        @Nonnull
         public Builder setRightIntersect(final char rightIntersect) {
             this.rightIntersect = rightIntersect;
             return this;
@@ -486,6 +504,7 @@ public class BoxDrawingCharacters {
          *
          * @return this instance
          */
+        @Nonnull
         public Builder setBottomLeftCorner(final char bottomLeftCorner) {
             this.bottomLeftCorner = bottomLeftCorner;
             return this;
@@ -500,6 +519,7 @@ public class BoxDrawingCharacters {
          *
          * @return this instance
          */
+        @Nonnull
         public Builder setBottomIntersect(final char bottomIntersect) {
             this.bottomIntersect = bottomIntersect;
             return this;
@@ -512,6 +532,7 @@ public class BoxDrawingCharacters {
          *
          * @return this instance
          */
+        @Nonnull
         public Builder setBottomRightCorner(final char bottomRightCorner) {
             this.bottomRightCorner = bottomRightCorner;
             return this;
@@ -522,6 +543,7 @@ public class BoxDrawingCharacters {
          *
          * @return the {@link BoxDrawingCharacters}
          */
+        @Nonnull
         public BoxDrawingCharacters build() {
             return new BoxDrawingCharacters(this);
         }
@@ -554,6 +576,7 @@ public class BoxDrawingCharacters {
         private static final int BOTTOM_RIGHT_HORIZONTAL = 23;
         private static final int BOTTOM_RIGHT_CORNER = 24;
 
+        @Nonnull
         private static final int[] horizontalCharIndexes = {
                 TOP_LEFT_HORIZONTAL,
                 TOP_RIGHT_HORIZONTAL,
@@ -562,6 +585,8 @@ public class BoxDrawingCharacters {
                 BOTTOM_LEFT_HORIZONTAL,
                 BOTTOM_RIGHT_HORIZONTAL
         };
+
+        @Nonnull
         private static final int[] verticalCharIndexes = {
                 TOP_ROW_LEFT_VERTICAL,
                 TOP_ROW_MIDDLE_VERTICAL,
@@ -571,17 +596,17 @@ public class BoxDrawingCharacters {
                 BOTTOM_ROW_RIGHT_VERTICAL
         };
 
+        @Nonnull
         private final String boxDrawing;
 
-        private BoxDrawingParser(final String boxDrawing) {
+        private BoxDrawingParser(@Nonnull final String boxDrawing) {
+            assert boxDrawing != null;
+            checkLength(boxDrawing);
             this.boxDrawing = boxDrawing;
         }
 
-        private char getChar(final int charIndex) {
-            return boxDrawing.charAt(charIndex);
-        }
-
-        private void checkLength() {
+        private static void checkLength(@Nonnull final CharSequence boxDrawing) {
+            assert boxDrawing != null;
             if (boxDrawing.length() != EXPECTED_LENGTH) {
                 throw new IllegalArgumentException(
                         "boxDrawing is expected to be " + EXPECTED_LENGTH + " characters long"
@@ -589,10 +614,18 @@ public class BoxDrawingCharacters {
             }
         }
 
+        private char getChar(final int charIndex) {
+            assert charIndex >= 0;
+            assert charIndex < boxDrawing.length();
+            return boxDrawing.charAt(charIndex);
+        }
+
         private char getHorizontalOrVerticalChar(
-                final String horizontalOrVertical,
-                final int... indexes
+                @Nonnull final String horizontalOrVertical,
+                @Nonnull final int... indexes
         ) {
+            assert horizontalOrVertical != null;
+            assert indexes != null;
             final char expectedChar = getChar(indexes[0]);
             for (int i = 1; i < indexes.length; i++) {
                 final char foundChar = getChar(indexes[i]);
@@ -614,8 +647,8 @@ public class BoxDrawingCharacters {
             return getHorizontalOrVerticalChar("vertical", verticalCharIndexes);
         }
 
+        @Nonnull
         private BoxDrawingCharacters parse() {
-            checkLength();
             return new Builder()
                     .setHorizontal(getHorizontalChar())
                     .setVertical(getVerticalChar())
