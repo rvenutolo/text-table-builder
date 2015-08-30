@@ -21,6 +21,10 @@ public class TextTableBuilderRowColumnNumbersTest {
                 .addRow("ROW");
     }
 
+    /*========================================================================
+     * TESTS FOR getNumRows()
+     *========================================================================*/
+
     @Test
     public void testGetNumRows() {
         assertEquals(
@@ -34,6 +38,10 @@ public class TextTableBuilderRowColumnNumbersTest {
                 populatedTextTableBuilder.getNumRows()
         );
     }
+
+    /*========================================================================
+     * TESTS FOR getNumColumns()
+     *========================================================================*/
 
     @Test
     public void testGetNumColumns() {
