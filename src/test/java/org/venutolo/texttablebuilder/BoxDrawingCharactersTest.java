@@ -95,6 +95,10 @@ public class BoxDrawingCharactersTest {
         builder = null;
     }
 
+    /*========================================================================
+     * TESTS FOR equals(Object)
+     *========================================================================*/
+
     @Test
     public void testEquals() {
         assertNotEquals(
@@ -173,6 +177,10 @@ public class BoxDrawingCharactersTest {
                 builder.setBottomRightCorner('9').build()
         );
     }
+
+    /*========================================================================
+     * TESTS FOR hashCode()
+     *========================================================================*/
 
     @Test
     public void testHashCode() {
@@ -254,6 +262,10 @@ public class BoxDrawingCharactersTest {
         );
     }
 
+    /*========================================================================
+     * TESTS FOR toString()
+     *========================================================================*/
+
     @Test
     public void testToString() {
         // this may be pointless, but is the only thing preventing me from 100% code coverage
@@ -269,6 +281,10 @@ public class BoxDrawingCharactersTest {
                 builder.build().toString()
         );
     }
+
+    /*========================================================================
+     * TESTS FOR BoxDrawingCharacters.Builder
+     *========================================================================*/
 
     @Test
     public void testBuilder() {
@@ -341,6 +357,10 @@ public class BoxDrawingCharactersTest {
                 built.getBottomRightCorner()
         );
     }
+
+    /*========================================================================
+     * TESTS FOR forBoxDrawing(String)
+     *========================================================================*/
 
     @Test
     public void testFromBoxDrawingSucceeds() {
