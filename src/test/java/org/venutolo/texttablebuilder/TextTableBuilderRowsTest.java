@@ -7,6 +7,7 @@ import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -99,12 +100,12 @@ public class TextTableBuilderRowsTest {
     }
 
     /*========================================================================
-     * TESTS FOR addRowInternal(Collection<?>)
+     * TESTS FOR addRow(Collection<?>)
      *========================================================================*/
 
     @Test
-    public void testAddRowInternal() {
-        emptyTextTableBuilder.addRowInternal(row0List);
+    public void testAddRow() {
+        emptyTextTableBuilder.addRow(row0List);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 row0List,
@@ -113,9 +114,9 @@ public class TextTableBuilderRowsTest {
     }
 
     @Test
-    public void testAddRowInternalMultiple() {
-        emptyTextTableBuilder.addRowInternal(row0List);
-        emptyTextTableBuilder.addRowInternal(row1List);
+    public void testAddRowMultiple() {
+        emptyTextTableBuilder.addRow(row0List);
+        emptyTextTableBuilder.addRow(row1List);
         assertEquals(
                 GETTER_APPENDER_VALUE_NOT_EQUAL,
                 allRows,
@@ -124,25 +125,25 @@ public class TextTableBuilderRowsTest {
     }
 
     @Test
-    public void testAddRowInternalForNull() {
+    public void testAddRowForNull() {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.addRowInternal(null);
+        populatedTextTableBuilder.addRow((Collection<?>) null);
     }
 
     @Test
-    public void testAddRowInternalForBadLength() {
+    public void testAddRowForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.addRowInternal(Collections.<String>emptyList());
+        populatedTextTableBuilder.addRow(Collections.<String>emptyList());
     }
 
     @Test
-    public void testAddRowInternalForDefensiveCopy() {
+    public void testAddRowForDefensiveCopy() {
         final String expected = row0List.get(0);
-        emptyTextTableBuilder.addRowInternal(row0List);
+        emptyTextTableBuilder.addRow(row0List);
         row0List.set(0, null);
         assertEquals(
                 APPENDER_NO_DEFENSIVE_COPY,

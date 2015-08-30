@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class TextTableBuilderHeadersTest {
         headers = Arrays.asList(headersArray);
         emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()
-                .setHeadersInternal(headers);
+                .setHeaders(headers);
     }
 
     /*========================================================================
@@ -75,12 +76,12 @@ public class TextTableBuilderHeadersTest {
     }
 
     /*========================================================================
-     * TESTS FOR setHeadersInternal(Collection<?>)
+     * TESTS FOR setHeaders(Collection<?>)
      *========================================================================*/
 
     @Test
-    public void testSetHeadersInternal() {
-        emptyTextTableBuilder.setHeadersInternal(headers);
+    public void testSetHeaders() {
+        emptyTextTableBuilder.setHeaders(headers);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 headers,
@@ -89,25 +90,25 @@ public class TextTableBuilderHeadersTest {
     }
 
     @Test
-    public void testSetHeaderInternalForNull() {
+    public void testSetHeaderForNull() {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.setHeadersInternal(null);
+        populatedTextTableBuilder.setHeaders((Collection<?>) null);
     }
 
     @Test
-    public void testSetHeadersInternalForBadLength() {
+    public void testSetHeadersForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.setHeadersInternal(Collections.<String>emptyList());
+        populatedTextTableBuilder.setHeaders(Collections.<String>emptyList());
     }
 
     @Test
-    public void testSetHeadersInternalForDefensiveCopying() {
+    public void testSetHeadersForDefensiveCopying() {
         final String expected = headers.get(0);
-        emptyTextTableBuilder.setHeadersInternal(headers);
+        emptyTextTableBuilder.setHeaders(headers);
         headers.set(0, null);
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,

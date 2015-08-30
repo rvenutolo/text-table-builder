@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class TextTableBuilderColumnAlignmentsTest {
         columnAlignments = Arrays.asList(columnAlignmentsArray);
         emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()
-                .setColumnAlignmentsInternal(columnAlignments);
+                .setColumnAlignments(columnAlignments);
     }
 
     /*========================================================================
@@ -78,12 +79,12 @@ public class TextTableBuilderColumnAlignmentsTest {
     }
 
     /*========================================================================
-     * TESTS FOR setColumnAlignmentsInternal(Collection<Alignment>)
+     * TESTS FOR setColumnAlignments(Collection<Alignment>)
      *========================================================================*/
 
     @Test
-    public void testSetColumnAlignmentsInternal() {
-        emptyTextTableBuilder.setColumnAlignmentsInternal(columnAlignments);
+    public void testSetColumnAlignments() {
+        emptyTextTableBuilder.setColumnAlignments(columnAlignments);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 columnAlignments,
@@ -92,33 +93,33 @@ public class TextTableBuilderColumnAlignmentsTest {
     }
 
     @Test
-    public void testSetColumnAlignmentsInternalForNull() {
+    public void testSetColumnAlignmentsForNull() {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
-        populatedTextTableBuilder.setColumnAlignmentsInternal(null);
+        populatedTextTableBuilder.setColumnAlignments((Collection<Alignment>) null);
     }
 
     @Test
-    public void testSetColumnAlignmentsInternalForNullAlignment() {
+    public void testSetColumnAlignmentsForNullAlignment() {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_ALIGNMENT);
-        populatedTextTableBuilder.setColumnAlignmentsInternal(Arrays.asList(null, Alignment.LEFT));
+        populatedTextTableBuilder.setColumnAlignments(Arrays.asList(null, Alignment.LEFT));
     }
 
     @Test
-    public void testSetColumnAlignmentsInternalForBadLength() {
+    public void testSetColumnAlignmentsForBadLength() {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
-        populatedTextTableBuilder.setColumnAlignmentsInternal(Collections.<Alignment>emptyList());
+        populatedTextTableBuilder.setColumnAlignments(Collections.<Alignment>emptyList());
     }
 
     @Test
-    public void testSetColumnAlignmentsInternalForDefensiveCopying() {
+    public void testSetColumnAlignmentsForDefensiveCopying() {
         final Alignment expected = columnAlignments.get(0);
-        emptyTextTableBuilder.setColumnAlignmentsInternal(columnAlignments);
+        emptyTextTableBuilder.setColumnAlignments(columnAlignments);
         columnAlignments.set(0, null);
         assertEquals(
                 SETTER_NO_DEFENSIVE_COPY,

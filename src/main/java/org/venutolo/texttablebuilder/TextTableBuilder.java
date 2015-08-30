@@ -131,7 +131,7 @@ public class TextTableBuilder {
     }
 
     @Nonnull
-    protected TextTableBuilder setHeaderAlignmentsInternal(@Nonnull final Collection<Alignment> headerAlignments) {
+    public TextTableBuilder setHeaderAlignments(@Nonnull final Collection<Alignment> headerAlignments) {
         checkNotNull(headerAlignments, "header alignments cannot be null");
         checkAlignmentsForNull(headerAlignments);
         checkNumColumns(headerAlignments);
@@ -141,7 +141,7 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder setHeaderAlignments(@Nonnull final Alignment... headerAlignments) {
-        return setHeaderAlignmentsInternal(alignmentArrayToCollection(headerAlignments));
+        return setHeaderAlignments(alignmentArrayToCollection(headerAlignments));
     }
 
     @Nonnull
@@ -160,7 +160,7 @@ public class TextTableBuilder {
     }
 
     @Nonnull
-    protected TextTableBuilder setColumnAlignmentsInternal(@Nonnull final Collection<Alignment> columnAlignments) {
+    public TextTableBuilder setColumnAlignments(@Nonnull final Collection<Alignment> columnAlignments) {
         checkNotNull(columnAlignments, "column alignments cannot be null");
         checkAlignmentsForNull(columnAlignments);
         checkNumColumns(columnAlignments);
@@ -170,7 +170,7 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder setColumnAlignments(@Nonnull final Alignment... columnAlignments) {
-        return setColumnAlignmentsInternal(alignmentArrayToCollection(columnAlignments));
+        return setColumnAlignments(alignmentArrayToCollection(columnAlignments));
     }
 
     @Nonnull
@@ -189,7 +189,7 @@ public class TextTableBuilder {
     }
 
     @Nonnull
-    protected TextTableBuilder setHeadersInternal(@Nonnull final Collection<?> headers) {
+    public TextTableBuilder setHeaders(@Nonnull final Collection<?> headers) {
         checkNotNull(headers, "headers cannot be null");
         checkNumColumns(headers);
         this.headers = defensiveObjectListCopy(headers);
@@ -198,7 +198,7 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder setHeaders(@Nonnull final Object... headers) {
-        return setHeadersInternal(objectArrayToCollection(headers));
+        return setHeaders(objectArrayToCollection(headers));
     }
 
     @Nonnull
@@ -221,7 +221,7 @@ public class TextTableBuilder {
     }
 
     @Nonnull
-    protected TextTableBuilder addRowInternal(@Nonnull final Collection<?> row) {
+    public TextTableBuilder addRow(@Nonnull final Collection<?> row) {
         checkNotNull(row, "row cannot be null");
         checkNumColumns(row);
         table.add(defensiveObjectListCopy(row));
@@ -230,7 +230,7 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder addRow(@Nonnull final Object... row) {
-        return addRowInternal(objectArrayToCollection(row));
+        return addRow(objectArrayToCollection(row));
     }
 
     @Nonnull
