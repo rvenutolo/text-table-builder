@@ -213,7 +213,7 @@ public class TextTableBuilder {
      *========================================================================*/
 
     @Nonnull
-    public List<List<Object>> getTable() {
+    public List<List<Object>> getRows() {
         final List<List<Object>> tableToReturn = new ArrayList<List<Object>>(table.size());
         for (final List<Object> row : table) {
             tableToReturn.add(listForOutput(row));

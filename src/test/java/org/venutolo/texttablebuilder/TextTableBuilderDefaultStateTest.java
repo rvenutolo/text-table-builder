@@ -66,7 +66,7 @@ public class TextTableBuilderDefaultStateTest {
     public void testDefaultStateTable() {
         assertTrue(
                 "Default state table is not empty",
-                emptyTextTableBuilder.getTable().isEmpty()
+                emptyTextTableBuilder.getRows().isEmpty()
         );
     }
 

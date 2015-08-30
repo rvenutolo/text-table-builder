@@ -44,7 +44,7 @@ final class TextTableToStringBuilder {
                 numColumns,
                 nullColumnReplacement,
                 textTableBuilder.getHeaders(),
-                textTableBuilder.getTable()
+                textTableBuilder.getRows()
         );
 
         headerStrings = textTableBuilder.getHeaders().isEmpty()
@@ -59,7 +59,7 @@ final class TextTableToStringBuilder {
         tableStrings = getPaddedAndAlignedTableStrings(
                 columnWidths,
                 nullColumnReplacement,
-                textTableBuilder.getTable(),
+                textTableBuilder.getRows(),
                 columnAlignments
         );
 
