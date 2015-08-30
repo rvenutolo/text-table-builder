@@ -32,6 +32,12 @@ final class TextTableBuilderTestStrings {
     static final String EXPECTED_NPE_FOR_NULL_ALIGNMENT =
             "expected NPE for null alignment";
 
+    static final String ALIGNMENTS_NOT_NULL =
+            "alignments should not be null";
+
+    static final String ALIGNMENTS_EMPTY =
+            "alignments should be empty";
+
     private TextTableBuilderTestStrings() {
     }
 
