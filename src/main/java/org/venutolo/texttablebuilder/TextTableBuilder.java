@@ -299,13 +299,13 @@ public class TextTableBuilder {
         return this;
     }
 
-    /**************************************************************************
-     * TOSTRING
-     **************************************************************************/
-
-    @Override
-    public String toString() {
-        return TextTableToStringBuilder.getToStringFor(this);
-    }
+//    /**************************************************************************
+//     * TOSTRING
+//     **************************************************************************/
+//
+//    @Override
+//    public String toString() {
+//        return TextTableToStringBuilder.getToStringFor(this);
+//    }
 
 }
