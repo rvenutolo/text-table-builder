@@ -22,9 +22,6 @@ public class TextTableBuilder {
     @Nullable
     private Integer numColumns;
 
-    @Nonnull
-    private BoxDrawingCharacters boxDrawingCharacters = BoxDrawingCharacters.LIGHT;
-
     @Nullable
     private List<Alignment> headerAlignments;
 
@@ -36,6 +33,9 @@ public class TextTableBuilder {
 
     @Nonnull
     private List<List<Object>> table = emptyTable();
+
+    @Nonnull
+    private BoxDrawingCharacters boxDrawingCharacters = BoxDrawingCharacters.LIGHT;
 
     private int repeatHeadersEveryXRows;
 
@@ -309,6 +309,7 @@ public class TextTableBuilder {
         return setShowRowNums(true);
     }
 
+    @Nonnull
     public String getLinePrepender() {
         return linePrepender;
     }
