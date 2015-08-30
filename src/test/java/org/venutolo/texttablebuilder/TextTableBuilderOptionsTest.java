@@ -37,6 +37,11 @@ public class TextTableBuilderOptionsTest {
     private static final String EXPECTED_NPE_FOR_NULL_BDC =
             "expected NPE for null box drawing characters";
 
+    private static final String EXPECTED_IAE_FOR_BAD_NUM_ROWS =
+            "expected IAE for negative number of rows";
+
+    private static final String EMPTY_STRING = "";
+
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
@@ -46,6 +51,10 @@ public class TextTableBuilderOptionsTest {
     public void setUp() {
         emptyTextTableBuilder = new TextTableBuilder();
     }
+
+    /*========================================================================
+     * TESTS FOR setBoxDrawingCharacters(BoxDrawingCharacters)
+     *========================================================================*/
 
     @Test
     public void testSetAndGetBoxDrawingCharacters() {
@@ -67,26 +76,9 @@ public class TextTableBuilderOptionsTest {
         emptyTextTableBuilder.setBoxDrawingCharacters(null);
     }
 
-    @Test
-    public void testSetAndGetShowRowNums() {
-        for (final boolean showRowNums : trueFalseArray) {
-            emptyTextTableBuilder.setShowRowNums(showRowNums);
-            assertEquals(
-                    GETTER_SETTER_VALUE_NOT_EQUAL,
-                    showRowNums,
-                    emptyTextTableBuilder.getShowRowNums()
-            );
-        }
-    }
-
-    @Test
-    public void testShowRowNums() {
-        emptyTextTableBuilder.showRowNums();
-        assertTrue(
-                GETTER_SETTER_VALUE_NOT_EQUAL,
-                emptyTextTableBuilder.getShowRowNums()
-        );
-    }
+    /*========================================================================
+     * TESTS FOR setRepeatHeadersEveryXRows(int)
+     *========================================================================*/
 
     @Test
     public void testSetAndGetRepeatHeadersEveryXRows() {
@@ -98,6 +90,18 @@ public class TextTableBuilderOptionsTest {
                 emptyTextTableBuilder.getRepeatHeadersEveryXRows()
         );
     }
+
+    @Test
+    public void testSetRepeatHeadersEveryXRowsBadValue() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("rows");
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_NUM_ROWS);
+        emptyTextTableBuilder.setRepeatHeadersEveryXRows(-1);
+    }
+
+    /*========================================================================
+     * TESTS FOR setRepeatHeadersAtBottom(boolean) and repeatHeadersAtBottom()
+     *========================================================================*/
 
     @Test
     public void testSetAndGetRepeatHeadersAtBottom() {
@@ -120,6 +124,35 @@ public class TextTableBuilderOptionsTest {
         );
     }
 
+    /*========================================================================
+     * TESTS FOR setShowRowNums(boolean) and showRowNums()
+     *========================================================================*/
+
+    @Test
+    public void testSetAndGetShowRowNums() {
+        for (final boolean showRowNums : trueFalseArray) {
+            emptyTextTableBuilder.setShowRowNums(showRowNums);
+            assertEquals(
+                    GETTER_SETTER_VALUE_NOT_EQUAL,
+                    showRowNums,
+                    emptyTextTableBuilder.getShowRowNums()
+            );
+        }
+    }
+
+    @Test
+    public void testShowRowNums() {
+        emptyTextTableBuilder.showRowNums();
+        assertTrue(
+                GETTER_SETTER_VALUE_NOT_EQUAL,
+                emptyTextTableBuilder.getShowRowNums()
+        );
+    }
+
+    /*========================================================================
+     * TESTS FOR setLinePrepender(String)
+     *========================================================================*/
+
     @Test
     public void testSetAndGetLinePrepender() {
         final String prepender = "prepender";
@@ -130,6 +163,20 @@ public class TextTableBuilderOptionsTest {
                 emptyTextTableBuilder.getLinePrepender()
         );
     }
+
+    @Test
+    public void testSetAndGetLinePrependerNull() {
+        emptyTextTableBuilder.setLinePrepender(null);
+        assertEquals(
+                GETTER_SETTER_VALUE_NOT_EQUAL,
+                EMPTY_STRING,
+                emptyTextTableBuilder.getLinePrepender()
+        );
+    }
+
+    /*========================================================================
+     * TESTS FOR setLineAppender(String)
+     *========================================================================*/
 
     @Test
     public void testSetAndGetLineAppender() {
@@ -143,12 +190,36 @@ public class TextTableBuilderOptionsTest {
     }
 
     @Test
+    public void testSetAndGetLineAppenderNull() {
+        emptyTextTableBuilder.setLineAppender(null);
+        assertEquals(
+                GETTER_SETTER_VALUE_NOT_EQUAL,
+                EMPTY_STRING,
+                emptyTextTableBuilder.getLineAppender()
+        );
+    }
+
+    /*========================================================================
+     * TESTS FOR setNullColumnReplacement(String)
+     *========================================================================*/
+
+    @Test
     public void testSetAndGetNullColumnReplacement() {
         final String replacement = "replacement";
         emptyTextTableBuilder.setNullColumnReplacement(replacement);
         assertEquals(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 replacement,
+                emptyTextTableBuilder.getNullColumnReplacement()
+        );
+    }
+
+    @Test
+    public void testSetAndGetNullColumnReplacementNull() {
+        emptyTextTableBuilder.setNullColumnReplacement(null);
+        assertEquals(
+                GETTER_SETTER_VALUE_NOT_EQUAL,
+                EMPTY_STRING,
                 emptyTextTableBuilder.getNullColumnReplacement()
         );
     }
