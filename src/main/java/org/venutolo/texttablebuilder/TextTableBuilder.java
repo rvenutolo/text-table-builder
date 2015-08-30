@@ -16,19 +16,26 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class TextTableBuilder {
 
+    @Nonnull
     private static final String EMPTY_STRING = "";
 
+    @Nullable
     private Integer numColumns;
 
+    @Nonnull
     private BoxDrawingCharacters boxDrawingCharacters = BoxDrawingCharacters.LIGHT;
 
-    private List<Object> headers;
-
+    @Nullable
     private List<Alignment> headerAlignments;
 
-    private List<List<Object>> table;
-
+    @Nullable
     private List<Alignment> columnAlignments;
+
+    @Nullable
+    private List<Object> headers;
+
+    @Nonnull
+    private List<List<Object>> table = emptyTable();
 
     private int repeatHeadersEveryXRows;
 
@@ -36,19 +43,14 @@ public class TextTableBuilder {
 
     private boolean showRowNums;
 
+    @Nonnull
     private String linePrepender = EMPTY_STRING;
 
+    @Nonnull
     private String lineAppender = EMPTY_STRING;
 
+    @Nonnull
     private String nullColumnReplacement = EMPTY_STRING;
-
-    /**************************************************************************
-     * CONSTRUCTOR
-     **************************************************************************/
-
-    public TextTableBuilder() {
-        initRows();
-    }
 
     /**************************************************************************
      * STATIC UTILITY METHODS
@@ -96,13 +98,14 @@ public class TextTableBuilder {
         return (list == null) ? new ArrayList<T>() : new ArrayList<T>(list);
     }
 
+    @Nonnull
+    private static List<List<Object>> emptyTable() {
+        return new ArrayList<List<Object>>();
+    }
+
     /**************************************************************************
      * INSTANCE UTILITY METHODS
      **************************************************************************/
-
-    private void initRows() {
-        this.table = new ArrayList<List<Object>>();
-    }
 
     protected void checkNumColumns(@Nonnull final Collection<?> collection) {
         checkNotNull(collection, "collection cannot be null");
@@ -233,7 +236,7 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder clearRows() {
-        initRows();
+        table = emptyTable();
         return this;
     }
 
