@@ -12,8 +12,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.ALIGNMENTS_EMPTY;
-import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.ALIGNMENTS_NOT_NULL;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.CANNOT_BE_NULL;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH;
@@ -56,11 +54,11 @@ public class TextTableBuilderHeadersTest {
     public void testGetHeadersWhenNotSet() {
         final List<Alignment> emptyColumnAlignments = emptyTextTableBuilder.getColumnAlignments();
         assertNotNull(
-                ALIGNMENTS_NOT_NULL,
+                "headers should not be null",
                 emptyColumnAlignments
         );
         assertTrue(
-                ALIGNMENTS_EMPTY,
+                "headers should be empty",
                 emptyColumnAlignments.isEmpty()
         );
     }
