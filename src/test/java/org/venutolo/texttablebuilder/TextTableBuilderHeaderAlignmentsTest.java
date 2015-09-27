@@ -13,6 +13,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.venutolo.texttablebuilder.Alignment.LEFT;
+import static org.venutolo.texttablebuilder.Alignment.RIGHT;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.ALIGNMENTS_EMPTY;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.ALIGNMENTS_NOT_NULL;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING;
@@ -43,7 +45,7 @@ public class TextTableBuilderHeaderAlignmentsTest {
 
     @Before
     public void setUp() {
-        headerAlignmentsArray = new Alignment[]{Alignment.LEFT, Alignment.RIGHT};
+        headerAlignmentsArray = new Alignment[]{LEFT, RIGHT};
         headerAlignments = Arrays.asList(headerAlignmentsArray);
         emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()
@@ -105,7 +107,7 @@ public class TextTableBuilderHeaderAlignmentsTest {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_ALIGNMENT);
-        populatedTextTableBuilder.setHeaderAlignments(Arrays.asList(null, Alignment.LEFT));
+        populatedTextTableBuilder.setHeaderAlignments(Arrays.asList(null, LEFT));
     }
 
     @Test
@@ -155,7 +157,7 @@ public class TextTableBuilderHeaderAlignmentsTest {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_ALIGNMENT);
-        populatedTextTableBuilder.setHeaderAlignments(null, Alignment.LEFT);
+        populatedTextTableBuilder.setHeaderAlignments(null, LEFT);
     }
 
     @Test

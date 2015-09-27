@@ -11,6 +11,13 @@ import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.venutolo.texttablebuilder.BoxDrawingCharacters.ASCII;
+import static org.venutolo.texttablebuilder.BoxDrawingCharacters.CURVED;
+import static org.venutolo.texttablebuilder.BoxDrawingCharacters.DOUBLE;
+import static org.venutolo.texttablebuilder.BoxDrawingCharacters.HEAVY;
+import static org.venutolo.texttablebuilder.BoxDrawingCharacters.LIGHT;
+import static org.venutolo.texttablebuilder.BoxDrawingCharacters.NULLS;
+import static org.venutolo.texttablebuilder.BoxDrawingCharacters.SPACES;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.CANNOT_BE_NULL;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
 
@@ -22,13 +29,13 @@ public class TextTableBuilderOptionsTest {
     private static final Collection<BoxDrawingCharacters> boxDrawingCharactersCollection =
             Collections.unmodifiableCollection(
                     Arrays.asList(
-                            BoxDrawingCharacters.ASCII,
-                            BoxDrawingCharacters.CURVED,
-                            BoxDrawingCharacters.DOUBLE,
-                            BoxDrawingCharacters.HEAVY,
-                            BoxDrawingCharacters.LIGHT,
-                            BoxDrawingCharacters.NULLS,
-                            BoxDrawingCharacters.SPACES
+                            ASCII,
+                            CURVED,
+                            DOUBLE,
+                            HEAVY,
+                            LIGHT,
+                            NULLS,
+                            SPACES
                     )
             );
 

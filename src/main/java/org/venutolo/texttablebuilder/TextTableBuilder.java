@@ -9,6 +9,7 @@ import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.venutolo.texttablebuilder.BoxDrawingCharacters.LIGHT;
 
 /**
  * @author Rick Venutolo
@@ -34,7 +35,7 @@ public class TextTableBuilder {
     private List<List<Object>> table = emptyTable();
 
     @Nonnull
-    private BoxDrawingCharacters boxDrawingCharacters = BoxDrawingCharacters.LIGHT;
+    private BoxDrawingCharacters boxDrawingCharacters = LIGHT;
 
     private int repeatHeadersEveryXRows;
 

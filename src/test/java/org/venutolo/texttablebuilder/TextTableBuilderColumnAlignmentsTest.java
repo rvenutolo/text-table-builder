@@ -13,6 +13,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.venutolo.texttablebuilder.Alignment.LEFT;
+import static org.venutolo.texttablebuilder.Alignment.RIGHT;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.ALIGNMENTS_EMPTY;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.ALIGNMENTS_NOT_NULL;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING;
@@ -43,7 +45,7 @@ public class TextTableBuilderColumnAlignmentsTest {
 
     @Before
     public void setUp() {
-        columnAlignmentsArray = new Alignment[]{Alignment.LEFT, Alignment.RIGHT};
+        columnAlignmentsArray = new Alignment[]{LEFT, RIGHT};
         columnAlignments = Arrays.asList(columnAlignmentsArray);
         emptyTextTableBuilder = new TextTableBuilder();
         populatedTextTableBuilder = new TextTableBuilder()
@@ -105,7 +107,7 @@ public class TextTableBuilderColumnAlignmentsTest {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_ALIGNMENT);
-        populatedTextTableBuilder.setColumnAlignments(Arrays.asList(null, Alignment.LEFT));
+        populatedTextTableBuilder.setColumnAlignments(Arrays.asList(null, LEFT));
     }
 
     @Test
@@ -155,7 +157,7 @@ public class TextTableBuilderColumnAlignmentsTest {
         expectedException.expect(NullPointerException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_ALIGNMENT);
-        populatedTextTableBuilder.setColumnAlignments(null, Alignment.LEFT);
+        populatedTextTableBuilder.setColumnAlignments(null, LEFT);
     }
 
     @Test
