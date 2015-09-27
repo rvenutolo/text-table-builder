@@ -31,6 +31,8 @@ final class TextTableToStringBuilder {
 
     private final boolean repeatHeadersAtBottom;
 
+    private final int repeatHeadersEveryXRows;
+
     private final List<String> headerStrings;
 
     private final List<List<String>> tableStrings;
@@ -48,14 +50,13 @@ final class TextTableToStringBuilder {
 
         repeatHeadersAtBottom = textTableBuilder.getRepeatHeadersAtBottom();
 
+        repeatHeadersEveryXRows = textTableBuilder.getRepeatHeadersEveryXRows();
 
         final List<Object> headers = textTableBuilder.getHeaders();
         final List<List<Object>> rows = textTableBuilder.getRows();
         final List<Alignment> headerAlignments = textTableBuilder.getHeaderAlignments();
         final List<Alignment> columnAlignments = textTableBuilder.getColumnAlignments();
         final String nullColumnReplacement = textTableBuilder.getNullColumnReplacement();
-
-
 
         if (showRowNums) {
             headerAlignments.add(0, RIGHT);
@@ -67,7 +68,6 @@ final class TextTableToStringBuilder {
                 rowNum++;
             }
         }
-
 
         final int[] columnWidths = getColumnWidths(
                 numColumns,
@@ -296,10 +296,27 @@ final class TextTableToStringBuilder {
             appendLine(getRowLine(headerStrings));
             appendLine(getInteriorLine());
         }
+        final boolean checkForRepeatingHeader =
+                (headerStrings != null) && (repeatHeadersEveryXRows != 0);
+        int rowNum = 1;
+        boolean justPrintedHeader = false;
         for (final List<String> rowString : tableStrings) {
+            if (justPrintedHeader) {
+                appendLine(getInteriorLine());
+            }
             appendLine(getRowLine(rowString));
+            if (checkForRepeatingHeader) {
+                if ((rowNum % repeatHeadersEveryXRows) == 0) {
+                    appendLine(getInteriorLine());
+                    appendLine(getRowLine(headerStrings));
+                    justPrintedHeader = true;
+                } else {
+                    justPrintedHeader = false;
+                }
+            }
+            rowNum++;
         }
-        if ((headerStrings != null) && repeatHeadersAtBottom) {
+        if ((headerStrings != null) && repeatHeadersAtBottom && !justPrintedHeader) {
             appendLine(getInteriorLine());
             appendLine(getRowLine(headerStrings));
         }
