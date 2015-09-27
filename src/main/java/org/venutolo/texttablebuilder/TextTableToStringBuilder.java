@@ -1,11 +1,16 @@
 package org.venutolo.texttablebuilder;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static org.venutolo.texttablebuilder.Alignment.LEFT;
+import static org.venutolo.texttablebuilder.Alignment.RIGHT;
 
 /**
  * @author Rick Venutolo
@@ -31,6 +36,7 @@ final class TextTableToStringBuilder {
     private final List<String> horizontalStrings;
 
     private TextTableToStringBuilder(final TextTableBuilder textTableBuilder) {
+
         numColumns = textTableBuilder.getNumColumns();
         linePrepender = textTableBuilder.getLinePrepender();
         lineAppender = textTableBuilder.getLineAppender();
@@ -48,13 +54,13 @@ final class TextTableToStringBuilder {
         );
 
         headerStrings = textTableBuilder.getHeaders().isEmpty()
-                              ? null
-                              : getPaddedAndAlignedRowStrings(
-                                      columnWidths,
-                                      nullColumnReplacement,
-                                      textTableBuilder.getHeaders(),
-                                      headerAlignments
-                              );
+                        ? null
+                        : getPaddedAndAlignedRowStrings(
+                                columnWidths,
+                                nullColumnReplacement,
+                                textTableBuilder.getHeaders(),
+                                headerAlignments
+                        );
 
         tableStrings = getPaddedAndAlignedTableStrings(
                 columnWidths,
@@ -144,7 +150,7 @@ final class TextTableToStringBuilder {
         assert columnWidths.length == row.size();
         assert alignments.isEmpty() || (alignments.size() == row.size());
         // alignments can be empty, if so default to using LEFT
-        final Alignment defaultAlignment = alignments.isEmpty() ? Alignment.LEFT : null;
+        final Alignment defaultAlignment = alignments.isEmpty() ? LEFT : null;
         final List<String> paddedAndAlignedRowStrings = new ArrayList<String>(row.size());
         for (int i = 0; i < columnWidths.length; i++) {
             final Object columnObject = row.get(i);
@@ -190,7 +196,8 @@ final class TextTableToStringBuilder {
 
     private static List<String> getHorizontalStrings(
             @Nonnull final int[] columnWidths,
-            final char horizontalChar) {
+            final char horizontalChar
+    ) {
         assert columnWidths != null;
         final List<String> horizontalStrings = new ArrayList<String>(columnWidths.length);
         for (final int columnWidth : columnWidths) {
@@ -282,6 +289,35 @@ final class TextTableToStringBuilder {
     static String getToStringFor(@Nonnull final TextTableBuilder textTableBuilder) {
         assert textTableBuilder != null;
         return new TextTableToStringBuilder(textTableBuilder).getToString();
+    }
+
+    public static void main(final String... args) {
+        TextTableBuilder textTableBuilder = new TextTableBuilder();
+        textTableBuilder.setHeaderAlignments(LEFT, RIGHT, LEFT);
+        textTableBuilder.setColumnAlignments(RIGHT, LEFT, RIGHT);
+        textTableBuilder.setHeaders("Col1", "Column2", "Column #3");
+        for (int i = 0; i < 10; i++) {
+            final String c1 = RandomStringUtils.randomAlphabetic(RandomUtils.nextInt(1, 12));
+            final String c2 = RandomStringUtils.randomAlphabetic(RandomUtils.nextInt(1, 12));
+            final String c3 = RandomStringUtils.randomAlphabetic(RandomUtils.nextInt(1, 12));
+            textTableBuilder.addRow(
+                    (c1.length() == 3) ? null : c1,
+                    (c2.length() == 3) ? null : c2,
+                    (c3.length() == 3) ? null : c3
+            );
+        }
+
+        textTableBuilder.setLineAppender("<");
+        textTableBuilder.setLinePrepender(">");
+        textTableBuilder.setNullColumnReplacement("-NON-");
+
+        textTableBuilder.setRepeatHeadersEveryXRows(5);
+
+        textTableBuilder.repeatHeadersAtBottom();
+
+        textTableBuilder.setShowRowNums(true);
+
+        System.out.println(getToStringFor(textTableBuilder));
     }
 
 }
