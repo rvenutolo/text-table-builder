@@ -29,6 +29,8 @@ final class TextTableToStringBuilder {
 
     private final BoxDrawingCharacters boxDrawingCharacters;
 
+    private final boolean repeatHeadersAtBottom;
+
     private final List<String> headerStrings;
 
     private final List<List<String>> tableStrings;
@@ -43,6 +45,8 @@ final class TextTableToStringBuilder {
         lineAppender = textTableBuilder.getLineAppender();
 
         boxDrawingCharacters = textTableBuilder.getBoxDrawingCharacters();
+
+        repeatHeadersAtBottom = textTableBuilder.getRepeatHeadersAtBottom();
 
 
         final List<Object> headers = textTableBuilder.getHeaders();
@@ -295,6 +299,10 @@ final class TextTableToStringBuilder {
         for (final List<String> rowString : tableStrings) {
             appendLine(getRowLine(rowString));
         }
+        if ((headerStrings != null) && repeatHeadersAtBottom) {
+            appendLine(getInteriorLine());
+            appendLine(getRowLine(headerStrings));
+        }
         appendLine(getBottomLine());
     }
 
@@ -330,7 +338,6 @@ final class TextTableToStringBuilder {
         textTableBuilder.setLinePrepender(">");
         textTableBuilder.setNullColumnReplacement("-NON-");
         textTableBuilder.setShowRowNums(true);
-
         textTableBuilder.repeatHeadersAtBottom();
 
         textTableBuilder.setRepeatHeadersEveryXRows(5);
