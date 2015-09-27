@@ -37,35 +37,54 @@ final class TextTableToStringBuilder {
 
     private TextTableToStringBuilder(final TextTableBuilder textTableBuilder) {
 
-        numColumns = textTableBuilder.getNumColumns();
+        final boolean showRowNums = textTableBuilder.getShowRowNums();
+        numColumns = textTableBuilder.getNumColumns() + (showRowNums ? 1 : 0);
         linePrepender = textTableBuilder.getLinePrepender();
         lineAppender = textTableBuilder.getLineAppender();
+
         boxDrawingCharacters = textTableBuilder.getBoxDrawingCharacters();
 
+
+        final List<Object> headers = textTableBuilder.getHeaders();
+        final List<List<Object>> rows = textTableBuilder.getRows();
         final List<Alignment> headerAlignments = textTableBuilder.getHeaderAlignments();
         final List<Alignment> columnAlignments = textTableBuilder.getColumnAlignments();
         final String nullColumnReplacement = textTableBuilder.getNullColumnReplacement();
 
+
+
+        if (showRowNums) {
+            headerAlignments.add(0, RIGHT);
+            columnAlignments.add(0, RIGHT);
+            headers.add(0, "");
+            int rowNum = 1;
+            for (final List<Object> row : rows) {
+                row.add(0, rowNum);
+                rowNum++;
+            }
+        }
+
+
         final int[] columnWidths = getColumnWidths(
                 numColumns,
                 nullColumnReplacement,
-                textTableBuilder.getHeaders(),
-                textTableBuilder.getRows()
+                headers,
+                rows
         );
 
-        headerStrings = textTableBuilder.getHeaders().isEmpty()
+        headerStrings = headers.isEmpty()
                         ? null
                         : getPaddedAndAlignedRowStrings(
                                 columnWidths,
                                 nullColumnReplacement,
-                                textTableBuilder.getHeaders(),
+                                headers,
                                 headerAlignments
                         );
 
         tableStrings = getPaddedAndAlignedTableStrings(
                 columnWidths,
                 nullColumnReplacement,
-                textTableBuilder.getRows(),
+                rows,
                 columnAlignments
         );
 
@@ -101,7 +120,7 @@ final class TextTableToStringBuilder {
             final int numColumns,
             @Nonnull final String nullColumnReplacement,
             @Nonnull final List<Object> headers,
-            @Nonnull final Iterable<List<Object>> table
+            @Nonnull final List<List<Object>> table
     ) {
         assert numColumns >= 0;
         assert nullColumnReplacement != null;
@@ -310,12 +329,11 @@ final class TextTableToStringBuilder {
         textTableBuilder.setLineAppender("<");
         textTableBuilder.setLinePrepender(">");
         textTableBuilder.setNullColumnReplacement("-NON-");
-
-        textTableBuilder.setRepeatHeadersEveryXRows(5);
+        textTableBuilder.setShowRowNums(true);
 
         textTableBuilder.repeatHeadersAtBottom();
 
-        textTableBuilder.setShowRowNums(true);
+        textTableBuilder.setRepeatHeadersEveryXRows(5);
 
         System.out.println(getToStringFor(textTableBuilder));
     }
