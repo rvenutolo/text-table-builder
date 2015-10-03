@@ -87,41 +87,6 @@ public class BoxDrawingCharacters {
             //@formatter:on
     );
 
-    /**
-     * Set of box drawing characters using space for all characters.
-     */
-    @Nonnull
-    public static final BoxDrawingCharacters SPACES = new Builder().setHorizontal(' ')
-                                                                   .setVertical(' ')
-                                                                   .setTopLeftCorner(' ')
-                                                                   .setTopIntersect(' ')
-                                                                   .setTopRightCorner(' ')
-                                                                   .setLeftIntersect(' ')
-                                                                   .setMiddleIntersect(' ')
-                                                                   .setRightIntersect(' ')
-                                                                   .setBottomLeftCorner(' ')
-                                                                   .setBottomIntersect(' ')
-                                                                   .setBottomRightCorner(' ')
-                                                                   .build();
-
-    // TODO figure out if this is worthwhile
-    /**
-     * Set of box drawing characters using null for all characters.
-     */
-    @Nonnull
-    public static final BoxDrawingCharacters NULLS = new Builder().setHorizontal('\u0000')
-                                                                  .setVertical('\u0000')
-                                                                  .setTopLeftCorner('\u0000')
-                                                                  .setTopIntersect('\u0000')
-                                                                  .setTopRightCorner('\u0000')
-                                                                  .setLeftIntersect('\u0000')
-                                                                  .setMiddleIntersect('\u0000')
-                                                                  .setRightIntersect('\u0000')
-                                                                  .setBottomLeftCorner('\u0000')
-                                                                  .setBottomIntersect('\u0000')
-                                                                  .setBottomRightCorner('\u0000')
-                                                                  .build();
-
     private final char horizontal;
     private final char vertical;
     private final char topLeftCorner;
@@ -153,6 +118,29 @@ public class BoxDrawingCharacters {
         this.bottomLeftCorner = builder.bottomLeftCorner;
         this.bottomIntersect = builder.bottomIntersect;
         this.bottomRightCorner = builder.bottomRightCorner;
+    }
+
+    /**
+     * Creates and returns a new instance where all box characters are the given character.
+     *
+     * @param c the character for all box drawing characters
+     *
+     * @return the BoxDrawingCharacters created with all characters being the given character
+     */
+    @Nonnull
+    public static BoxDrawingCharacters forCharacter(final char c) {
+        return new Builder().setHorizontal(c)
+                            .setVertical(c)
+                            .setTopLeftCorner(c)
+                            .setTopIntersect(c)
+                            .setTopRightCorner(c)
+                            .setLeftIntersect(c)
+                            .setMiddleIntersect(c)
+                            .setRightIntersect(c)
+                            .setBottomLeftCorner(c)
+                            .setBottomIntersect(c)
+                            .setBottomRightCorner(c)
+                            .build();
     }
 
     /**
