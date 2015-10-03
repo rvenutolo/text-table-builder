@@ -350,7 +350,7 @@ public class TextTableBuilder {
 
     @Override
     public String toString() {
-        return TextTableToStringBuilder.getToStringFor(this);
+        return ToStringBuilder.getToStringFor(this);
     }
 
 }

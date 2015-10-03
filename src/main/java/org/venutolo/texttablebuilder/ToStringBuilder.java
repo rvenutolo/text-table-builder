@@ -13,7 +13,7 @@ import static org.venutolo.texttablebuilder.Alignment.RIGHT;
 /**
  * @author Rick Venutolo
  */
-final class TextTableToStringBuilder {
+final class ToStringBuilder {
 
     private static final int STRING_BUILDER_INITIAL_CAPACITY = 128;
 
@@ -37,7 +37,7 @@ final class TextTableToStringBuilder {
 
     private final List<String> horizontalStrings;
 
-    private TextTableToStringBuilder(final TextTableBuilder textTableBuilder) {
+    private ToStringBuilder(final TextTableBuilder textTableBuilder) {
         final boolean showRowNums = textTableBuilder.getShowRowNums();
         numColumns = textTableBuilder.getNumColumns() + (showRowNums ? 1 : 0);
         boxDrawingCharacters = textTableBuilder.getBoxDrawingCharacters();
@@ -324,7 +324,7 @@ final class TextTableToStringBuilder {
 
     static String getToStringFor(@Nonnull final TextTableBuilder textTableBuilder) {
         assert textTableBuilder != null;
-        return new TextTableToStringBuilder(textTableBuilder).getToString();
+        return new ToStringBuilder(textTableBuilder).getToString();
     }
 
 }
