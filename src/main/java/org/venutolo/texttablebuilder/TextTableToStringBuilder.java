@@ -1,7 +1,5 @@
 package org.venutolo.texttablebuilder;
 
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
@@ -327,32 +325,6 @@ final class TextTableToStringBuilder {
     static String getToStringFor(@Nonnull final TextTableBuilder textTableBuilder) {
         assert textTableBuilder != null;
         return new TextTableToStringBuilder(textTableBuilder).getToString();
-    }
-
-    public static void main(final String... args) {
-        TextTableBuilder textTableBuilder = new TextTableBuilder();
-        textTableBuilder.setHeaderAlignments(LEFT, RIGHT, LEFT);
-        textTableBuilder.setColumnAlignments(RIGHT, LEFT, RIGHT);
-        textTableBuilder.setHeaders("Col1", "Column2", "Column #3");
-        for (int i = 0; i < 10; i++) {
-            final String c1 = RandomStringUtils.randomAlphabetic(RandomUtils.nextInt(1, 12));
-            final String c2 = RandomStringUtils.randomAlphabetic(RandomUtils.nextInt(1, 12));
-            final String c3 = RandomStringUtils.randomAlphabetic(RandomUtils.nextInt(1, 12));
-//            textTableBuilder.addRow(
-//                    (c1.length() == 3) ? null : c1,
-//                    (c2.length() == 3) ? null : c2,
-//                    (c3.length() == 3) ? null : c3
-//            );
-        }
-
-        textTableBuilder.setLineAppender("<");
-        textTableBuilder.setLinePrepender(">");
-        textTableBuilder.setNullColumnReplacement("-NON-");
-        textTableBuilder.setShowRowNums(true);
-        textTableBuilder.repeatHeadersAtBottom();
-        textTableBuilder.setRepeatHeadersEveryXRows(5);
-
-        System.out.println(getToStringFor(textTableBuilder));
     }
 
 }
