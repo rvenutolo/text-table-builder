@@ -16,8 +16,6 @@ import static org.venutolo.texttablebuilder.BoxDrawingCharacters.CURVED;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.DOUBLE;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.HEAVY;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.LIGHT;
-import static org.venutolo.texttablebuilder.BoxDrawingCharacters.NULLS;
-import static org.venutolo.texttablebuilder.BoxDrawingCharacters.SPACES;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.CANNOT_BE_NULL;
 import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
 
@@ -33,9 +31,7 @@ public class TextTableBuilderOptionsTest {
                             CURVED,
                             DOUBLE,
                             HEAVY,
-                            LIGHT,
-                            NULLS,
-                            SPACES
+                            LIGHT
                     )
             );
 
