@@ -363,6 +363,33 @@ public class BoxDrawingCharactersTest {
      *========================================================================*/
 
     @Test
+    public void testForCharacter() {
+        final BoxDrawingCharacters expected = new BoxDrawingCharacters.Builder()
+                .setHorizontal('x')
+                .setVertical('x')
+                .setTopLeftCorner('x')
+                .setTopIntersect('x')
+                .setTopRightCorner('x')
+                .setLeftIntersect('x')
+                .setMiddleIntersect('x')
+                .setRightIntersect('x')
+                .setBottomLeftCorner('x')
+                .setBottomIntersect('x')
+                .setBottomRightCorner('x')
+                .build();
+        final BoxDrawingCharacters actual = BoxDrawingCharacters.forCharacter('x');
+        assertEquals(
+                "forCharacter should produce equivalent instance",
+                expected,
+                actual
+        );
+    }
+
+    /*========================================================================
+     * TESTS FOR forBoxDrawing(String)
+     *========================================================================*/
+
+    @Test
     public void testFromBoxDrawingSucceeds() {
         final BoxDrawingCharacters fromBoxDrawing = BoxDrawingCharacters.fromBoxDrawing(
                 //@formatter:off
