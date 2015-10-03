@@ -301,6 +301,8 @@ final class TextTableToStringBuilder {
                 if ((rowNum % repeatHeadersEveryXRows) == 0) {
                     appendLine(getInteriorLine());
                     appendLine(getRowLine(headerStrings));
+                    // can't just append interior line after repeating headers
+                    // in case it ends up being the bottom headers
                     justPrintedHeader = true;
                 } else {
                     justPrintedHeader = false;
