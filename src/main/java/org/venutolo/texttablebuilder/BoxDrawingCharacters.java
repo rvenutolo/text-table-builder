@@ -4,7 +4,6 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -303,7 +302,7 @@ public class BoxDrawingCharacters {
      * to this {@code BoxDrawingCharacters}, {@code false} otherwise
      */
     @Override
-    public boolean equals(@Nullable final Object object) {
+    public boolean equals(final Object object) {
         if (this == object) {
             return true;
         }
