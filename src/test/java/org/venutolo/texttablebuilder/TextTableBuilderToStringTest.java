@@ -173,4 +173,53 @@ public class TextTableBuilderToStringTest {
         );
     }
 
+    /*========================================================================
+     * HEADER - TOSTRING TESTS
+     *========================================================================*/
+
+    @Test
+    public void testSetHeadersToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        final String expected1 = joinForTable(
+                "#############",
+                "# h # h # h #",
+                "#############",
+                "#############"
+        );
+        assertEquals(
+                "toString() did not produced expected value",
+                expected1,
+                textTableBuilder.toString()
+        );
+        textTableBuilder.setHeaders("H", "H", "H");
+        final String expected2 = joinForTable(
+                "#############",
+                "# H # H # H #",
+                "#############",
+                "#############"
+        );
+        assertEquals(
+                "toString() did not produced expected value",
+                expected2,
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testClearHeadersToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "bbb", "cc");
+        textTableBuilder.clearHeaders();
+        final String expected = joinForTable(
+                "################",
+                "# a # bbb # cc #",
+                "################"
+        );
+        assertEquals(
+                "toString() did not produced expected value",
+                expected,
+                textTableBuilder.toString()
+        );
+    }
+
 }
