@@ -37,4 +37,36 @@ public class TextTableBuilderToStringTest {
         );
     }
 
+    @Test
+    public void testSetHeadersToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        final String expected = joinForTable(
+                "#############",
+                "# h # h # h #",
+                "#############",
+                "#############"
+        );
+        assertEquals(
+                "toString() did not produced expected value",
+                expected,
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetHeadersThenClearToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.clearHeaders();
+        // should retain three columns
+        final String expected = joinForTable(
+                "##########",
+                "##########"
+        );
+        assertEquals(
+                "toString() did not produced expected value",
+                expected,
+                textTableBuilder.toString()
+        );
+    }
+
 }
