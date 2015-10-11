@@ -893,4 +893,86 @@ public class TextTableBuilderToStringTest {
         );
     }
 
+    @Test
+    public void testMegaToString() {
+        textTableBuilder.setHeaders("h", "hh", "hhh", null);
+        textTableBuilder.addRow("aaaa", null, "c", "dd");
+        textTableBuilder.addRow("aaa", "b", "cccc", "dd");
+        textTableBuilder.addRow("aa", "bb", "ccc", "dd");
+        textTableBuilder.addRow("a", "bbb", "cc", "dd");
+        textTableBuilder.addRow(null, "bbbb", "", "dd");
+        textTableBuilder.addRow("a", "bbbb", "c", "dd");
+        textTableBuilder.addRow("aa", "bbb", "cccc", "dd");
+        textTableBuilder.addRow("aaa", "bb", "ccc", "dd");
+        textTableBuilder.addRow("aaaa", "b", "cc", "dd");
+        textTableBuilder.addRow(null, null, "", "dd");
+        textTableBuilder.setHeaderAlignments(LEFT, LEFT, RIGHT, RIGHT);
+        textTableBuilder.setColumnAlignments(LEFT, RIGHT, RIGHT, LEFT);
+        textTableBuilder.setRepeatHeadersEveryXRows(3);
+        textTableBuilder.setRepeatHeadersAtBottom(true);
+        textTableBuilder.setShowRowNums(true);
+        textTableBuilder.setLinePrepender(">");
+        textTableBuilder.setLineAppender("<");
+        textTableBuilder.setNullColumnReplacement("NULL");
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        ">##################################<",
+                        ">#    # h    # hh   #  hhh # NULL #<",
+                        ">##################################<",
+                        ">#  1 # aaaa # NULL #    c # dd   #<",
+                        ">#  2 # aaa  #    b # cccc # dd   #<",
+                        ">#  3 # aa   #   bb #  ccc # dd   #<",
+                        ">##################################<",
+                        ">#    # h    # hh   #  hhh # NULL #<",
+                        ">##################################<",
+                        ">#  4 # a    #  bbb #   cc # dd   #<",
+                        ">#  5 # NULL # bbbb #      # dd   #<",
+                        ">#  6 # a    # bbbb #    c # dd   #<",
+                        ">##################################<",
+                        ">#    # h    # hh   #  hhh # NULL #<",
+                        ">##################################<",
+                        ">#  7 # aa   #  bbb # cccc # dd   #<",
+                        ">#  8 # aaa  #   bb #  ccc # dd   #<",
+                        ">#  9 # aaaa #    b #   cc # dd   #<",
+                        ">##################################<",
+                        ">#    # h    # hh   #  hhh # NULL #<",
+                        ">##################################<",
+                        "># 10 # NULL # NULL #      # dd   #<",
+                        ">##################################<",
+                        ">#    # h    # hh   #  hhh # NULL #<",
+                        ">##################################<"
+                ),
+                textTableBuilder.toString()
+        );
+        textTableBuilder.clearHeaderAlignments();
+        textTableBuilder.clearColumnAlignments();
+        textTableBuilder.setRepeatHeadersEveryXRows(0);
+        textTableBuilder.setRepeatHeadersAtBottom(false);
+        textTableBuilder.setShowRowNums(false);
+        textTableBuilder.setLinePrepender(null);
+        textTableBuilder.setLineAppender(null);
+        textTableBuilder.setNullColumnReplacement(null);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "###########################",
+                        "# h    # hh   # hhh  #    #",
+                        "###########################",
+                        "# aaaa #      # c    # dd #",
+                        "# aaa  # b    # cccc # dd #",
+                        "# aa   # bb   # ccc  # dd #",
+                        "# a    # bbb  # cc   # dd #",
+                        "#      # bbbb #      # dd #",
+                        "# a    # bbbb # c    # dd #",
+                        "# aa   # bbb  # cccc # dd #",
+                        "# aaa  # bb   # ccc  # dd #",
+                        "# aaaa # b    # cc   # dd #",
+                        "#      #      #      # dd #",
+                        "###########################"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
 }
