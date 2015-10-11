@@ -602,7 +602,7 @@ public class TextTableBuilderToStringTest {
     }
 
     @Test
-    public void testSetRepeatHeadersEveryXRowsAndRepeatAtBottomNoOverlap() {
+    public void testSetRepeatHeadersEveryXRowsAndRepeatAtBottomNoOverlapToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("d", "e", "f");
@@ -630,7 +630,7 @@ public class TextTableBuilderToStringTest {
     }
 
     @Test
-    public void testSetRepeatHeadersEveryXRowsAndRepeatAtBottomOverlap() {
+    public void testSetRepeatHeadersEveryXRowsAndRepeatAtBottomOverlapToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("d", "e", "f");
@@ -654,7 +654,7 @@ public class TextTableBuilderToStringTest {
     }
 
     @Test
-    public void testShowRowNums() {
+    public void testShowRowNumsToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("d", "e", "f");
@@ -674,12 +674,53 @@ public class TextTableBuilderToStringTest {
     }
 
     @Test
-    public void testShowRowThenClearNums() {
+    public void testShowRowThenClearNumsToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.showRowNums();
         textTableBuilder.setShowRowNums(false);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetLinePrependerToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setLinePrepender(">");
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        ">#############",
+                        "># h # h # h #",
+                        ">#############",
+                        "># a # b # c #",
+                        "># d # e # f #",
+                        ">#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetLinePrependerThenClearToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setLinePrepender(">");
+        textTableBuilder.setLinePrepender(null);
         assertEquals(
                 "toString() did not produced expected value",
                 joinForTable(
