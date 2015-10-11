@@ -443,4 +443,96 @@ public class TextTableBuilderToStringTest {
         );
     }
 
+    @Test
+    public void testSetRepeatHeadersEveryXRowsNotEnoughRowsToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setRepeatHeadersEveryXRows(5);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetRepeatHeadersEvery1RowToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setRepeatHeadersEveryXRows(1);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# d # e # f #",
+                        "#############",
+                        "# h # h # h #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetRepeatHeadersEvery2RowToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setRepeatHeadersEveryXRows(2);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############",
+                        "# h # h # h #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetRepeatHeadersEvery2RowWith3RowsToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.addRow("g", "h", "i");
+        textTableBuilder.setRepeatHeadersEveryXRows(2);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# g # h # i #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
 }
