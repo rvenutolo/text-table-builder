@@ -464,7 +464,7 @@ public class TextTableBuilderToStringTest {
     }
 
     @Test
-    public void testSetRepeatHeadersEvery1RowToString() {
+    public void testSetRepeatHeadersEvery1RowsToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("d", "e", "f");
@@ -489,7 +489,7 @@ public class TextTableBuilderToStringTest {
     }
 
     @Test
-    public void testSetRepeatHeadersEvery2RowToString() {
+    public void testSetRepeatHeadersEvery2RowsToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("d", "e", "f");
@@ -511,7 +511,7 @@ public class TextTableBuilderToStringTest {
     }
 
     @Test
-    public void testSetRepeatHeadersEvery2RowWith3RowsToString() {
+    public void testSetRepeatHeadersEvery2RowsWith3RowsToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("d", "e", "f");
@@ -528,6 +528,29 @@ public class TextTableBuilderToStringTest {
                         "#############",
                         "# h # h # h #",
                         "#############",
+                        "# g # h # i #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetRepeatHeadersEveryXRowsThenClearToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.addRow("g", "h", "i");
+        textTableBuilder.setRepeatHeadersEveryXRows(1);
+        textTableBuilder.setRepeatHeadersEveryXRows(0);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
                         "# g # h # i #",
                         "#############"
                 ),
