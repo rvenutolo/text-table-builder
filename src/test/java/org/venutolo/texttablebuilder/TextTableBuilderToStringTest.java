@@ -558,4 +558,47 @@ public class TextTableBuilderToStringTest {
         );
     }
 
+    @Test
+    public void testSetRepeatHeadersAtBottomToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.repeatHeadersAtBottom();
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############",
+                        "# h # h # h #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetRepeatHeadersAtBottomThenClearToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.repeatHeadersAtBottom();
+        textTableBuilder.setRepeatHeadersAtBottom(false);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
 }
