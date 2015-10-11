@@ -25,14 +25,13 @@ public class TextTableBuilderToStringTest {
 
     @Test
     public void testEmptyTableToString() {
-        // should just be the four corner characters
-        final String expected = joinForTable(
-                "##",
-                "##"
-        );
         assertEquals(
                 "toString() did not produced expected value",
-                expected,
+                // should just be the four corner characters
+                joinForTable(
+                        "##",
+                        "##"
+                ),
                 textTableBuilder.toString()
         );
     }
@@ -40,15 +39,14 @@ public class TextTableBuilderToStringTest {
     @Test
     public void testSetHeadersToString() {
         textTableBuilder.setHeaders("h", "h", "h");
-        final String expected = joinForTable(
-                "#############",
-                "# h # h # h #",
-                "#############",
-                "#############"
-        );
         assertEquals(
                 "toString() did not produced expected value",
-                expected,
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "#############"
+                ),
                 textTableBuilder.toString()
         );
     }
@@ -57,16 +55,64 @@ public class TextTableBuilderToStringTest {
     public void testSetHeadersThenClearToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.clearHeaders();
-        // should retain three columns
-        final String expected = joinForTable(
-                "##########",
-                "##########"
-        );
         assertEquals(
                 "toString() did not produced expected value",
-                expected,
+                // should retain three columns
+                joinForTable(
+                        "##########",
+                        "##########"
+                ),
                 textTableBuilder.toString()
         );
+    }
+
+    @Test
+    public void testAddRowToString() {
+        textTableBuilder.addRow("a", "b", "c");
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# a # b # c #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+
+    }
+
+    @Test
+    public void testAddRowsToString() {
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+
+    }
+
+    @Test
+    public void testAddRowsThenClearToString() {
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.clearRows();
+        assertEquals(
+                "toString() did not produced expected value",
+                // should retain three columns
+                joinForTable(
+                        "##########",
+                        "##########"
+                ),
+                textTableBuilder.toString()
+        );
+
     }
 
 }
