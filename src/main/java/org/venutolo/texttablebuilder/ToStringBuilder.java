@@ -48,16 +48,24 @@ final class ToStringBuilder {
         final List<Object> headers = textTableBuilder.getHeaders();
         final List<List<Object>> rows = textTableBuilder.getRows();
         final List<Alignment> headerAlignments = textTableBuilder.getHeaderAlignments();
+        // if alignments are empty, then populate with LEFT for defaults
+        if (headerAlignments.isEmpty()) {
+            for (int i = 0; i < textTableBuilder.getNumColumns(); i++) {
+                headerAlignments.add(LEFT);
+            }
+        }
         final List<Alignment> columnAlignments = textTableBuilder.getColumnAlignments();
+        // if alignments are empty, then populate with LEFT for defaults
+        if (columnAlignments.isEmpty()) {
+            for (int i = 0; i < textTableBuilder.getNumColumns(); i++) {
+                columnAlignments.add(LEFT);
+            }
+        }
         final String nullColumnReplacement = textTableBuilder.getNullColumnReplacement();
         // if showing row number, add column items for row numbers
         if (showRowNums) {
-            if (!headerAlignments.isEmpty()){
-                headerAlignments.add(0, RIGHT);
-            }
-            if (!columnAlignments.isEmpty()) {
-                columnAlignments.add(0, RIGHT);
-            }
+            headerAlignments.add(0, RIGHT);
+            columnAlignments.add(0, RIGHT);
             headers.add(0, "");
             int rowNum = 1;
             for (final List<Object> row : rows) {
@@ -166,7 +174,7 @@ final class ToStringBuilder {
         assert row != null;
         assert alignments != null;
         assert columnWidths.length == row.size();
-        assert alignments.isEmpty() || (alignments.size() == row.size());
+        assert alignments.size() == row.size();
         final List<String> paddedAndAlignedRowStrings = new ArrayList<String>(row.size());
         for (int i = 0; i < columnWidths.length; i++) {
             final Object columnObject = row.get(i);
