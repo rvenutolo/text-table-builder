@@ -735,4 +735,45 @@ public class TextTableBuilderToStringTest {
         );
     }
 
+    @Test
+    public void testSetLineAppenderToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setLineAppender("<");
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############<",
+                        "# h # h # h #<",
+                        "#############<",
+                        "# a # b # c #<",
+                        "# d # e # f #<",
+                        "#############<"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetLineAppenderThenClearToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setLineAppender("<");
+        textTableBuilder.setLineAppender(null);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
 }
