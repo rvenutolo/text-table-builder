@@ -776,4 +776,85 @@ public class TextTableBuilderToStringTest {
         );
     }
 
+    @Test
+    public void testDefaultNullColumnReplacementToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow(null, null, null);
+        textTableBuilder.addRow("d", "e", "f");
+        assertEquals(
+                "toString() did not produced expected value",
+                // nulls should be replaced with empty strings
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "#   #   #   #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetNullColumnReplacementToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow(null, null, null);
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setNullColumnReplacement("N");
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# N # N # N #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetNullColumnReplacementThenClearToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow(null, null, null);
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setNullColumnReplacement("N");
+        textTableBuilder.setNullColumnReplacement(null);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "#   #   #   #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetNullColumnReplacementAppliesToHeadersToString() {
+        textTableBuilder.setHeaders(null, null, null);
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setNullColumnReplacement("N");
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# N # N # N #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
 }
