@@ -601,4 +601,56 @@ public class TextTableBuilderToStringTest {
         );
     }
 
+    @Test
+    public void testSetRepeatHeadersEveryXRowsAndRepeatAtBottomNoOverlap() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.addRow("g", "h", "i");
+        textTableBuilder.setRepeatHeadersEveryXRows(2);
+        textTableBuilder.repeatHeadersAtBottom();
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# g # h # i #",
+                        "#############",
+                        "# h # h # h #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetRepeatHeadersEveryXRowsAndRepeatAtBottomOverlap() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setRepeatHeadersEveryXRows(2);
+        textTableBuilder.repeatHeadersAtBottom();
+        assertEquals(
+                "toString() did not produced expected value",
+                // header should NOT repeat at bottom twice
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############",
+                        "# h # h # h #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
 }
