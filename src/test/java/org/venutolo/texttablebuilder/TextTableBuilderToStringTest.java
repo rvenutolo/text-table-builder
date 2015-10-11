@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.venutolo.texttablebuilder.Alignment.LEFT;
+import static org.venutolo.texttablebuilder.Alignment.RIGHT;
 
 /**
  * @author Rick Venutolo
@@ -78,7 +80,6 @@ public class TextTableBuilderToStringTest {
                 ),
                 textTableBuilder.toString()
         );
-
     }
 
     @Test
@@ -95,7 +96,6 @@ public class TextTableBuilderToStringTest {
                 ),
                 textTableBuilder.toString()
         );
-
     }
 
     @Test
@@ -112,7 +112,81 @@ public class TextTableBuilderToStringTest {
                 ),
                 textTableBuilder.toString()
         );
+    }
 
+    @Test
+    public void testDefaultHeaderAlignmentsToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("aa", "bbb", "cccc");
+        textTableBuilder.addRow("dd", "eee", "ffff");
+        assertEquals(
+                "toString() did not produced expected value",
+                // should default to left alignment
+                joinForTable(
+                        "###################",
+                        "# h  # h   # h    #",
+                        "###################",
+                        "# aa # bbb # cccc #",
+                        "# dd # eee # ffff #",
+                        "###################"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetHeaderAlignmentsToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("aa", "bbb", "cccc");
+        textTableBuilder.addRow("dd", "eee", "ffff");
+        textTableBuilder.setHeaderAlignments(LEFT, LEFT, LEFT);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "###################",
+                        "# h  # h   # h    #",
+                        "###################",
+                        "# aa # bbb # cccc #",
+                        "# dd # eee # ffff #",
+                        "###################"
+                ),
+                textTableBuilder.toString()
+        );
+        textTableBuilder.setHeaderAlignments(RIGHT, RIGHT, RIGHT);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "###################",
+                        "#  h #   h #    h #",
+                        "###################",
+                        "# aa # bbb # cccc #",
+                        "# dd # eee # ffff #",
+                        "###################"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetThenClearHeaderAlignmentsToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("aa", "bbb", "cccc");
+        textTableBuilder.addRow("dd", "eee", "ffff");
+        textTableBuilder.setHeaderAlignments(RIGHT, RIGHT, RIGHT);
+        textTableBuilder.clearHeaderAlignments();
+        assertEquals(
+                "toString() did not produced expected value",
+                // should default to left alignment after clear
+                joinForTable(
+                        "###################",
+                        "# h  # h   # h    #",
+                        "###################",
+                        "# aa # bbb # cccc #",
+                        "# dd # eee # ffff #",
+                        "###################"
+                ),
+                textTableBuilder.toString()
+        );
     }
 
 }
