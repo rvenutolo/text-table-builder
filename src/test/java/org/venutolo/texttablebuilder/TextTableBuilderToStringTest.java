@@ -115,6 +115,78 @@ public class TextTableBuilderToStringTest {
     }
 
     @Test
+    public void testSetHeaderAndAddRowsToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetHeaderAndAddRowsThenClearHeadersToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.clearHeaders();
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetHeaderAndAddRowsThenClearRowsToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.clearRows();
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetHeaderAndAddRowsThenClearBothToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.clearHeaders();
+        textTableBuilder.clearRows();
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "##########",
+                        "##########"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
     public void testDefaultHeaderAlignmentsToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("aa", "bbb", "cccc");
