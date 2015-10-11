@@ -653,4 +653,45 @@ public class TextTableBuilderToStringTest {
         );
     }
 
+    @Test
+    public void testShowRowNums() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.showRowNums();
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#################",
+                        "#   # h # h # h #",
+                        "#################",
+                        "# 1 # a # b # c #",
+                        "# 2 # d # e # f #",
+                        "#################"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testShowRowThenClearNums() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.showRowNums();
+        textTableBuilder.setShowRowNums(false);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "#############",
+                        "# h # h # h #",
+                        "#############",
+                        "# a # b # c #",
+                        "# d # e # f #",
+                        "#############"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
 }
