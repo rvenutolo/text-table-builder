@@ -52,8 +52,12 @@ final class ToStringBuilder {
         final String nullColumnReplacement = textTableBuilder.getNullColumnReplacement();
         // if showing row number, add column items for row numbers
         if (showRowNums) {
-            headerAlignments.add(0, RIGHT);
-            columnAlignments.add(0, RIGHT);
+            if (!headerAlignments.isEmpty()){
+                headerAlignments.add(0, RIGHT);
+            }
+            if (!columnAlignments.isEmpty()) {
+                columnAlignments.add(0, RIGHT);
+            }
             headers.add(0, "");
             int rowNum = 1;
             for (final List<Object> row : rows) {
