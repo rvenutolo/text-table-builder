@@ -674,6 +674,42 @@ public class TextTableBuilderToStringTest {
     }
 
     @Test
+    public void testShowRowNumsRowNumAlignmentToString() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.showRowNums();
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "##################",
+                        "#    # h # h # h #",
+                        "##################",
+                        "#  1 # a # b # c #",
+                        "#  2 # a # b # c #",
+                        "#  3 # a # b # c #",
+                        "#  4 # a # b # c #",
+                        "#  5 # a # b # c #",
+                        "#  6 # a # b # c #",
+                        "#  7 # a # b # c #",
+                        "#  8 # a # b # c #",
+                        "#  9 # a # b # c #",
+                        "# 10 # a # b # c #",
+                        "##################"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
     public void testShowRowThenClearNumsToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("a", "b", "c");
