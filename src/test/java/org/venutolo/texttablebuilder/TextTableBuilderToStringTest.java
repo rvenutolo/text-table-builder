@@ -7,6 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.venutolo.texttablebuilder.Alignment.LEFT;
 import static org.venutolo.texttablebuilder.Alignment.RIGHT;
+import static org.venutolo.texttablebuilder.BoxDrawingCharacters.LIGHT;
 
 /**
  * @author Rick Venutolo
@@ -26,13 +27,32 @@ public class TextTableBuilderToStringTest {
     }
 
     @Test
+    public void testSetBoxDrawingCharactersToString() {
+        textTableBuilder.setHeaders("h", "h");
+        textTableBuilder.addRow("a", "b");
+        textTableBuilder.setBoxDrawingCharacters(LIGHT);
+        assertEquals(
+                "toString() did not produced expected value",
+                joinForTable(
+                        "┌───┬───┐",
+                        "│ h │ h │",
+                        "├───┼───┤",
+                        "│ a │ b │",
+                        "└───┴───┘"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
     public void testEmptyTableToString() {
+        textTableBuilder.setBoxDrawingCharacters(LIGHT);
         assertEquals(
                 "toString() did not produced expected value",
                 // should just be the four corner characters
                 joinForTable(
-                        "##",
-                        "##"
+                        "┌┐",
+                        "└┘"
                 ),
                 textTableBuilder.toString()
         );
@@ -953,23 +973,24 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setLinePrepender(null);
         textTableBuilder.setLineAppender(null);
         textTableBuilder.setNullColumnReplacement(null);
+        textTableBuilder.setBoxDrawingCharacters(LIGHT);
         assertEquals(
                 "toString() did not produced expected value",
                 joinForTable(
-                        "###########################",
-                        "# h    # hh   # hhh  #    #",
-                        "###########################",
-                        "# aaaa #      # c    # dd #",
-                        "# aaa  # b    # cccc # dd #",
-                        "# aa   # bb   # ccc  # dd #",
-                        "# a    # bbb  # cc   # dd #",
-                        "#      # bbbb #      # dd #",
-                        "# a    # bbbb # c    # dd #",
-                        "# aa   # bbb  # cccc # dd #",
-                        "# aaa  # bb   # ccc  # dd #",
-                        "# aaaa # b    # cc   # dd #",
-                        "#      #      #      # dd #",
-                        "###########################"
+                        "┌──────┬──────┬──────┬────┐",
+                        "│ h    │ hh   │ hhh  │    │",
+                        "├──────┼──────┼──────┼────┤",
+                        "│ aaaa │      │ c    │ dd │",
+                        "│ aaa  │ b    │ cccc │ dd │",
+                        "│ aa   │ bb   │ ccc  │ dd │",
+                        "│ a    │ bbb  │ cc   │ dd │",
+                        "│      │ bbbb │      │ dd │",
+                        "│ a    │ bbbb │ c    │ dd │",
+                        "│ aa   │ bbb  │ cccc │ dd │",
+                        "│ aaa  │ bb   │ ccc  │ dd │",
+                        "│ aaaa │ b    │ cc   │ dd │",
+                        "│      │      │      │ dd │",
+                        "└──────┴──────┴──────┴────┘"
                 ),
                 textTableBuilder.toString()
         );
