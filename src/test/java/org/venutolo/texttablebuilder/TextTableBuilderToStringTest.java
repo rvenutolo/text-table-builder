@@ -1,6 +1,5 @@
 package org.venutolo.texttablebuilder;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,7 +22,12 @@ public class TextTableBuilderToStringTest {
     }
 
     private static String joinForTable(final String... strings) {
-        return StringUtils.join(strings, "\n");
+        final StringBuilder stringBuilder = new StringBuilder();
+        for (final String string : strings) {
+            stringBuilder.append(string).append("\n");
+        }
+        stringBuilder.setLength(stringBuilder.length() - 1);
+        return stringBuilder.toString();
     }
 
     @Test

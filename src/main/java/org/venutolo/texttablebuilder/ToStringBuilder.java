@@ -1,9 +1,8 @@
 package org.venutolo.texttablebuilder;
 
-import org.apache.commons.lang3.StringUtils;
-
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -101,6 +100,22 @@ final class ToStringBuilder {
         );
     }
 
+    private static String leftPad(@Nonnull final String s, final int length) {
+        assert s != null;
+        return String.format("%1$" + length + "s", s);
+    }
+
+    private static String rightPad(@Nonnull final String s, final int length) {
+        assert s != null;
+        return String.format("%1$-" + length + "s", s);
+    }
+
+    private static String repeatChar(final char c, final int times) {
+        final char[] chars = new char[times];
+        Arrays.fill(chars, c);
+        return new String(chars);
+    }
+
     private static void checkAndUpdateColumnMaxWidths(
             @Nonnull final int[] columnWidths,
             @Nonnull final String nullColumnReplacement,
@@ -155,9 +170,9 @@ final class ToStringBuilder {
         final int columnWidthWithPadding = columnWidth + 2;
         switch (alignment) {
             case LEFT:
-                return StringUtils.rightPad(columnStringPlusSpaces, columnWidthWithPadding);
+                return rightPad(columnStringPlusSpaces, columnWidthWithPadding);
             case RIGHT:
-                return StringUtils.leftPad(columnStringPlusSpaces, columnWidthWithPadding);
+                return leftPad(columnStringPlusSpaces, columnWidthWithPadding);
             default:
                 throw new IllegalArgumentException("Unexpected alignment: " + alignment);
         }
@@ -226,7 +241,7 @@ final class ToStringBuilder {
         assert columnWidths != null;
         final List<String> horizontalStrings = new ArrayList<String>(columnWidths.length);
         for (final int columnWidth : columnWidths) {
-            final String horizontalString = StringUtils.repeat(horizontalChar, columnWidth + 2);
+            final String horizontalString = repeatChar(horizontalChar, columnWidth + 2);
             horizontalStrings.add(horizontalString);
         }
         return horizontalStrings;
