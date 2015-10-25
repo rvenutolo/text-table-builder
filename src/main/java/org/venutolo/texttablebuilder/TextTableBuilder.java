@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.LIGHT;
 
 /**
@@ -74,7 +72,9 @@ public class TextTableBuilder {
         // check that no alignments are null
         int index = 0;
         for (final Alignment alignment : alignments) {
-            checkNotNull(alignment, "alignment at index %s cannot be null", index);
+            if (alignment == null) {
+                throw new NullPointerException("alignment at index " + index + " cannot be null");
+            }
             index++;
         }
     }
@@ -108,7 +108,9 @@ public class TextTableBuilder {
      *========================================================================*/
 
     protected void checkNumColumns(@Nonnull final Collection<?> collection) {
-        checkNotNull(collection, "collection cannot be null");
+        if (collection == null) {
+            throw new NullPointerException("collection cannot be null");
+        }
         if (numColumns == null) {
             // if numColumns is null, this is the first check for number of columns, so set it
             numColumns = collection.size();
@@ -133,7 +135,9 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder setHeaderAlignments(@Nonnull final Collection<Alignment> headerAlignments) {
-        checkNotNull(headerAlignments, "header alignments cannot be null");
+        if (headerAlignments == null) {
+            throw new NullPointerException("header alignments cannot be null");
+        }
         checkAlignmentsForNull(headerAlignments);
         checkNumColumns(headerAlignments);
         this.headerAlignments = defensiveAlignmentListCopy(headerAlignments);
@@ -162,7 +166,9 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder setColumnAlignments(@Nonnull final Collection<Alignment> columnAlignments) {
-        checkNotNull(columnAlignments, "column alignments cannot be null");
+        if (columnAlignments == null) {
+            throw new NullPointerException("column alignments cannot be null");
+        }
         checkAlignmentsForNull(columnAlignments);
         checkNumColumns(columnAlignments);
         this.columnAlignments = defensiveAlignmentListCopy(columnAlignments);
@@ -191,7 +197,9 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder setHeaders(@Nonnull final Collection<?> headers) {
-        checkNotNull(headers, "headers cannot be null");
+        if (headers == null) {
+            throw new NullPointerException("headers cannot be null");
+        }
         checkNumColumns(headers);
         this.headers = defensiveObjectListCopy(headers);
         return this;
@@ -223,7 +231,9 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder addRow(@Nonnull final Collection<?> row) {
-        checkNotNull(row, "row cannot be null");
+        if (row == null) {
+            throw new NullPointerException("row cannot be null");
+        }
         checkNumColumns(row);
         table.add(defensiveObjectListCopy(row));
         return this;
@@ -263,7 +273,9 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder setBoxDrawingCharacters(@Nonnull final BoxDrawingCharacters boxDrawingCharacters) {
-        checkNotNull(boxDrawingCharacters, "box drawing characters cannot be null");
+        if (boxDrawingCharacters == null) {
+            throw new NullPointerException("box drawing characters cannot be null");
+        }
         this.boxDrawingCharacters = boxDrawingCharacters;
         return this;
     }
@@ -274,7 +286,9 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder setRepeatHeadersEveryXRows(final int repeatHeadersEveryXRows) {
-        checkArgument(repeatHeadersEveryXRows >= 0, "num rows must be non-negative");
+        if (repeatHeadersEveryXRows <0) {
+            throw new IllegalArgumentException("num rows must be non-negative: " + repeatHeadersEveryXRows);
+        }
         this.repeatHeadersEveryXRows = repeatHeadersEveryXRows;
         return this;
     }

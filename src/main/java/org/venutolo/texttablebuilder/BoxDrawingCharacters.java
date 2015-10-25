@@ -1,11 +1,6 @@
 package org.venutolo.texttablebuilder;
 
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
-
 import javax.annotation.Nonnull;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Set of characters used to create text tables.
@@ -106,7 +101,9 @@ public class BoxDrawingCharacters {
      */
     @Nonnull
     protected BoxDrawingCharacters(@Nonnull final Builder builder) {
-        checkNotNull(builder, "builder cannot be null");
+        if (builder == null) {
+            throw new NullPointerException("builder cannot be null");
+        }
         this.horizontal = builder.horizontal;
         this.vertical = builder.vertical;
         this.topLeftCorner = builder.topLeftCorner;
@@ -167,7 +164,9 @@ public class BoxDrawingCharacters {
      */
     @Nonnull
     public static BoxDrawingCharacters fromBoxDrawing(@Nonnull final String boxDrawing) {
-        checkNotNull(boxDrawing, "box drawing cannot be null");
+        if (boxDrawing == null) {
+            throw new NullPointerException("box drawing cannot be null");
+        }
         return new BoxDrawingParser(boxDrawing).parse();
     }
 
@@ -298,17 +297,18 @@ public class BoxDrawingCharacters {
             return false;
         }
         final BoxDrawingCharacters that = (BoxDrawingCharacters) object;
-        return Objects.equal(horizontal, that.horizontal) &&
-               Objects.equal(vertical, that.vertical) &&
-               Objects.equal(topLeftCorner, that.topLeftCorner) &&
-               Objects.equal(topIntersect, that.topIntersect) &&
-               Objects.equal(topRightCorner, that.topRightCorner) &&
-               Objects.equal(leftIntersect, that.leftIntersect) &&
-               Objects.equal(middleIntersect, that.middleIntersect) &&
-               Objects.equal(rightIntersect, that.rightIntersect) &&
-               Objects.equal(bottomLeftCorner, that.bottomLeftCorner) &&
-               Objects.equal(bottomIntersect, that.bottomIntersect) &&
-               Objects.equal(bottomRightCorner, that.bottomRightCorner);
+        return (horizontal == that.horizontal)
+               && (vertical == that.vertical)
+               && (topLeftCorner == that.topLeftCorner)
+               && (topIntersect == that.topIntersect)
+               && (topRightCorner == that.topRightCorner)
+               && (leftIntersect == that.leftIntersect)
+               && (middleIntersect == that.middleIntersect)
+               && (rightIntersect == that.rightIntersect)
+               && (bottomLeftCorner == that.bottomLeftCorner)
+               && (bottomIntersect == that.bottomIntersect)
+               && (bottomRightCorner == that.bottomRightCorner);
+
     }
 
     /**
@@ -318,19 +318,18 @@ public class BoxDrawingCharacters {
      */
     @Override
     public int hashCode() {
-        return Objects.hashCode(
-                horizontal,
-                vertical,
-                topLeftCorner,
-                topIntersect,
-                topRightCorner,
-                leftIntersect,
-                middleIntersect,
-                rightIntersect,
-                bottomLeftCorner,
-                bottomIntersect,
-                bottomRightCorner
-        );
+        int result = horizontal;
+        result = (31 * result) + vertical;
+        result = (31 * result) + topLeftCorner;
+        result = (31 * result) + topIntersect;
+        result = (31 * result) + topRightCorner;
+        result = (31 * result) + leftIntersect;
+        result = (31 * result) + middleIntersect;
+        result = (31 * result) + rightIntersect;
+        result = (31 * result) + bottomLeftCorner;
+        result = (31 * result) + bottomIntersect;
+        result = (31 * result) + bottomRightCorner;
+        return result;
     }
 
     /**
@@ -340,19 +339,19 @@ public class BoxDrawingCharacters {
      */
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                          .add("horizontal", horizontal)
-                          .add("vertical", vertical)
-                          .add("topLeftCorner", topLeftCorner)
-                          .add("topIntersect", topIntersect)
-                          .add("topRightCorner", topRightCorner)
-                          .add("leftIntersect", leftIntersect)
-                          .add("middleIntersect", middleIntersect)
-                          .add("rightIntersect", rightIntersect)
-                          .add("bottomLeftCorner", bottomLeftCorner)
-                          .add("bottomIntersect", bottomIntersect)
-                          .add("bottomRightCorner", bottomRightCorner)
-                          .toString();
+        return "BoxDrawingCharacters ["
+               + "horizontal=" + horizontal
+               + ", vertical=" + vertical
+               + ", topLeftCorner=" + topLeftCorner
+               + ", topIntersect=" + topIntersect
+               + ", topRightCorner=" + topRightCorner
+               + ", leftIntersect=" + leftIntersect
+               + ", middleIntersect=" + middleIntersect
+               + ", rightIntersect=" + rightIntersect
+               + ", bottomLeftCorner=" + bottomLeftCorner
+               + ", bottomIntersect=" + bottomIntersect
+               + ", bottomRightCorner=" + bottomRightCorner
+               + "]";
     }
 
     /**
