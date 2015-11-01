@@ -168,14 +168,9 @@ final class ToStringBuilder {
         assert columnWidth >= 0;
         final String columnStringPlusSpaces = " " + columnString + " ";
         final int columnWidthWithPadding = columnWidth + 2;
-        switch (alignment) {
-            case LEFT:
-                return rightPad(columnStringPlusSpaces, columnWidthWithPadding);
-            case RIGHT:
-                return leftPad(columnStringPlusSpaces, columnWidthWithPadding);
-            default:
-                throw new IllegalArgumentException("Unexpected alignment: " + alignment);
-        }
+        return (alignment == LEFT)
+               ? rightPad(columnStringPlusSpaces, columnWidthWithPadding)
+               : leftPad(columnStringPlusSpaces, columnWidthWithPadding);
     }
 
     private static List<String> getPaddedAndAlignedRowStrings(
