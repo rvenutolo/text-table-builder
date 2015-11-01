@@ -1,6 +1,7 @@
 package org.venutolo.texttablebuilder;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 
 /**
  * Set of characters used to create text tables.
@@ -279,6 +280,21 @@ public class BoxDrawingCharacters {
         return bottomRightCorner;
     }
 
+    private char[] getCharArray() {
+        return new char[]{
+                vertical,
+                topLeftCorner,
+                topIntersect,
+                topRightCorner,
+                leftIntersect,
+                middleIntersect,
+                rightIntersect,
+                bottomLeftCorner,
+                bottomIntersect,
+                bottomRightCorner
+        };
+    }
+
     /**
      * Returns {@code true} if {@code object} is a {@code BoxDrawingCharacters} with the same set of
      * characters used for box drawing.
@@ -297,18 +313,7 @@ public class BoxDrawingCharacters {
             return false;
         }
         final BoxDrawingCharacters that = (BoxDrawingCharacters) object;
-        return (horizontal == that.horizontal)
-               && (vertical == that.vertical)
-               && (topLeftCorner == that.topLeftCorner)
-               && (topIntersect == that.topIntersect)
-               && (topRightCorner == that.topRightCorner)
-               && (leftIntersect == that.leftIntersect)
-               && (middleIntersect == that.middleIntersect)
-               && (rightIntersect == that.rightIntersect)
-               && (bottomLeftCorner == that.bottomLeftCorner)
-               && (bottomIntersect == that.bottomIntersect)
-               && (bottomRightCorner == that.bottomRightCorner);
-
+        return Arrays.equals(getCharArray(), that.getCharArray());
     }
 
     /**
@@ -318,18 +323,7 @@ public class BoxDrawingCharacters {
      */
     @Override
     public int hashCode() {
-        int result = horizontal;
-        result = (31 * result) + vertical;
-        result = (31 * result) + topLeftCorner;
-        result = (31 * result) + topIntersect;
-        result = (31 * result) + topRightCorner;
-        result = (31 * result) + leftIntersect;
-        result = (31 * result) + middleIntersect;
-        result = (31 * result) + rightIntersect;
-        result = (31 * result) + bottomLeftCorner;
-        result = (31 * result) + bottomIntersect;
-        result = (31 * result) + bottomRightCorner;
-        return result;
+        return Arrays.hashCode(getCharArray());
     }
 
     /**
