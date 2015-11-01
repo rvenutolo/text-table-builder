@@ -13,6 +13,9 @@ import static org.venutolo.texttablebuilder.BoxDrawingCharacters.LIGHT;
  */
 public class TextTableBuilderToStringTest {
 
+    private static final String TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE =
+            "toString() did not produced expected value";
+
     private TextTableBuilder textTableBuilder;
 
     @Before
@@ -36,7 +39,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("a", "b");
         textTableBuilder.setBoxDrawingCharacters(LIGHT);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "┌───┬───┐",
                         "│ h │ h │",
@@ -52,7 +55,7 @@ public class TextTableBuilderToStringTest {
     public void testEmptyTableToString() {
         textTableBuilder.setBoxDrawingCharacters(LIGHT);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should just be the four corner characters
                 joinForTable(
                         "┌┐",
@@ -66,7 +69,7 @@ public class TextTableBuilderToStringTest {
     public void testSetHeadersToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -82,7 +85,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.clearHeaders();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should retain three columns
                 joinForTable(
                         "##########",
@@ -96,7 +99,7 @@ public class TextTableBuilderToStringTest {
     public void testAddRowToString() {
         textTableBuilder.addRow("a", "b", "c");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# a # b # c #",
@@ -111,7 +114,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("d", "e", "f");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# a # b # c #",
@@ -128,7 +131,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.clearRows();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should retain three columns
                 joinForTable(
                         "##########",
@@ -144,7 +147,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("d", "e", "f");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -164,7 +167,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.clearHeaders();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# a # b # c #",
@@ -182,7 +185,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.clearRows();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -201,7 +204,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.clearHeaders();
         textTableBuilder.clearRows();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "##########",
                         "##########"
@@ -216,7 +219,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("aa", "bbb", "cccc");
         textTableBuilder.addRow("dd", "eee", "ffff");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment
                 joinForTable(
                         "###################",
@@ -237,7 +240,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("dd", "eee", "ffff");
         textTableBuilder.setHeaderAlignments(LEFT, LEFT, LEFT);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "###################",
                         "# h  # h   # h    #",
@@ -250,7 +253,7 @@ public class TextTableBuilderToStringTest {
         );
         textTableBuilder.setHeaderAlignments(RIGHT, RIGHT, RIGHT);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "###################",
                         "#  h #   h #    h #",
@@ -271,7 +274,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setHeaderAlignments(RIGHT, RIGHT, RIGHT);
         textTableBuilder.clearHeaderAlignments();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment after clear
                 joinForTable(
                         "###################",
@@ -291,7 +294,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("d", "e", "f");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment
                 joinForTable(
                         "###################",
@@ -312,7 +315,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.setColumnAlignments(LEFT, LEFT, LEFT);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "###################",
                         "# hh # hhh # hhhh #",
@@ -325,7 +328,7 @@ public class TextTableBuilderToStringTest {
         );
         textTableBuilder.setColumnAlignments(RIGHT, RIGHT, RIGHT);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "###################",
                         "# hh # hhh # hhhh #",
@@ -346,7 +349,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setColumnAlignments(RIGHT, RIGHT, RIGHT);
         textTableBuilder.clearColumnAlignments();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment after clear
                 joinForTable(
                         "###################",
@@ -366,7 +369,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("aaaa", "bbb", "cc", "d");
         textTableBuilder.addRow("e", "f", "g", "h");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment
                 joinForTable(
                         "###########################",
@@ -388,7 +391,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setHeaderAlignments(LEFT, LEFT, LEFT, LEFT);
         textTableBuilder.setColumnAlignments(LEFT, LEFT, LEFT, LEFT);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "###########################",
                         "# h    # hh  # hhh # hhhh #",
@@ -402,7 +405,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setHeaderAlignments(RIGHT, RIGHT, RIGHT, RIGHT);
         textTableBuilder.setColumnAlignments(RIGHT, RIGHT, RIGHT, RIGHT);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "###########################",
                         "#    h #  hh # hhh # hhhh #",
@@ -416,7 +419,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setHeaderAlignments(LEFT, LEFT, LEFT, LEFT);
         textTableBuilder.setColumnAlignments(RIGHT, RIGHT, RIGHT, RIGHT);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "###########################",
                         "# h    # hh  # hhh # hhhh #",
@@ -430,7 +433,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setHeaderAlignments(RIGHT, RIGHT, RIGHT, RIGHT);
         textTableBuilder.setColumnAlignments(LEFT, LEFT, LEFT, LEFT);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "###########################",
                         "#    h #  hh # hhh # hhhh #",
@@ -453,7 +456,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.clearHeaderAlignments();
         textTableBuilder.clearColumnAlignments();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment after clear
                 joinForTable(
                         "###########################",
@@ -474,7 +477,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.setRepeatHeadersEveryXRows(5);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -494,7 +497,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.setRepeatHeadersEveryXRows(1);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -519,7 +522,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.setRepeatHeadersEveryXRows(2);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -542,7 +545,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("g", "h", "i");
         textTableBuilder.setRepeatHeadersEveryXRows(2);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -568,7 +571,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setRepeatHeadersEveryXRows(1);
         textTableBuilder.setRepeatHeadersEveryXRows(0);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -589,7 +592,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.repeatHeadersAtBottom();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -612,7 +615,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.repeatHeadersAtBottom();
         textTableBuilder.setRepeatHeadersAtBottom(false);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -634,7 +637,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setRepeatHeadersEveryXRows(2);
         textTableBuilder.repeatHeadersAtBottom();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -661,7 +664,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setRepeatHeadersEveryXRows(2);
         textTableBuilder.repeatHeadersAtBottom();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // header should NOT repeat at bottom twice
                 joinForTable(
                         "#############",
@@ -684,7 +687,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.showRowNums();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#################",
                         "#   # h # h # h #",
@@ -712,7 +715,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.showRowNums();
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "##################",
                         "#    # h # h # h #",
@@ -741,7 +744,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.showRowNums();
         textTableBuilder.setShowRowNums(false);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -761,7 +764,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.setLinePrepender(">");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         ">#############",
                         "># h # h # h #",
@@ -782,7 +785,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setLinePrepender(">");
         textTableBuilder.setLinePrepender(null);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -802,7 +805,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.setLineAppender("<");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############<",
                         "# h # h # h #<",
@@ -823,7 +826,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setLineAppender("<");
         textTableBuilder.setLineAppender(null);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -842,7 +845,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow(null, null, null);
         textTableBuilder.addRow("d", "e", "f");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // nulls should be replaced with empty strings
                 joinForTable(
                         "#############",
@@ -863,7 +866,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.setNullColumnReplacement("N");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -884,7 +887,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setNullColumnReplacement("N");
         textTableBuilder.setNullColumnReplacement(null);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# h # h # h #",
@@ -904,7 +907,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.setNullColumnReplacement("N");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "#############",
                         "# N # N # N #",
@@ -939,7 +942,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setLineAppender("<");
         textTableBuilder.setNullColumnReplacement("NULL");
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         ">##################################<",
                         ">#    # h    # hh   #  hhh # NULL #<",
@@ -979,7 +982,7 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setNullColumnReplacement(null);
         textTableBuilder.setBoxDrawingCharacters(LIGHT);
         assertEquals(
-                "toString() did not produced expected value",
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         "┌──────┬──────┬──────┬────┐",
                         "│ h    │ hh   │ hhh  │    │",
