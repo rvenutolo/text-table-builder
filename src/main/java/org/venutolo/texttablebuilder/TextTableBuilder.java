@@ -367,4 +367,41 @@ public class TextTableBuilder {
         return ToStringBuilder.getToStringFor(this);
     }
 
+    /*========================================================================
+     * EQUALS / HASHCODE
+     *========================================================================*/
+
+    private Object[] getObjectArray() {
+        return new Object[] {
+                repeatHeadersEveryXRows,
+                repeatHeadersAtBottom,
+                showRowNums,
+                headerAlignments,
+                columnAlignments,
+                headers,
+                table,
+                boxDrawingCharacters,
+                linePrepender,
+                lineAppender,
+                nullColumnReplacement
+        };
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if ((o == null) || (getClass() != o.getClass())) {
+            return false;
+        }
+        final TextTableBuilder that = (TextTableBuilder) o;
+        return Arrays.equals(getObjectArray(), that.getObjectArray());
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(getObjectArray());
+    }
+
 }
