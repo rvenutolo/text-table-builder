@@ -16,8 +16,8 @@ import static org.venutolo.texttablebuilder.BoxDrawingCharacters.CURVED;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.DOUBLE;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.HEAVY;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.LIGHT;
-import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.CANNOT_BE_NULL;
-import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
+import static org.venutolo.texttablebuilder.TestStrings.CANNOT_BE_NULL;
+import static org.venutolo.texttablebuilder.TestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
 
 /**
  * @author Rick Venutolo

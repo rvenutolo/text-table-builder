@@ -8,8 +8,8 @@ import org.junit.rules.ExpectedException;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
-import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.CANNOT_BE_NULL;
-import static org.venutolo.texttablebuilder.TextTableBuilderTestStrings.EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH;
+import static org.venutolo.texttablebuilder.TestStrings.CANNOT_BE_NULL;
+import static org.venutolo.texttablebuilder.TestStrings.EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH;
 
 /**
  * @author Rick Venutolo

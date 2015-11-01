@@ -9,32 +9,18 @@ import static org.venutolo.texttablebuilder.Alignment.LEFT;
 import static org.venutolo.texttablebuilder.Alignment.RIGHT;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.CURVED;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.HEAVY;
+import static org.venutolo.texttablebuilder.TestStrings.EQUAL_ITSELF;
+import static org.venutolo.texttablebuilder.TestStrings.EQUAL_TO_INSTANCE_WITH_SAME_VALUES;
+import static org.venutolo.texttablebuilder.TestStrings.HASH_CODE_MUST_BE_DISTINCT;
+import static org.venutolo.texttablebuilder.TestStrings.HASH_CODE_MUST_BE_SAME;
+import static org.venutolo.texttablebuilder.TestStrings.NOT_EQUAL_RANDOM_OBJECT;
+import static org.venutolo.texttablebuilder.TestStrings.NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES;
+import static org.venutolo.texttablebuilder.TestStrings.NOT_EQUAL_TO_NULL;
 
 /**
  * @author Rick Venutolo
  */
 public class TextTableBuilderEqualsAndHashCodeTest {
-
-    private static final String NOT_EQUAL_TO_NULL =
-            "must not be equal to null";
-
-    private static final String NOT_EQUAL_RANDOM_OBJECT =
-            "must not be equal to some random object";
-
-    private static final String EQUAL_ITSELF =
-            "must be equal to itself";
-
-    private static final String NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES =
-            "must not be equal to instance with different values";
-
-    private static final String EQUAL_TO_INSTANCE_WITH_SAME_VALUES =
-            "must be equal to instance with same values";
-
-    private static final String HASH_CODE_MUST_BE_DISTINCT =
-            "hash code must be distinct for non-equal instances";
-
-    private static final String HASH_CODE_MUST_BE_SAME =
-            "hash code must be the same for equal instances";
 
     private TextTableBuilder textTableBuilder1;
 
