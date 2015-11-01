@@ -191,14 +191,10 @@ final class ToStringBuilder {
             final String columnString = (columnObject != null)
                                         ? columnObject.toString()
                                         : nullColumnReplacement;
-            // if alignments is empty, default to LEFT alignment
-            final Alignment alignment = alignments.isEmpty()
-                                        ? LEFT
-                                        : alignments.get(i);
             final int columnWidth = columnWidths[i];
             final String paddedAndAlignedColumnString = getPaddedAndAlignedColumnString(
                     columnString,
-                    alignment,
+                    alignments.get(i),
                     columnWidth
             );
             paddedAndAlignedRowStrings.add(paddedAndAlignedColumnString);
