@@ -282,6 +282,7 @@ public class BoxDrawingCharacters {
 
     private char[] getCharArray() {
         return new char[]{
+                horizontal,
                 vertical,
                 topLeftCorner,
                 topIntersect,
