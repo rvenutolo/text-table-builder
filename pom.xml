@@ -34,11 +34,10 @@
         <url>https://github.com/rvenutolo/text-table-builder/issues</url>
     </issueManagement>
 
-    <!-- TODO try Travis CI -->
-    <!--<ciManagement>-->
-        <!--<system>Travis CI</system>-->
-        <!--<url>https://travis-ci.org/rvenutolo/text-table-builder</url>-->
-    <!--</ciManagement>-->
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/rvenutolo/text-table-builder</url>
+    </ciManagement>
 
     <developers>
         <developer>
