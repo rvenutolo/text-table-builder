@@ -1,6 +1,5 @@
 package org.venutolo.texttablebuilder;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -87,12 +86,6 @@ public class BoxDrawingCharactersTest {
                 .setBottomRightCorner('9')
                 .build();
         builder = new BoxDrawingCharacters.Builder();
-    }
-
-    @After
-    public void tearDown() {
-        testCharacters = null;
-        builder = null;
     }
 
     /*========================================================================
