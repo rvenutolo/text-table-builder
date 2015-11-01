@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.venutolo.texttablebuilder.Alignment.LEFT;
 import static org.venutolo.texttablebuilder.Alignment.RIGHT;
+import static org.venutolo.texttablebuilder.BoxDrawingCharacters.ASCII;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.LIGHT;
 
 /**
@@ -21,7 +22,7 @@ public class TextTableBuilderToStringTest {
     @Before
     public void setUp() {
         textTableBuilder = new TextTableBuilder()
-                .setBoxDrawingCharacters(BoxDrawingCharacters.forCharacter('#'));
+                .setBoxDrawingCharacters(ASCII);
     }
 
     private static String joinForTable(final String... strings) {
@@ -71,10 +72,10 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -88,8 +89,8 @@ public class TextTableBuilderToStringTest {
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should retain three columns
                 joinForTable(
-                        "##########",
-                        "##########"
+                        "+--+--+--+",
+                        "+--+--+--+"
                 ),
                 textTableBuilder.toString()
         );
@@ -101,9 +102,9 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# a # b # c #",
-                        "#############"
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -116,10 +117,10 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -134,8 +135,8 @@ public class TextTableBuilderToStringTest {
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should retain three columns
                 joinForTable(
-                        "##########",
-                        "##########"
+                        "+--+--+--+",
+                        "+--+--+--+"
                 ),
                 textTableBuilder.toString()
         );
@@ -149,12 +150,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -169,10 +170,10 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -187,10 +188,10 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -205,9 +206,10 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.clearRows();
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
+                // should retain three columns
                 joinForTable(
-                        "##########",
-                        "##########"
+                        "+--+--+--+",
+                        "+--+--+--+"
                 ),
                 textTableBuilder.toString()
         );
@@ -222,12 +224,12 @@ public class TextTableBuilderToStringTest {
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment
                 joinForTable(
-                        "###################",
-                        "# h  # h   # h    #",
-                        "###################",
-                        "# aa # bbb # cccc #",
-                        "# dd # eee # ffff #",
-                        "###################"
+                        "+----+-----+------+",
+                        "| h  | h   | h    |",
+                        "+----+-----+------+",
+                        "| aa | bbb | cccc |",
+                        "| dd | eee | ffff |",
+                        "+----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -242,12 +244,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "###################",
-                        "# h  # h   # h    #",
-                        "###################",
-                        "# aa # bbb # cccc #",
-                        "# dd # eee # ffff #",
-                        "###################"
+                        "+----+-----+------+",
+                        "| h  | h   | h    |",
+                        "+----+-----+------+",
+                        "| aa | bbb | cccc |",
+                        "| dd | eee | ffff |",
+                        "+----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -255,12 +257,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "###################",
-                        "#  h #   h #    h #",
-                        "###################",
-                        "# aa # bbb # cccc #",
-                        "# dd # eee # ffff #",
-                        "###################"
+                        "+----+-----+------+",
+                        "|  h |   h |    h |",
+                        "+----+-----+------+",
+                        "| aa | bbb | cccc |",
+                        "| dd | eee | ffff |",
+                        "+----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -277,12 +279,12 @@ public class TextTableBuilderToStringTest {
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment after clear
                 joinForTable(
-                        "###################",
-                        "# h  # h   # h    #",
-                        "###################",
-                        "# aa # bbb # cccc #",
-                        "# dd # eee # ffff #",
-                        "###################"
+                        "+----+-----+------+",
+                        "| h  | h   | h    |",
+                        "+----+-----+------+",
+                        "| aa | bbb | cccc |",
+                        "| dd | eee | ffff |",
+                        "+----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -297,12 +299,12 @@ public class TextTableBuilderToStringTest {
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment
                 joinForTable(
-                        "###################",
-                        "# hh # hhh # hhhh #",
-                        "###################",
-                        "# a  # b   # c    #",
-                        "# d  # e   # f    #",
-                        "###################"
+                        "+----+-----+------+",
+                        "| hh | hhh | hhhh |",
+                        "+----+-----+------+",
+                        "| a  | b   | c    |",
+                        "| d  | e   | f    |",
+                        "+----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -317,12 +319,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "###################",
-                        "# hh # hhh # hhhh #",
-                        "###################",
-                        "# a  # b   # c    #",
-                        "# d  # e   # f    #",
-                        "###################"
+                        "+----+-----+------+",
+                        "| hh | hhh | hhhh |",
+                        "+----+-----+------+",
+                        "| a  | b   | c    |",
+                        "| d  | e   | f    |",
+                        "+----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -330,12 +332,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "###################",
-                        "# hh # hhh # hhhh #",
-                        "###################",
-                        "#  a #   b #    c #",
-                        "#  d #   e #    f #",
-                        "###################"
+                        "+----+-----+------+",
+                        "| hh | hhh | hhhh |",
+                        "+----+-----+------+",
+                        "|  a |   b |    c |",
+                        "|  d |   e |    f |",
+                        "+----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -352,12 +354,12 @@ public class TextTableBuilderToStringTest {
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment after clear
                 joinForTable(
-                        "###################",
-                        "# hh # hhh # hhhh #",
-                        "###################",
-                        "# a  # b   # c    #",
-                        "# d  # e   # f    #",
-                        "###################"
+                        "+----+-----+------+",
+                        "| hh | hhh | hhhh |",
+                        "+----+-----+------+",
+                        "| a  | b   | c    |",
+                        "| d  | e   | f    |",
+                        "+----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -372,12 +374,12 @@ public class TextTableBuilderToStringTest {
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment
                 joinForTable(
-                        "###########################",
-                        "# h    # hh  # hhh # hhhh #",
-                        "###########################",
-                        "# aaaa # bbb # cc  # d    #",
-                        "# e    # f   # g   # h    #",
-                        "###########################"
+                        "+------+-----+-----+------+",
+                        "| h    | hh  | hhh | hhhh |",
+                        "+------+-----+-----+------+",
+                        "| aaaa | bbb | cc  | d    |",
+                        "| e    | f   | g   | h    |",
+                        "+------+-----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -393,12 +395,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "###########################",
-                        "# h    # hh  # hhh # hhhh #",
-                        "###########################",
-                        "# aaaa # bbb # cc  # d    #",
-                        "# e    # f   # g   # h    #",
-                        "###########################"
+                        "+------+-----+-----+------+",
+                        "| h    | hh  | hhh | hhhh |",
+                        "+------+-----+-----+------+",
+                        "| aaaa | bbb | cc  | d    |",
+                        "| e    | f   | g   | h    |",
+                        "+------+-----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -407,12 +409,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "###########################",
-                        "#    h #  hh # hhh # hhhh #",
-                        "###########################",
-                        "# aaaa # bbb #  cc #    d #",
-                        "#    e #   f #   g #    h #",
-                        "###########################"
+                        "+------+-----+-----+------+",
+                        "|    h |  hh | hhh | hhhh |",
+                        "+------+-----+-----+------+",
+                        "| aaaa | bbb |  cc |    d |",
+                        "|    e |   f |   g |    h |",
+                        "+------+-----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -421,12 +423,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "###########################",
-                        "# h    # hh  # hhh # hhhh #",
-                        "###########################",
-                        "# aaaa # bbb #  cc #    d #",
-                        "#    e #   f #   g #    h #",
-                        "###########################"
+                        "+------+-----+-----+------+",
+                        "| h    | hh  | hhh | hhhh |",
+                        "+------+-----+-----+------+",
+                        "| aaaa | bbb |  cc |    d |",
+                        "|    e |   f |   g |    h |",
+                        "+------+-----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -435,12 +437,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "###########################",
-                        "#    h #  hh # hhh # hhhh #",
-                        "###########################",
-                        "# aaaa # bbb # cc  # d    #",
-                        "# e    # f   # g   # h    #",
-                        "###########################"
+                        "+------+-----+-----+------+",
+                        "|    h |  hh | hhh | hhhh |",
+                        "+------+-----+-----+------+",
+                        "| aaaa | bbb | cc  | d    |",
+                        "| e    | f   | g   | h    |",
+                        "+------+-----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -459,12 +461,12 @@ public class TextTableBuilderToStringTest {
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // should default to left alignment after clear
                 joinForTable(
-                        "###########################",
-                        "# h    # hh  # hhh # hhhh #",
-                        "###########################",
-                        "# aaaa # bbb # cc  # d    #",
-                        "# e    # f   # g   # h    #",
-                        "###########################"
+                        "+------+-----+-----+------+",
+                        "| h    | hh  | hhh | hhhh |",
+                        "+------+-----+-----+------+",
+                        "| aaaa | bbb | cc  | d    |",
+                        "| e    | f   | g   | h    |",
+                        "+------+-----+-----+------+"
                 ),
                 textTableBuilder.toString()
         );
@@ -479,12 +481,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -499,17 +501,17 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# d # e # f #",
-                        "#############",
-                        "# h # h # h #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| d | e | f |",
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -524,14 +526,14 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############",
-                        "# h # h # h #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -547,16 +549,16 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# g # h # i #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| g | h | i |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -573,13 +575,13 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "# g # h # i #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "| g | h | i |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -594,14 +596,14 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############",
-                        "# h # h # h #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -617,12 +619,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -639,18 +641,18 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# g # h # i #",
-                        "#############",
-                        "# h # h # h #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| g | h | i |",
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -667,14 +669,14 @@ public class TextTableBuilderToStringTest {
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // header should NOT repeat at bottom twice
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############",
-                        "# h # h # h #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -689,12 +691,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#################",
-                        "#   # h # h # h #",
-                        "#################",
-                        "# 1 # a # b # c #",
-                        "# 2 # d # e # f #",
-                        "#################"
+                        "+---+---+---+---+",
+                        "|   | h | h | h |",
+                        "+---+---+---+---+",
+                        "| 1 | a | b | c |",
+                        "| 2 | d | e | f |",
+                        "+---+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -717,20 +719,20 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "##################",
-                        "#    # h # h # h #",
-                        "##################",
-                        "#  1 # a # b # c #",
-                        "#  2 # a # b # c #",
-                        "#  3 # a # b # c #",
-                        "#  4 # a # b # c #",
-                        "#  5 # a # b # c #",
-                        "#  6 # a # b # c #",
-                        "#  7 # a # b # c #",
-                        "#  8 # a # b # c #",
-                        "#  9 # a # b # c #",
-                        "# 10 # a # b # c #",
-                        "##################"
+                        "+----+---+---+---+",
+                        "|    | h | h | h |",
+                        "+----+---+---+---+",
+                        "|  1 | a | b | c |",
+                        "|  2 | a | b | c |",
+                        "|  3 | a | b | c |",
+                        "|  4 | a | b | c |",
+                        "|  5 | a | b | c |",
+                        "|  6 | a | b | c |",
+                        "|  7 | a | b | c |",
+                        "|  8 | a | b | c |",
+                        "|  9 | a | b | c |",
+                        "| 10 | a | b | c |",
+                        "+----+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -746,12 +748,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -766,12 +768,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        ">#############",
-                        "># h # h # h #",
-                        ">#############",
-                        "># a # b # c #",
-                        "># d # e # f #",
-                        ">#############"
+                        ">+---+---+---+",
+                        ">| h | h | h |",
+                        ">+---+---+---+",
+                        ">| a | b | c |",
+                        ">| d | e | f |",
+                        ">+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -787,12 +789,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -807,12 +809,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############<",
-                        "# h # h # h #<",
-                        "#############<",
-                        "# a # b # c #<",
-                        "# d # e # f #<",
-                        "#############<"
+                        "+---+---+---+<",
+                        "| h | h | h |<",
+                        "+---+---+---+<",
+                        "| a | b | c |<",
+                        "| d | e | f |<",
+                        "+---+---+---+<"
                 ),
                 textTableBuilder.toString()
         );
@@ -828,12 +830,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -848,12 +850,12 @@ public class TextTableBuilderToStringTest {
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 // nulls should be replaced with empty strings
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "#   #   #   #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "|   |   |   |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -868,12 +870,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "# N # N # N #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "| N | N | N |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -889,12 +891,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# h # h # h #",
-                        "#############",
-                        "#   #   #   #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| h | h | h |",
+                        "+---+---+---+",
+                        "|   |   |   |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -909,12 +911,12 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "#############",
-                        "# N # N # N #",
-                        "#############",
-                        "# a # b # c #",
-                        "# d # e # f #",
-                        "#############"
+                        "+---+---+---+",
+                        "| N | N | N |",
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+"
                 ),
                 textTableBuilder.toString()
         );
@@ -944,31 +946,31 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        ">##################################<",
-                        ">#    # h    # hh   #  hhh # NULL #<",
-                        ">##################################<",
-                        ">#  1 # aaaa # NULL #    c # dd   #<",
-                        ">#  2 # aaa  #    b # cccc # dd   #<",
-                        ">#  3 # aa   #   bb #  ccc # dd   #<",
-                        ">##################################<",
-                        ">#    # h    # hh   #  hhh # NULL #<",
-                        ">##################################<",
-                        ">#  4 # a    #  bbb #   cc # dd   #<",
-                        ">#  5 # NULL # bbbb #      # dd   #<",
-                        ">#  6 # a    # bbbb #    c # dd   #<",
-                        ">##################################<",
-                        ">#    # h    # hh   #  hhh # NULL #<",
-                        ">##################################<",
-                        ">#  7 # aa   #  bbb # cccc # dd   #<",
-                        ">#  8 # aaa  #   bb #  ccc # dd   #<",
-                        ">#  9 # aaaa #    b #   cc # dd   #<",
-                        ">##################################<",
-                        ">#    # h    # hh   #  hhh # NULL #<",
-                        ">##################################<",
-                        "># 10 # NULL # NULL #      # dd   #<",
-                        ">##################################<",
-                        ">#    # h    # hh   #  hhh # NULL #<",
-                        ">##################################<"
+                        ">+----+------+------+------+------+<",
+                        ">|    | h    | hh   |  hhh | NULL |<",
+                        ">+----+------+------+------+------+<",
+                        ">|  1 | aaaa | NULL |    c | dd   |<",
+                        ">|  2 | aaa  |    b | cccc | dd   |<",
+                        ">|  3 | aa   |   bb |  ccc | dd   |<",
+                        ">+----+------+------+------+------+<",
+                        ">|    | h    | hh   |  hhh | NULL |<",
+                        ">+----+------+------+------+------+<",
+                        ">|  4 | a    |  bbb |   cc | dd   |<",
+                        ">|  5 | NULL | bbbb |      | dd   |<",
+                        ">|  6 | a    | bbbb |    c | dd   |<",
+                        ">+----+------+------+------+------+<",
+                        ">|    | h    | hh   |  hhh | NULL |<",
+                        ">+----+------+------+------+------+<",
+                        ">|  7 | aa   |  bbb | cccc | dd   |<",
+                        ">|  8 | aaa  |   bb |  ccc | dd   |<",
+                        ">|  9 | aaaa |    b |   cc | dd   |<",
+                        ">+----+------+------+------+------+<",
+                        ">|    | h    | hh   |  hhh | NULL |<",
+                        ">+----+------+------+------+------+<",
+                        ">| 10 | NULL | NULL |      | dd   |<",
+                        ">+----+------+------+------+------+<",
+                        ">|    | h    | hh   |  hhh | NULL |<",
+                        ">+----+------+------+------+------+<"
                 ),
                 textTableBuilder.toString()
         );
