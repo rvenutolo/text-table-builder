@@ -56,7 +56,9 @@ final class ToStringBuilder {
         if (showRowNums) {
             headerAlignments.add(0, RIGHT);
             columnAlignments.add(0, RIGHT);
-            headers.add(0, "");
+            if (!headers.isEmpty()) {
+                headers.add(0, "");
+            }
             int rowNum = 1;
             for (final List<Object> row : rows) {
                 row.add(0, rowNum);

@@ -684,15 +684,12 @@ public class TextTableBuilderToStringTest {
 
     @Test
     public void testShowRowNumsToString() {
-        textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("d", "e", "f");
         textTableBuilder.showRowNums();
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "+---+---+---+---+",
-                        "|   | h | h | h |",
                         "+---+---+---+---+",
                         "| 1 | a | b | c |",
                         "| 2 | d | e | f |",
@@ -704,7 +701,6 @@ public class TextTableBuilderToStringTest {
 
     @Test
     public void testShowRowNumsRowNumAlignmentToString() {
-        textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("a", "b", "c");
         textTableBuilder.addRow("a", "b", "c");
@@ -719,8 +715,6 @@ public class TextTableBuilderToStringTest {
         assertEquals(
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
-                        "+----+---+---+---+",
-                        "|    | h | h | h |",
                         "+----+---+---+---+",
                         "|  1 | a | b | c |",
                         "|  2 | a | b | c |",
