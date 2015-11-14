@@ -36,6 +36,17 @@ final class ToStringBuilder {
 
     private final List<String> horizontalStrings;
 
+    private static void ifEmptyPopulateWithLeft(
+            final Collection<Alignment> alignments,
+            final int numColumns
+    ) {
+        if (alignments.isEmpty()) {
+            for (int i = 0; i < numColumns; i++) {
+                alignments.add(LEFT);
+            }
+        }
+    }
+
     private ToStringBuilder(final TextTableBuilder textTableBuilder) {
         final boolean showRowNums = textTableBuilder.getShowRowNums();
         numColumns = textTableBuilder.getNumColumns() + (showRowNums ? 1 : 0);
@@ -47,19 +58,10 @@ final class ToStringBuilder {
         final List<Object> headers = textTableBuilder.getHeaders();
         final List<List<Object>> rows = textTableBuilder.getRows();
         final List<Alignment> headerAlignments = textTableBuilder.getHeaderAlignments();
-        // if alignments are empty, then populate with LEFT for defaults
-        if (headerAlignments.isEmpty()) {
-            for (int i = 0; i < textTableBuilder.getNumColumns(); i++) {
-                headerAlignments.add(LEFT);
-            }
-        }
         final List<Alignment> columnAlignments = textTableBuilder.getColumnAlignments();
         // if alignments are empty, then populate with LEFT for defaults
-        if (columnAlignments.isEmpty()) {
-            for (int i = 0; i < textTableBuilder.getNumColumns(); i++) {
-                columnAlignments.add(LEFT);
-            }
-        }
+        ifEmptyPopulateWithLeft(headerAlignments, textTableBuilder.getNumColumns());
+        ifEmptyPopulateWithLeft(columnAlignments, textTableBuilder.getNumColumns());
         final String nullColumnReplacement = textTableBuilder.getNullColumnReplacement();
         // if showing row number, add column items for row numbers
         if (showRowNums) {
