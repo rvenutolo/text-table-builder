@@ -3,6 +3,8 @@ package org.venutolo.texttablebuilder;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.DecimalFormat;
+
 import static org.junit.Assert.assertEquals;
 import static org.venutolo.texttablebuilder.Alignment.LEFT;
 import static org.venutolo.texttablebuilder.Alignment.RIGHT;
@@ -754,6 +756,99 @@ public class TextTableBuilderToStringTest {
     }
 
     @Test
+    public void testSetRowNumsHeader() {
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.showRowNums();
+        textTableBuilder.setRowNumHeader("r");
+        assertEquals(
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
+                joinForTable(
+                        "+---+---+---+---+",
+                        "| r |   |   |   |",
+                        "+---+---+---+---+",
+                        "| 1 | a | b | c |",
+                        "| 2 | d | e | f |",
+                        "+---+---+---+---+"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetRowNumsHeaderWithHeader() {
+        textTableBuilder.setHeaders("h", "h", "h");
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.showRowNums();
+        textTableBuilder.setRowNumHeader("r");
+        assertEquals(
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
+                joinForTable(
+                        "+---+---+---+---+",
+                        "| r | h | h | h |",
+                        "+---+---+---+---+",
+                        "| 1 | a | b | c |",
+                        "| 2 | d | e | f |",
+                        "+---+---+---+---+"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetRowNumsHeaderNoShowRowNums() {
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setRowNumHeader("r");
+        assertEquals(
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
+                joinForTable(
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetRowNumsFormat() {
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.showRowNums();
+        textTableBuilder.setRowNumFormat(new DecimalFormat("00"));
+        assertEquals(
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
+                joinForTable(
+                        "+----+---+---+---+",
+                        "| 01 | a | b | c |",
+                        "| 02 | d | e | f |",
+                        "+----+---+---+---+"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
+    public void testSetRowNumsFormatNoShowRowNums() {
+        textTableBuilder.addRow("a", "b", "c");
+        textTableBuilder.addRow("d", "e", "f");
+        textTableBuilder.setRowNumFormat(new DecimalFormat("##"));
+        assertEquals(
+                TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
+                joinForTable(
+                        "+---+---+---+",
+                        "| a | b | c |",
+                        "| d | e | f |",
+                        "+---+---+---+"
+                ),
+                textTableBuilder.toString()
+        );
+    }
+
+    @Test
     public void testSetLinePrependerToString() {
         textTableBuilder.setHeaders("h", "h", "h");
         textTableBuilder.addRow("a", "b", "c");
@@ -934,6 +1029,8 @@ public class TextTableBuilderToStringTest {
         textTableBuilder.setRepeatHeadersEveryXRows(3);
         textTableBuilder.setRepeatHeadersAtBottom(true);
         textTableBuilder.setShowRowNums(true);
+        textTableBuilder.setRowNumHeader("r");
+        textTableBuilder.setRowNumFormat(new DecimalFormat("00"));
         textTableBuilder.setLinePrepender(">");
         textTableBuilder.setLineAppender("<");
         textTableBuilder.setNullColumnReplacement("NULL");
@@ -941,29 +1038,29 @@ public class TextTableBuilderToStringTest {
                 TO_STRING_DID_NOT_PRODUCED_EXPECTED_VALUE,
                 joinForTable(
                         ">+----+------+------+------+------+<",
-                        ">|    | h    | hh   |  hhh | NULL |<",
+                        ">|  r | h    | hh   |  hhh | NULL |<",
                         ">+----+------+------+------+------+<",
-                        ">|  1 | aaaa | NULL |    c | dd   |<",
-                        ">|  2 | aaa  |    b | cccc | dd   |<",
-                        ">|  3 | aa   |   bb |  ccc | dd   |<",
+                        ">| 01 | aaaa | NULL |    c | dd   |<",
+                        ">| 02 | aaa  |    b | cccc | dd   |<",
+                        ">| 03 | aa   |   bb |  ccc | dd   |<",
                         ">+----+------+------+------+------+<",
-                        ">|    | h    | hh   |  hhh | NULL |<",
+                        ">|  r | h    | hh   |  hhh | NULL |<",
                         ">+----+------+------+------+------+<",
-                        ">|  4 | a    |  bbb |   cc | dd   |<",
-                        ">|  5 | NULL | bbbb |      | dd   |<",
-                        ">|  6 | a    | bbbb |    c | dd   |<",
+                        ">| 04 | a    |  bbb |   cc | dd   |<",
+                        ">| 05 | NULL | bbbb |      | dd   |<",
+                        ">| 06 | a    | bbbb |    c | dd   |<",
                         ">+----+------+------+------+------+<",
-                        ">|    | h    | hh   |  hhh | NULL |<",
+                        ">|  r | h    | hh   |  hhh | NULL |<",
                         ">+----+------+------+------+------+<",
-                        ">|  7 | aa   |  bbb | cccc | dd   |<",
-                        ">|  8 | aaa  |   bb |  ccc | dd   |<",
-                        ">|  9 | aaaa |    b |   cc | dd   |<",
+                        ">| 07 | aa   |  bbb | cccc | dd   |<",
+                        ">| 08 | aaa  |   bb |  ccc | dd   |<",
+                        ">| 09 | aaaa |    b |   cc | dd   |<",
                         ">+----+------+------+------+------+<",
-                        ">|    | h    | hh   |  hhh | NULL |<",
+                        ">|  r | h    | hh   |  hhh | NULL |<",
                         ">+----+------+------+------+------+<",
                         ">| 10 | NULL | NULL |      | dd   |<",
                         ">+----+------+------+------+------+<",
-                        ">|    | h    | hh   |  hhh | NULL |<",
+                        ">|  r | h    | hh   |  hhh | NULL |<",
                         ">+----+------+------+------+------+<"
                 ),
                 textTableBuilder.toString()

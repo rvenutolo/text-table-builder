@@ -1,6 +1,7 @@
 package org.venutolo.texttablebuilder;
 
 import javax.annotation.Nonnull;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -56,12 +57,21 @@ final class ToStringBuilder {
         if (showRowNums) {
             headerAlignments.add(0, RIGHT);
             columnAlignments.add(0, RIGHT);
-            if (!headers.isEmpty()) {
-                headers.add(0, "");
+            final String rowNumHeader = textTableBuilder.getRowNumHeader();
+            final boolean headersWereEmpty = headers.isEmpty();
+            if (!headersWereEmpty || !rowNumHeader.isEmpty()) {
+                headers.add(0, rowNumHeader);
+                // if headers were empty, need to populate other headers with empty strings
+                if (headersWereEmpty) {
+                    for (int i = 1; i < numColumns; i++) {
+                        headers.add("");
+                    }
+                }
             }
             int rowNum = 1;
+            final NumberFormat rowNumFormat = textTableBuilder.getRowNumFormat();
             for (final List<Object> row : rows) {
-                row.add(0, rowNum);
+                row.add(0, (rowNumFormat != null) ? rowNumFormat.format(rowNum) : rowNum);
                 rowNum++;
             }
         }
