@@ -59,7 +59,7 @@ final class ToStringBuilder {
             columnAlignments.add(0, RIGHT);
             final String rowNumHeader = textTableBuilder.getRowNumHeader();
             final boolean headersWereEmpty = headers.isEmpty();
-            if (!headersWereEmpty || !"".equals(rowNumHeader)) {
+            if (!headersWereEmpty || (rowNumHeader.length() != 0)) {
                 headers.add(0, rowNumHeader);
                 // if headers were empty, need to populate other headers with empty strings
                 if (headersWereEmpty) {
