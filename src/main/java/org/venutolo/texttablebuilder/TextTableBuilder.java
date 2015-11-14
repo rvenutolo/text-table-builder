@@ -2,6 +2,7 @@ package org.venutolo.texttablebuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -40,6 +41,12 @@ public class TextTableBuilder {
     private boolean repeatHeadersAtBottom;
 
     private boolean showRowNums;
+
+    @Nonnull
+    private String rowNumHeader = EMPTY_STRING;
+
+    @Nullable
+    private NumberFormat rowNumFormat;
 
     @Nonnull
     private String linePrepender = EMPTY_STRING;
@@ -321,6 +328,27 @@ public class TextTableBuilder {
     @Nonnull
     public TextTableBuilder showRowNums() {
         return setShowRowNums(true);
+    }
+
+    @Nonnull
+    public String getRowNumHeader() {
+        return rowNumHeader;
+    }
+
+    @Nonnull
+    public TextTableBuilder setRowNumHeader(@Nullable final String rowNumHeader) {
+        this.rowNumHeader = (rowNumHeader == null) ? EMPTY_STRING : rowNumHeader;
+        return this;
+    }
+
+    @Nullable
+    public NumberFormat getRowNumFormat() {
+        return rowNumFormat;
+    }
+
+    public TextTableBuilder setRowNumFormat(@Nullable final NumberFormat rowNumFormat) {
+        this.rowNumFormat = rowNumFormat;
+        return this;
     }
 
     @Nonnull

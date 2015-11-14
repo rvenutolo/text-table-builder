@@ -5,11 +5,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.ASCII;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.CURVED;
@@ -149,6 +152,55 @@ public class TextTableBuilderOptionsTest {
         assertTrue(
                 GETTER_SETTER_VALUE_NOT_EQUAL,
                 emptyTextTableBuilder.getShowRowNums()
+        );
+    }
+
+    /*========================================================================
+     * TESTS FOR setRowNumHeader(boolean)
+     *========================================================================*/
+
+    @Test
+    public void testSetAndGetRowNumHeader() {
+        final String header = "header";
+        emptyTextTableBuilder.setRowNumHeader(header);
+        assertEquals(
+                GETTER_SETTER_VALUE_NOT_EQUAL,
+                header,
+                emptyTextTableBuilder.getRowNumHeader()
+        );
+    }
+
+    @Test
+    public void testSetAndGetRowNumHeaderNull() {
+        emptyTextTableBuilder.setRowNumHeader(null);
+        assertEquals(
+                GETTER_SETTER_VALUE_NOT_EQUAL,
+                EMPTY_STRING,
+                emptyTextTableBuilder.getRowNumHeader()
+        );
+    }
+
+    /*========================================================================
+     * TESTS FOR setRowNumFormat(NumberFormat)
+     *========================================================================*/
+
+    @Test
+    public void testSetAndGetRowNumFormat() {
+        final NumberFormat numberFormat = new DecimalFormat();
+        emptyTextTableBuilder.setRowNumFormat(numberFormat);
+        assertEquals(
+                GETTER_SETTER_VALUE_NOT_EQUAL,
+                numberFormat,
+                emptyTextTableBuilder.getRowNumFormat()
+        );
+    }
+
+    @Test
+    public void testSetAndGetRowNumFormatNull() {
+        emptyTextTableBuilder.setRowNumFormat(null);
+        assertNull(
+                GETTER_SETTER_VALUE_NOT_EQUAL,
+                emptyTextTableBuilder.getRowNumFormat()
         );
     }
 
