@@ -36,17 +36,6 @@ final class ToStringBuilder {
 
     private final List<String> horizontalStrings;
 
-    private static void ifEmptyPopulateWithLeft(
-            final Collection<Alignment> alignments,
-            final int numColumns
-    ) {
-        if (alignments.isEmpty()) {
-            for (int i = 0; i < numColumns; i++) {
-                alignments.add(LEFT);
-            }
-        }
-    }
-
     private ToStringBuilder(final TextTableBuilder textTableBuilder) {
         final boolean showRowNums = textTableBuilder.getShowRowNums();
         numColumns = textTableBuilder.getNumColumns() + (showRowNums ? 1 : 0);
@@ -116,6 +105,17 @@ final class ToStringBuilder {
         final char[] chars = new char[times];
         Arrays.fill(chars, c);
         return new String(chars);
+    }
+
+    private static void ifEmptyPopulateWithLeft(
+            @Nonnull final Collection<Alignment> alignments,
+            final int numColumns
+    ) {
+        if (alignments.isEmpty()) {
+            for (int i = 0; i < numColumns; i++) {
+                alignments.add(LEFT);
+            }
+        }
     }
 
     private static void checkAndUpdateColumnMaxWidths(
