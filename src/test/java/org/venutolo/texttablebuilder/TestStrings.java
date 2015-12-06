@@ -32,11 +32,8 @@ final class TestStrings {
     public static final String EXPECTED_IAE_FOR_NULL_ALIGNMENT =
             "expected IAE for null alignment";
 
-    public static final String ALIGNMENTS_NOT_NULL =
-            "alignments should not be null";
-
-    public static final String ALIGNMENTS_EMPTY =
-            "alignments should be empty";
+    public static final String ALIGNMENTS_NOT_NULL_AND_EMPTY =
+            "alignments should be non-null and empty";
 
     public static final String NOT_EQUAL_TO_NULL =
             "must not be equal to null";

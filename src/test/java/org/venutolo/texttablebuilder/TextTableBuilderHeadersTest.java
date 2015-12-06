@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.venutolo.texttablebuilder.TestStrings.BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING;
@@ -56,13 +55,9 @@ public class TextTableBuilderHeadersTest {
     @Test
     public void testGetHeadersWhenNotSet() {
         final List<Object> emptyHeaders = emptyTextTableBuilder.getHeaders();
-        assertNotNull(
-                "headers should not be null",
-                emptyHeaders
-        );
         assertTrue(
-                "headers should be empty",
-                emptyHeaders.isEmpty()
+                "headers should be non-null and empty",
+                (emptyHeaders != null) && emptyHeaders.isEmpty()
         );
     }
 

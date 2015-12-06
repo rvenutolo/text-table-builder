@@ -26,12 +26,16 @@ public class TextTableBuilderRowColumnNumbersTest {
      *========================================================================*/
 
     @Test
-    public void testGetNumRows() {
+    public void testGetNumRowsOnEmptyTable() {
         assertEquals(
                 "Incorrect number of rows",
                 emptyTextTableBuilder.getRows().size(),
                 emptyTextTableBuilder.getNumRows()
         );
+    }
+
+    @Test
+    public void testGetNumRowsOnPopulatedTable() {
         assertEquals(
                 "Incorrect number of rows",
                 populatedTextTableBuilder.getRows().size(),
@@ -44,12 +48,16 @@ public class TextTableBuilderRowColumnNumbersTest {
      *========================================================================*/
 
     @Test
-    public void testGetNumColumns() {
+    public void testGetNumColumnsOnEmptyTable() {
         assertEquals(
                 "Incorrect number of columns",
                 emptyTextTableBuilder.getRows().size(),
                 emptyTextTableBuilder.getNumColumns()
         );
+    }
+
+    @Test
+    public void testGetNumColumnsOnPopulatedTable() {
         assertEquals(
                 "Incorrect number of columns",
                 populatedTextTableBuilder.getRows().size(),

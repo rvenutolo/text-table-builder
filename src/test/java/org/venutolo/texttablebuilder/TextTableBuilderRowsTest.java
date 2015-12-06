@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.venutolo.texttablebuilder.TestStrings.BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING;
@@ -73,18 +72,14 @@ public class TextTableBuilderRowsTest {
     @Test
     public void testGetRowsWhenNotSet() {
         final List<List<Object>> emptyRows = emptyTextTableBuilder.getRows();
-        assertNotNull(
-                "rows should not be null",
-                emptyRows
-        );
         assertTrue(
-                "rows should be empty",
-                emptyRows.isEmpty()
+                "rows should be non-null and empty",
+                (emptyRows != null) && emptyRows.isEmpty()
         );
     }
 
     @Test
-    public void testGetRowsForDefensiveCopying() {
+    public void testGetRowsForDefensiveCopyingOfRows() {
         final List<String> rowExpected = allRows.get(0);
         populatedTextTableBuilder.getRows().set(0, null);
         assertEquals(
@@ -92,7 +87,11 @@ public class TextTableBuilderRowsTest {
                 rowExpected,
                 populatedTextTableBuilder.getRows().get(0)
         );
-        final String columnExpected = rowExpected.get(0);
+    }
+
+    @Test
+    public void testGetRowsForDefensiveCopyingOfColumns() {
+        final String columnExpected = allRows.get(0).get(0);
         populatedTextTableBuilder.getRows().get(0).set(0, null);
         assertEquals(
                 GETTER_NO_DEFENSIVE_COPY,
