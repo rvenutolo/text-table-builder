@@ -176,7 +176,7 @@ public class BoxDrawingCharacters {
      *
      * @return the character used to draw horizontal lines
      */
-    char getHorizontal() {
+    public char getHorizontal() {
         return horizontal;
     }
 
@@ -185,7 +185,7 @@ public class BoxDrawingCharacters {
      *
      * @return the character used to draw vertical lines
      */
-    char getVertical() {
+    public char getVertical() {
         return vertical;
     }
 

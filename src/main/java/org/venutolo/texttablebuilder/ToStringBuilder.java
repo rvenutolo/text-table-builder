@@ -354,7 +354,7 @@ final class ToStringBuilder {
         return toStringBuilder.toString();
     }
 
-    static String getToStringFor(@Nonnull final TextTableBuilder textTableBuilder) {
+    protected static String getToStringFor(@Nonnull final TextTableBuilder textTableBuilder) {
         assert textTableBuilder != null;
         return new ToStringBuilder(textTableBuilder).getToString();
     }
