@@ -8,8 +8,10 @@ import org.junit.rules.ExpectedException;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.venutolo.texttablebuilder.TestStrings.CANNOT_BE_NULL;
 import static org.venutolo.texttablebuilder.TestStrings.EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH;
+import static org.venutolo.texttablebuilder.TestStrings.SHOULD_NOT_REACH_THIS_POINT;
 
 /**
  * @author Rick Venutolo
@@ -48,6 +50,7 @@ public class TextTableBuilderCheckNumColumnsTest {
         expectedException.expectMessage("expected 2 columns");
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         emptyTextTableBuilder.checkNumColumns(Arrays.asList(null, null, null));
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -56,6 +59,7 @@ public class TextTableBuilderCheckNumColumnsTest {
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_COLLECTION);
         emptyTextTableBuilder.checkNumColumns(null);
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
 }

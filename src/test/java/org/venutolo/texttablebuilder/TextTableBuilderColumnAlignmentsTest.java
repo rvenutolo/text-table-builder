@@ -13,6 +13,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.venutolo.texttablebuilder.Alignment.LEFT;
 import static org.venutolo.texttablebuilder.Alignment.RIGHT;
 import static org.venutolo.texttablebuilder.TestStrings.ALIGNMENTS_EMPTY;
@@ -26,6 +27,7 @@ import static org.venutolo.texttablebuilder.TestStrings.GETTER_NO_DEFENSIVE_COPY
 import static org.venutolo.texttablebuilder.TestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
 import static org.venutolo.texttablebuilder.TestStrings.NOT_EMPTY_AFTER_CLEAR;
 import static org.venutolo.texttablebuilder.TestStrings.SETTER_NO_DEFENSIVE_COPY;
+import static org.venutolo.texttablebuilder.TestStrings.SHOULD_NOT_REACH_THIS_POINT;
 
 /**
  * @author Rick Venutolo
@@ -100,6 +102,7 @@ public class TextTableBuilderColumnAlignmentsTest {
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_LIST);
         populatedTextTableBuilder.setColumnAlignments((Collection<Alignment>) null);
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -108,6 +111,7 @@ public class TextTableBuilderColumnAlignmentsTest {
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_ALIGNMENT);
         populatedTextTableBuilder.setColumnAlignments(Arrays.asList(null, LEFT));
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -116,6 +120,7 @@ public class TextTableBuilderColumnAlignmentsTest {
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.setColumnAlignments(Collections.<Alignment>emptyList());
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -150,6 +155,7 @@ public class TextTableBuilderColumnAlignmentsTest {
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_LIST);
         populatedTextTableBuilder.setColumnAlignments((Alignment[]) null);
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -158,6 +164,7 @@ public class TextTableBuilderColumnAlignmentsTest {
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_ALIGNMENT);
         populatedTextTableBuilder.setColumnAlignments(null, LEFT);
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -166,6 +173,7 @@ public class TextTableBuilderColumnAlignmentsTest {
         expectedException.expectMessage(BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH);
         populatedTextTableBuilder.setColumnAlignments();
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test

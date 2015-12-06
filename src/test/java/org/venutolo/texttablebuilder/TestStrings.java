@@ -65,6 +65,9 @@ final class TestStrings {
     static final String TO_STRING_MUST_BE_SAME =
             "toString() must be the same for equal instances";
 
+    static final String SHOULD_NOT_REACH_THIS_POINT =
+            "test should never reach this point";
+
     private TestStrings() {
     }
 

@@ -7,6 +7,7 @@ import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
 import static org.venutolo.texttablebuilder.TestStrings.CANNOT_BE_NULL;
 import static org.venutolo.texttablebuilder.TestStrings.EQUAL_ITSELF;
 import static org.venutolo.texttablebuilder.TestStrings.EQUAL_TO_INSTANCE_WITH_SAME_VALUES;
@@ -16,6 +17,7 @@ import static org.venutolo.texttablebuilder.TestStrings.HASH_CODE_MUST_BE_SAME;
 import static org.venutolo.texttablebuilder.TestStrings.NOT_EQUAL_RANDOM_OBJECT;
 import static org.venutolo.texttablebuilder.TestStrings.NOT_EQUAL_TO_INSTANCE_WITH_DIFFERENT_VALUES;
 import static org.venutolo.texttablebuilder.TestStrings.NOT_EQUAL_TO_NULL;
+import static org.venutolo.texttablebuilder.TestStrings.SHOULD_NOT_REACH_THIS_POINT;
 import static org.venutolo.texttablebuilder.TestStrings.TO_STRING_MUST_BE_DISTINCT;
 import static org.venutolo.texttablebuilder.TestStrings.TO_STRING_MUST_BE_SAME;
 
@@ -90,6 +92,7 @@ public class BoxDrawingCharactersTest {
         expectedException.expectMessage(EXPECTED_IAE_BUILDER_SUBSTRING);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_BUILDER);
         new BoxDrawingCharacters(null);
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     /*========================================================================
@@ -258,6 +261,7 @@ public class BoxDrawingCharactersTest {
                 + "7h8h9_"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -274,6 +278,7 @@ public class BoxDrawingCharactersTest {
                 + "7h8h"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -290,6 +295,7 @@ public class BoxDrawingCharactersTest {
                 + "7h8h9"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -306,6 +312,7 @@ public class BoxDrawingCharactersTest {
                 + "7h8h9"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -322,6 +329,7 @@ public class BoxDrawingCharactersTest {
                 + "7h8h9"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -338,6 +346,7 @@ public class BoxDrawingCharactersTest {
                 + "7H8h9"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -354,6 +363,7 @@ public class BoxDrawingCharactersTest {
                 + "7h8H9"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -370,6 +380,7 @@ public class BoxDrawingCharactersTest {
                 + "7h8h9"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -386,6 +397,7 @@ public class BoxDrawingCharactersTest {
                 + "7h8h9"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -402,6 +414,7 @@ public class BoxDrawingCharactersTest {
                 + "7h8h9"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -418,6 +431,7 @@ public class BoxDrawingCharactersTest {
                 + "7h8h9"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -434,6 +448,7 @@ public class BoxDrawingCharactersTest {
                 + "7h8h9"
                 //@formatter:on
         );
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     @Test
@@ -442,6 +457,7 @@ public class BoxDrawingCharactersTest {
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_ALIGNMENT);
         BoxDrawingCharacters.fromBoxDrawing(null);
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     /*========================================================================
