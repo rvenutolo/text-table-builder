@@ -370,7 +370,7 @@ final class ToStringBuilder {
         return stringBuilder.toString();
     }
 
-    static String getToStringFor(@Nonnull final TextTableBuilder textTableBuilder) {
+    public static String getToStringFor(@Nonnull final TextTableBuilder textTableBuilder) {
         assert textTableBuilder != null;
         return new ToStringBuilder(textTableBuilder).getToString();
     }
