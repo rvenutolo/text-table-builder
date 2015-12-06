@@ -71,7 +71,7 @@ final class ToStringBuilder {
             int rowNum = 1;
             final NumberFormat rowNumFormat = textTableBuilder.getRowNumFormat();
             for (final List<Object> row : rows) {
-                row.add(0, (rowNumFormat != null) ? rowNumFormat.format(rowNum) : rowNum);
+                row.add(0, (rowNumFormat == null) ? rowNum : rowNumFormat.format(rowNum));
                 rowNum++;
             }
         }
@@ -142,9 +142,9 @@ final class ToStringBuilder {
         for (int i = 0; i < columnWidths.length; i++) {
             final int currentMaxWidth = columnWidths[i];
             final Object columnObject = row.get(i);
-            final String columnString = (columnObject != null)
-                                        ? columnObject.toString()
-                                        : nullColumnReplacement;
+            final String columnString = (columnObject == null)
+                                        ? nullColumnReplacement
+                                        : columnObject.toString();
             final int columnWidth = columnString.length();
             if (columnWidth > currentMaxWidth) {
                 columnWidths[i] = columnWidth;
