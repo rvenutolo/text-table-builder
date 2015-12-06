@@ -121,23 +121,23 @@ public class BoxDrawingCharacters {
     /**
      * Creates and returns a new instance where all box characters are the given character.
      *
-     * @param c the character for all box drawing characters
+     * @param ch the character for all box drawing characters
      *
      * @return the BoxDrawingCharacters created with all characters being the given character
      */
     @Nonnull
-    public static BoxDrawingCharacters forCharacter(final char c) {
-        return new Builder().setHorizontal(c)
-                            .setVertical(c)
-                            .setTopLeftCorner(c)
-                            .setTopIntersect(c)
-                            .setTopRightCorner(c)
-                            .setLeftIntersect(c)
-                            .setMiddleIntersect(c)
-                            .setRightIntersect(c)
-                            .setBottomLeftCorner(c)
-                            .setBottomIntersect(c)
-                            .setBottomRightCorner(c)
+    public static BoxDrawingCharacters forCharacter(final char ch) {
+        return new Builder().setHorizontal(ch)
+                            .setVertical(ch)
+                            .setTopLeftCorner(ch)
+                            .setTopIntersect(ch)
+                            .setTopRightCorner(ch)
+                            .setLeftIntersect(ch)
+                            .setMiddleIntersect(ch)
+                            .setRightIntersect(ch)
+                            .setBottomLeftCorner(ch)
+                            .setBottomIntersect(ch)
+                            .setBottomRightCorner(ch)
                             .build();
     }
 
