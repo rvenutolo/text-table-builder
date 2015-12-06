@@ -40,8 +40,8 @@ public class TextTableBuilderOptionsTest {
 
     private static final boolean[] trueFalseArray = {true, false};
 
-    private static final String EXPECTED_NPE_FOR_NULL_BDC =
-            "expected NPE for null box drawing characters";
+    private static final String EXPECTED_IAE_FOR_NULL_BDC =
+            "expected IAE for null box drawing characters";
 
     private static final String EXPECTED_IAE_FOR_BAD_NUM_ROWS =
             "expected IAE for negative number of rows";
@@ -76,9 +76,9 @@ public class TextTableBuilderOptionsTest {
 
     @Test
     public void testSetBoxDrawingCharactersForNull() {
-        expectedException.expect(NullPointerException.class);
+        expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_BDC);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_BDC);
         emptyTextTableBuilder.setBoxDrawingCharacters(null);
     }
 

@@ -26,11 +26,11 @@ final class TestStrings {
     static final String CANNOT_BE_NULL =
             "cannot be null";
 
-    static final String EXPECTED_NPE_FOR_NULL_LIST =
-            "expected NPE for null list";
+    static final String EXPECTED_IAE_FOR_NULL_LIST =
+            "expected IAE for null list";
 
-    static final String EXPECTED_NPE_FOR_NULL_ALIGNMENT =
-            "expected NPE for null alignment";
+    static final String EXPECTED_IAE_FOR_NULL_ALIGNMENT =
+            "expected IAE for null alignment";
 
     static final String ALIGNMENTS_NOT_NULL =
             "alignments should not be null";

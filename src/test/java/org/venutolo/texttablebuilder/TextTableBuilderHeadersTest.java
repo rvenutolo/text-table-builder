@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 import static org.venutolo.texttablebuilder.TestStrings.BAD_COLUMN_LENGTH_MESSAGE_SUBSTRING;
 import static org.venutolo.texttablebuilder.TestStrings.CANNOT_BE_NULL;
 import static org.venutolo.texttablebuilder.TestStrings.EXPECTED_IAE_FOR_BAD_COLUMN_LENGTH;
-import static org.venutolo.texttablebuilder.TestStrings.EXPECTED_NPE_FOR_NULL_LIST;
+import static org.venutolo.texttablebuilder.TestStrings.EXPECTED_IAE_FOR_NULL_LIST;
 import static org.venutolo.texttablebuilder.TestStrings.GETTER_NO_DEFENSIVE_COPY;
 import static org.venutolo.texttablebuilder.TestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
 import static org.venutolo.texttablebuilder.TestStrings.NOT_EMPTY_AFTER_CLEAR;
@@ -91,9 +91,9 @@ public class TextTableBuilderHeadersTest {
 
     @Test
     public void testSetHeaderForNull() {
-        expectedException.expect(NullPointerException.class);
+        expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_LIST);
         populatedTextTableBuilder.setHeaders((Collection<?>) null);
     }
 
@@ -133,9 +133,9 @@ public class TextTableBuilderHeadersTest {
 
     @Test
     public void testSetHeaderArrayForNull() {
-        expectedException.expect(NullPointerException.class);
+        expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_LIST);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_LIST);
         populatedTextTableBuilder.setHeaders((Object[]) null);
     }
 

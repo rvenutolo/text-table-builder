@@ -16,8 +16,8 @@ import static org.venutolo.texttablebuilder.TestStrings.EXPECTED_IAE_FOR_BAD_COL
  */
 public class TextTableBuilderCheckNumColumnsTest {
 
-    private static final String EXPECTED_NPE_FOR_NULL_COLLECTION =
-            "expected NPE for null collection";
+    private static final String EXPECTED_IAE_FOR_NULL_COLLECTION =
+            "expected IAE for null collection";
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -41,7 +41,7 @@ public class TextTableBuilderCheckNumColumnsTest {
     }
 
     @Test
-    public void testCheckNumColumnsIaeForDifferentSizes() {
+    public void testCheckNumColumnsForDifferentSizes() {
         emptyTextTableBuilder.checkNumColumns(Arrays.asList(null, null));
         // first call sets the number of columns to expect
         expectedException.expect(IllegalArgumentException.class);
@@ -51,10 +51,10 @@ public class TextTableBuilderCheckNumColumnsTest {
     }
 
     @Test
-    public void testCheckNumColumnsNpeWhenNull() {
-        expectedException.expect(NullPointerException.class);
+    public void testCheckNumColumnsWhenNull() {
+        expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_COLLECTION);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_COLLECTION);
         emptyTextTableBuilder.checkNumColumns(null);
     }
 

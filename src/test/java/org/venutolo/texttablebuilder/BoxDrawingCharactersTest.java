@@ -10,7 +10,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.venutolo.texttablebuilder.TestStrings.CANNOT_BE_NULL;
 import static org.venutolo.texttablebuilder.TestStrings.EQUAL_ITSELF;
 import static org.venutolo.texttablebuilder.TestStrings.EQUAL_TO_INSTANCE_WITH_SAME_VALUES;
-import static org.venutolo.texttablebuilder.TestStrings.EXPECTED_NPE_FOR_NULL_ALIGNMENT;
+import static org.venutolo.texttablebuilder.TestStrings.EXPECTED_IAE_FOR_NULL_ALIGNMENT;
 import static org.venutolo.texttablebuilder.TestStrings.HASH_CODE_MUST_BE_DISTINCT;
 import static org.venutolo.texttablebuilder.TestStrings.HASH_CODE_MUST_BE_SAME;
 import static org.venutolo.texttablebuilder.TestStrings.NOT_EQUAL_RANDOM_OBJECT;
@@ -42,11 +42,11 @@ public class BoxDrawingCharactersTest {
     private static final String EXPECTED_IAE_FOR_INCONSISTENT_VERT =
             "Expected IAE for inconsistent vertical usage";
 
-    private static final String EXPECTED_NPE_BUILDER_SUBSTRING =
+    private static final String EXPECTED_IAE_BUILDER_SUBSTRING =
             "cannot be null";
 
-    private static final String EXPECTED_NPE_FOR_NULL_BUILDER =
-            "Expected NPE for null builder";
+    private static final String EXPECTED_IAE_FOR_NULL_BUILDER =
+            "Expected IAE for null builder";
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -85,10 +85,10 @@ public class BoxDrawingCharactersTest {
     }
 
     @Test
-    public void testNpeForNullBuilder() {
-        expectedException.expect(NullPointerException.class);
-        expectedException.expectMessage(EXPECTED_NPE_BUILDER_SUBSTRING);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_BUILDER);
+    public void testWhenNullBuilder() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage(EXPECTED_IAE_BUILDER_SUBSTRING);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_BUILDER);
         new BoxDrawingCharacters(null);
     }
 
@@ -438,9 +438,9 @@ public class BoxDrawingCharactersTest {
 
     @Test
     public void testFromBoxDrawingNull() {
-        expectedException.expect(NullPointerException.class);
+        expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage(CANNOT_BE_NULL);
-        expectedException.reportMissingExceptionWithMessage(EXPECTED_NPE_FOR_NULL_ALIGNMENT);
+        expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_ALIGNMENT);
         BoxDrawingCharacters.fromBoxDrawing(null);
     }
 
