@@ -103,7 +103,7 @@ public class BoxDrawingCharacters {
     @Nonnull
     protected BoxDrawingCharacters(@Nonnull final Builder builder) {
         if (builder == null) {
-            throw new NullPointerException("builder cannot be null");
+            throw new IllegalArgumentException("builder cannot be null");
         }
         this.horizontal = builder.horizontal;
         this.vertical = builder.vertical;
@@ -166,7 +166,7 @@ public class BoxDrawingCharacters {
     @Nonnull
     public static BoxDrawingCharacters fromBoxDrawing(@Nonnull final String boxDrawing) {
         if (boxDrawing == null) {
-            throw new NullPointerException("box drawing cannot be null");
+            throw new IllegalArgumentException("box drawing cannot be null");
         }
         return new BoxDrawingParser(boxDrawing).parse();
     }

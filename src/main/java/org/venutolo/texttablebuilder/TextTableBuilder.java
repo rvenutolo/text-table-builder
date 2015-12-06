@@ -80,7 +80,8 @@ public class TextTableBuilder {
         int index = 0;
         for (final Alignment alignment : alignments) {
             if (alignment == null) {
-                throw new NullPointerException("alignment at index " + index + " cannot be null");
+                throw new IllegalArgumentException(
+                        "alignment at index " + index + " cannot be null");
             }
             index++;
         }
@@ -116,7 +117,7 @@ public class TextTableBuilder {
 
     protected void checkNumColumns(@Nonnull final Collection<?> collection) {
         if (collection == null) {
-            throw new NullPointerException("collection cannot be null");
+            throw new IllegalArgumentException("collection cannot be null");
         }
         if (numColumns == null) {
             // if numColumns is null, this is the first check for number of columns, so set it
@@ -143,7 +144,7 @@ public class TextTableBuilder {
     @Nonnull
     public TextTableBuilder setHeaderAlignments(@Nonnull final Collection<Alignment> headerAlignments) {
         if (headerAlignments == null) {
-            throw new NullPointerException("header alignments cannot be null");
+            throw new IllegalArgumentException("header alignments cannot be null");
         }
         checkAlignmentsForNull(headerAlignments);
         checkNumColumns(headerAlignments);
@@ -174,7 +175,7 @@ public class TextTableBuilder {
     @Nonnull
     public TextTableBuilder setColumnAlignments(@Nonnull final Collection<Alignment> columnAlignments) {
         if (columnAlignments == null) {
-            throw new NullPointerException("column alignments cannot be null");
+            throw new IllegalArgumentException("column alignments cannot be null");
         }
         checkAlignmentsForNull(columnAlignments);
         checkNumColumns(columnAlignments);
@@ -205,7 +206,7 @@ public class TextTableBuilder {
     @Nonnull
     public TextTableBuilder setHeaders(@Nonnull final Collection<?> headers) {
         if (headers == null) {
-            throw new NullPointerException("headers cannot be null");
+            throw new IllegalArgumentException("headers cannot be null");
         }
         checkNumColumns(headers);
         this.headers = defensiveObjectListCopy(headers);
@@ -239,7 +240,7 @@ public class TextTableBuilder {
     @Nonnull
     public TextTableBuilder addRow(@Nonnull final Collection<?> row) {
         if (row == null) {
-            throw new NullPointerException("row cannot be null");
+            throw new IllegalArgumentException("row cannot be null");
         }
         checkNumColumns(row);
         table.add(defensiveObjectListCopy(row));
@@ -281,7 +282,7 @@ public class TextTableBuilder {
     @Nonnull
     public TextTableBuilder setBoxDrawingCharacters(@Nonnull final BoxDrawingCharacters boxDrawingCharacters) {
         if (boxDrawingCharacters == null) {
-            throw new NullPointerException("box drawing characters cannot be null");
+            throw new IllegalArgumentException("box drawing characters cannot be null");
         }
         this.boxDrawingCharacters = boxDrawingCharacters;
         return this;
@@ -293,8 +294,10 @@ public class TextTableBuilder {
 
     @Nonnull
     public TextTableBuilder setRepeatHeadersEveryXRows(final int repeatHeadersEveryXRows) {
-        if (repeatHeadersEveryXRows <0) {
-            throw new IllegalArgumentException("num rows must be non-negative: " + repeatHeadersEveryXRows);
+        if (repeatHeadersEveryXRows < 0) {
+            throw new IllegalArgumentException(
+                    "num rows must be non-negative: " + repeatHeadersEveryXRows
+            );
         }
         this.repeatHeadersEveryXRows = repeatHeadersEveryXRows;
         return this;
@@ -400,7 +403,7 @@ public class TextTableBuilder {
      *========================================================================*/
 
     private Object[] getObjectArray() {
-        return new Object[] {
+        return new Object[]{
                 repeatHeadersEveryXRows,
                 repeatHeadersAtBottom,
                 showRowNums,
