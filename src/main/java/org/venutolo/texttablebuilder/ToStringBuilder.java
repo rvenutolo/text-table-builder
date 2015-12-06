@@ -55,12 +55,12 @@ final class ToStringBuilder {
         final String nullColumnReplacement = textTableBuilder.getNullColumnReplacement();
         // if showing row number, add column items for row numbers
         if (showRowNums) {
-            addItemsForShowRowNums(
+            headerAlignments.add(0, RIGHT);
+            columnAlignments.add(0, RIGHT);
+            addRowNumColumnItems(
                     textTableBuilder,
                     headers,
-                    rows,
-                    headerAlignments,
-                    columnAlignments
+                    rows
             );
         }
         // determine widths of columns to be used when padding strings
@@ -91,15 +91,12 @@ final class ToStringBuilder {
         );
     }
 
-    private void addItemsForShowRowNums(
+    private void addRowNumColumnItems(
             final TextTableBuilder textTableBuilder,
             final List<Object> headers,
-            final List<List<Object>> rows,
-            final List<Alignment> headerAlignments,
-            final List<Alignment> columnAlignments
+            final Iterable<List<Object>> rows
     ) {
-        headerAlignments.add(0, RIGHT);
-        columnAlignments.add(0, RIGHT);
+
         final String rowNumHeader = textTableBuilder.getRowNumHeader();
         final boolean headersWereEmpty = headers.isEmpty();
         if (!headersWereEmpty || (rowNumHeader.length() != 0)) {
