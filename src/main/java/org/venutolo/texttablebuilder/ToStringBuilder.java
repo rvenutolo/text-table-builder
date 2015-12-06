@@ -55,25 +55,13 @@ final class ToStringBuilder {
         final String nullColumnReplacement = textTableBuilder.getNullColumnReplacement();
         // if showing row number, add column items for row numbers
         if (showRowNums) {
-            headerAlignments.add(0, RIGHT);
-            columnAlignments.add(0, RIGHT);
-            final String rowNumHeader = textTableBuilder.getRowNumHeader();
-            final boolean headersWereEmpty = headers.isEmpty();
-            if (!headersWereEmpty || (rowNumHeader.length() != 0)) {
-                headers.add(0, rowNumHeader);
-                // if headers were empty, need to populate other headers with empty strings
-                if (headersWereEmpty) {
-                    for (int i = 1; i < numColumns; i++) {
-                        headers.add("");
-                    }
-                }
-            }
-            int rowNum = 1;
-            final NumberFormat rowNumFormat = textTableBuilder.getRowNumFormat();
-            for (final List<Object> row : rows) {
-                row.add(0, (rowNumFormat == null) ? rowNum : rowNumFormat.format(rowNum));
-                rowNum++;
-            }
+            addItemsForShowRowNums(
+                    textTableBuilder,
+                    headers,
+                    rows,
+                    headerAlignments,
+                    columnAlignments
+            );
         }
         // determine widths of columns to be used when padding strings
         final int[] columnWidths = getColumnWidths(
@@ -101,6 +89,34 @@ final class ToStringBuilder {
                 columnWidths,
                 boxDrawingCharacters.getHorizontal()
         );
+    }
+
+    private void addItemsForShowRowNums(
+            final TextTableBuilder textTableBuilder,
+            final List<Object> headers,
+            final List<List<Object>> rows,
+            final List<Alignment> headerAlignments,
+            final List<Alignment> columnAlignments
+    ) {
+        headerAlignments.add(0, RIGHT);
+        columnAlignments.add(0, RIGHT);
+        final String rowNumHeader = textTableBuilder.getRowNumHeader();
+        final boolean headersWereEmpty = headers.isEmpty();
+        if (!headersWereEmpty || (rowNumHeader.length() != 0)) {
+            headers.add(0, rowNumHeader);
+            // if headers were empty, need to populate other headers with empty strings
+            if (headersWereEmpty) {
+                for (int i = 1; i < numColumns; i++) {
+                    headers.add("");
+                }
+            }
+        }
+        int rowNum = 1;
+        final NumberFormat rowNumFormat = textTableBuilder.getRowNumFormat();
+        for (final List<Object> row : rows) {
+            row.add(0, (rowNumFormat == null) ? rowNum : rowNumFormat.format(rowNum));
+            rowNum++;
+        }
     }
 
     private static String leftPad(@Nonnull final String s, final int length) {
