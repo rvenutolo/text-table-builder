@@ -202,9 +202,9 @@ final class ToStringBuilder {
         final List<String> paddedAndAlignedRowStrings = new ArrayList<String>(row.size());
         for (int i = 0; i < columnWidths.length; i++) {
             final Object columnObject = row.get(i);
-            final String columnString = (columnObject != null)
-                                        ? columnObject.toString()
-                                        : nullColumnReplacement;
+            final String columnString = (columnObject == null)
+                                        ? nullColumnReplacement
+                                        : columnObject.toString();
             final int columnWidth = columnWidths[i];
             final String paddedAndAlignedColumnString = getPaddedAndAlignedColumnString(
                     columnString,
