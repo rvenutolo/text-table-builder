@@ -2,3 +2,7 @@ language: java
 
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
+  - curl http://www.jpm4j.org/install/script > jpmInstall.sh
+  - sudo sh jpmInstall.sh
+  - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
+  - codacy-coverage-reporter -l Java -r target/site/cobertura/coverage.xml
