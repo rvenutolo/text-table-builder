@@ -14,6 +14,7 @@ import java.util.Collections;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.ASCII;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.CURVED;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.DOUBLE;
@@ -21,6 +22,7 @@ import static org.venutolo.texttablebuilder.BoxDrawingCharacters.HEAVY;
 import static org.venutolo.texttablebuilder.BoxDrawingCharacters.LIGHT;
 import static org.venutolo.texttablebuilder.TestStrings.CANNOT_BE_NULL;
 import static org.venutolo.texttablebuilder.TestStrings.GETTER_SETTER_VALUE_NOT_EQUAL;
+import static org.venutolo.texttablebuilder.TestStrings.SHOULD_NOT_REACH_THIS_POINT;
 
 /**
  * @author Rick Venutolo
@@ -80,6 +82,7 @@ public class TextTableBuilderOptionsTest {
         expectedException.expectMessage(CANNOT_BE_NULL);
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_NULL_BDC);
         emptyTextTableBuilder.setBoxDrawingCharacters(null);
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     /*========================================================================
@@ -103,6 +106,7 @@ public class TextTableBuilderOptionsTest {
         expectedException.expectMessage("rows");
         expectedException.reportMissingExceptionWithMessage(EXPECTED_IAE_FOR_BAD_NUM_ROWS);
         emptyTextTableBuilder.setRepeatHeadersEveryXRows(-1);
+        fail(SHOULD_NOT_REACH_THIS_POINT);
     }
 
     /*========================================================================
