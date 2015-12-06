@@ -253,7 +253,7 @@ final class ToStringBuilder {
     }
 
     private void appendLine(final String line) {
-        toStringBuilder.append(linePrepender).append(line).append(lineAppender).append("\n");
+        toStringBuilder.append(linePrepender).append(line).append(lineAppender).append('\n');
     }
 
     private String getLine(

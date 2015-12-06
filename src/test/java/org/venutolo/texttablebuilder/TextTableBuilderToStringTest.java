@@ -30,7 +30,7 @@ public class TextTableBuilderToStringTest {
     private static String joinForTable(final String... strings) {
         final StringBuilder stringBuilder = new StringBuilder();
         for (final String string : strings) {
-            stringBuilder.append(string).append("\n");
+            stringBuilder.append(string).append('\n');
         }
         stringBuilder.setLength(stringBuilder.length() - 1);
         return stringBuilder.toString();
