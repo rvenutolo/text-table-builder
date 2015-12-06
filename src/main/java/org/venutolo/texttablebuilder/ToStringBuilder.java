@@ -17,7 +17,7 @@ final class ToStringBuilder {
 
     private static final int STRING_BUILDER_INITIAL_CAPACITY = 128;
 
-    private final StringBuilder toStringBuilder = new StringBuilder(STRING_BUILDER_INITIAL_CAPACITY);
+    private final StringBuilder stringBuilder = new StringBuilder(STRING_BUILDER_INITIAL_CAPACITY);
 
     private final int numColumns;
 
@@ -269,7 +269,7 @@ final class ToStringBuilder {
     }
 
     private void appendLine(final String line) {
-        toStringBuilder.append(linePrepender).append(line).append(lineAppender).append('\n');
+        stringBuilder.append(linePrepender).append(line).append(lineAppender).append('\n');
     }
 
     private String getLine(
@@ -366,8 +366,8 @@ final class ToStringBuilder {
     private String getToString() {
         buildToString();
         // remove last newline
-        toStringBuilder.setLength(toStringBuilder.length() - 1);
-        return toStringBuilder.toString();
+        stringBuilder.setLength(stringBuilder.length() - 1);
+        return stringBuilder.toString();
     }
 
     static String getToStringFor(@Nonnull final TextTableBuilder textTableBuilder) {
