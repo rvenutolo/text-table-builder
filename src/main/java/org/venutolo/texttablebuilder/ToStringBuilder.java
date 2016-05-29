@@ -57,11 +57,7 @@ final class ToStringBuilder {
         if (showRowNums) {
             headerAlignments.add(0, RIGHT);
             columnAlignments.add(0, RIGHT);
-            addRowNumColumnItems(
-                    textTableBuilder,
-                    headers,
-                    rows
-            );
+            addRowNumColumnItems(textTableBuilder, headers, rows);
         }
         // determine widths of columns to be used when padding strings
         final int[] columnWidths = getColumnWidths(
@@ -96,7 +92,7 @@ final class ToStringBuilder {
             final List<Object> headers,
             final Iterable<List<Object>> rows
     ) {
-
+        // TODO decrease complexity
         final String rowNumHeader = textTableBuilder.getRowNumHeader();
         final boolean headersWereEmpty = headers.isEmpty();
         if (!headersWereEmpty || (rowNumHeader.length() != 0)) {
@@ -326,6 +322,7 @@ final class ToStringBuilder {
     }
 
     private void buildToString() {
+        // TODO decrease complexity
         appendLine(getTopLine());
         if (headerStrings != null) {
             appendLine(getRowLine(headerStrings));
