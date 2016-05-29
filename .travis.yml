@@ -3,7 +3,9 @@ language: java
 jdk:
   - oraclejdk8
   - oraclejdk7
-  - openjdk7
+# TODO - use openjdk7 again when this travis issue is handled
+#      - https://github.com/travis-ci/travis-ci/issues/5227
+#  - openjdk7
 
 after_success:
   - mvn clean test jacoco:report coveralls:report
